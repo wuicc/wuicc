@@ -1,0 +1,153 @@
+{
+  "app": {
+    "title": "Web UI Chrono Collector",
+    "documentTitle": "Timeline Collector - Web UI Chrono Collector",
+    "sidebar": {
+      "home": "Home",
+      "timeline": "Timeline",
+      "notification": "Notification",
+      "settings": "Settings",
+      "about": "About"
+    },
+    "games": {
+      "genshin": {
+        "title": "Genshin Impact"
+      },
+      "starrail": {
+        "title": "Honkai: Star Rail"
+      },
+      "zenless": {
+        "title": "Zenless Zone Zero"
+      },
+      "wuthering": {
+        "title": "Wuthering Waves"
+      }
+    },
+    "pages": {
+      "home": {
+        "title": "Home",
+        "welcome": "Welcome to the home page!"
+      },
+      "timeline": {
+        "title": "Timeline",
+        "noActivities": "No activities found for your current selections. Please check your game and activity type preferences.",
+        "loading": "Loading timeline...",
+        "time_remaining": {
+          "days_hours": "{days}d {hours}h",
+          "hours_minutes": "{hours}h {minutes}m",
+          "minutes": "{minutes}m",
+          "less_than_minute": "Less than minute"
+        },
+        "starts_in": "Starts in",
+        "ends_in": "Ends in",
+        "starts_in_prefix": "Starts in ",
+        "ends_in_prefix": "",
+        "event_ended": "This event has ended",
+        "day": "d"
+      },
+      "notification": {
+        "title": "Notification",
+        "content": "This is the notification content."
+      },
+      "settings": {
+        "title": "Settings"
+      },
+      "shortcuts": {
+        "title": "Game Shortcuts",
+        "links": {
+          "mihoyo_genshin": "Official (miHoYo, Chinese Mainland)",
+          "hoyoverse_genshin": "Official (HoYoVerse, Global)",
+          "mihoyo_starrail": "Official (miHoYo, Chinese Mainland)",
+          "hoyoverse_starrail": "Official (HoYoVerse, Global)",
+          "mihoyo_zenless": "Official (miHoYo, Chinese Mainland)",
+          "hoyoverse_zenless": "Official (HoYoVerse, Global)",
+          "kurogame_cn_wuthering": "Official (Chinese Mainland)",
+          "kurogame_os_wuthering": "Official (Global)"
+        }
+      },
+      "notFound": {
+        "title": "Page Not Found",
+        "message": "The page you're looking for doesn't exist or has been removed",
+        "backHome": "Back to Home"
+      },
+      "about": {
+        "title": "About",
+        "projectInfo": "Project Information",
+        "description": "Web UI Chrono Collector (WUICC) is a timeline management tool for tracking game activities and events across multiple platforms. The project started on May 28, 2025.",
+        "team": "Development Team",
+        "teamDescription": "Our team is dedicated to creating useful tools for gamers."
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "Toggle sidebar",
+      "changeLanguage": "Change language"
+    },
+    "settings": {
+      "title": "Settings",
+      "gameSelection": {
+        "title": "Game Settings",
+        "save": "Save Game Preferences",
+        "saved": "Game preferences saved",
+        "refresh": "Refresh Game List",
+        "refreshSuccess": "Game list refreshed successfully",
+        "refreshFailed": "Failed to refresh game list"
+      },
+      "theme": {
+        "title": "Theme Settings",
+        "selectLabel": "Select Theme",
+        "light": "Light Theme",
+        "dark": "Dark Theme",
+        "system": "Follow System"
+      },
+      "language": {
+        "title": "Language Settings",
+        "selectLabel": "Select Language",
+        "en": "English",
+        "zh-CN": "Simplified Chinese",
+        "zh-TW": "Traditional Chinese",
+        "ja": "Japanese"
+      },
+      "notifications": {
+        "title": "Notification Settings",
+        "enable": "Enable Notifications",
+        "frequency": "Notification Frequency"
+      }
+    },
+    "gameSelection": {
+      "info": "Select the games you play and configure which activities you want to track",
+      "save": "Save Preferences",
+      "saved": "Your game preferences have been saved",
+      "refreshSuccess": "Game list refreshed successfully",
+      "refreshFailed": "Failed to refresh game list",
+      "noGames": "No games available",
+      "loading": "Loading game data..."
+    },
+    "errors": {
+      "network": "Network request failed",
+      "invalidResponse": "Invalid server response",
+      "unknown": "An unknown error occurred",
+      "loadFailed": "Failed to load game data",
+      "saveFailed": "Failed to save preferences"
+    },
+    "welcome": {
+      "title": "Welcome to WUICC",
+      "message": "Please select the games you play and configure which activities you want to track:",
+      "confirm": "Confirm Selections",
+      "skip": "Skip for now"
+    },
+    "gameActivities": {
+      "challenge": "Challenge",
+      "event": "Event",
+      "gacha": "Gacha",
+      "version": "Version Update",
+      "maintenance": "Maintenance"
+    },
+    "default": "Default",
+    "timeFormat": {
+      "24hour": "24-hour",
+      "12hour": "12-hour"
+    },
+    "version_with_number": "Version {version}",
+    "close": "Close"
+  }
+}

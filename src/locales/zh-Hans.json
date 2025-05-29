@@ -1,0 +1,153 @@
+{
+  "app": {
+    "title": "时间线收集器",
+    "documentTitle": "时间线收集器 - Web UI Chrono Collector",
+    "sidebar": {
+      "home": "首页",
+      "timeline": "时间线",
+      "notification": "通知",
+      "settings": "设置",
+      "about": "关于"
+    },
+    "games": {
+      "genshin": {
+        "title": "原神"
+      },
+      "starrail": {
+        "title": "崩坏：星穹铁道"
+      },
+      "zenless": {
+        "title": "绝区零"
+      },
+      "wuthering": {
+        "title": "鸣潮"
+      }
+    },
+    "pages": {
+      "home": {
+        "title": "首页",
+        "welcome": "欢迎来到首页！"
+      },
+      "timeline": {
+        "title": "时间线",
+        "noActivities": "未找到符合当前选择的活动。请检查您的游戏和活动类型偏好设置。",
+        "loading": "正在加载时间线...",
+        "time_remaining": {
+          "days_hours": "{days}天 {hours}小时",
+          "hours_minutes": "{hours}小时 {minutes}分钟",
+          "minutes": "{minutes}分钟",
+          "less_than_minute": "不到一分钟"
+        },
+        "starts_in": "开始倒计时",
+        "ends_in": "结束倒计时",
+        "starts_in_prefix": "即将开始 ",
+        "ends_in_prefix": "",
+        "event_ended": "活动已结束",
+        "day": "天"
+      },
+      "notification": {
+        "title": "通知",
+        "content": "这是通知内容。"
+      },
+      "settings": {
+        "title": "设置"
+      },
+      "shortcuts": {
+        "title": "游戏快捷链接",
+        "links": {
+          "mihoyo_genshin": "官网",
+          "hoyoverse_genshin": "官网 (国际服)",
+          "mihoyo_starrail": "官网",
+          "hoyoverse_starrail": "官网 (国际服)",
+          "mihoyo_zenless": "官网",
+          "hoyoverse_zenless": "官网 (国际服)",
+          "kurogame_cn_wuthering": "官网",
+          "kurogame_os_wuthering": "官网 (国际服)"
+        }
+      },
+      "notFound": {
+        "title": "页面未找到",
+        "message": "您访问的页面不存在或已被移除",
+        "backHome": "返回首页"
+      },
+      "about": {
+        "title": "关于",
+        "projectInfo": "项目信息",
+        "description": "时间线收集器 (WUICC) 是一款用于跨平台追踪游戏活动和事件的时间线管理工具。项目开始于2025年5月24日。",
+        "team": "开发团队",
+        "teamDescription": "我们的团队致力于为玩家创造实用工具。"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "切换侧边栏",
+      "changeLanguage": "切换语言"
+    },
+    "gameSelection": {
+      "info": "请选择您游玩的游戏并配置您想要追踪的活动类型",
+      "save": "保存偏好设置",
+      "saved": "游戏偏好设置已保存",
+      "refreshSuccess": "游戏列表刷新成功",
+      "refreshFailed": "游戏列表刷新失败",
+      "noGames": "暂无可用游戏",
+      "loading": "正在加载游戏数据..."
+    },
+    "errors": {
+      "network": "网络请求失败",
+      "invalidResponse": "服务器响应无效",
+      "unknown": "发生未知错误",
+      "loadFailed": "加载游戏数据失败",
+      "saveFailed": "保存偏好设置失败"
+    },
+    "welcome": {
+      "title": "欢迎使用WUICC",
+      "message": "请选择您游玩的游戏并配置您想要追踪的活动类型：",
+      "confirm": "确认选择",
+      "skip": "暂时跳过"
+    },
+    "settings": {
+      "title": "系统设置",
+      "gameSelection": {
+        "title": "游戏设置",
+        "save": "保存游戏偏好",
+        "saved": "游戏偏好已保存",
+        "refresh": "刷新游戏列表",
+        "refreshSuccess": "游戏列表刷新成功",
+        "refreshFailed": "游戏列表刷新失败"
+      },
+      "theme": {
+        "title": "主题设置",
+        "selectLabel": "选择主题",
+        "light": "浅色主题",
+        "dark": "深色主题",
+        "system": "跟随系统"
+      },
+      "language": {
+        "title": "语言设置",
+        "selectLabel": "选择语言",
+        "en": "英文",
+        "zh-CN": "简体中文",
+        "zh-TW": "繁體中文",
+        "ja": "日本語"
+      },
+      "notifications": {
+        "title": "通知设置",
+        "enable": "启用通知",
+        "frequency": "通知频率"
+      }
+    },
+    "gameActivities": {
+      "challenge": "周期挑战",
+      "event": "普通活动",
+      "gacha": "祈愿活动",
+      "version": "版本更新",
+      "maintenance": "维护公告"
+    },
+    "default": "默认",
+    "timeFormat": {
+      "24hour": "24小时制",
+      "12hour": "12小时制"
+    },
+    "version_with_number": "{version} 版本",
+    "close": "关闭"
+  }
+}

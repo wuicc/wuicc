@@ -1,0 +1,350 @@
+<template>
+  <div>
+    <!-- 活动块 -->
+    <div class="activity-item" :style="activityStyle" @click="openDialog">
+      <div class="activity-content">
+        <span class="activity-title">{{ formattedTitle }}</span>
+      </div>
+    </div>
+
+    <!-- 左侧倒计时（未开始的活动） -->
+    <div
+      v-if="showLeftIndicator"
+      class="time-indicator left"
+      :style="leftIndicatorStyle"
+    >
+      {{ formattedTimeRemaining }}
+    </div>
+
+    <!-- 右侧倒计时（已开始的活动） -->
+    <div
+      v-if="showRightIndicator"
+      class="time-indicator right"
+      :style="rightIndicatorStyle"
+    >
+      {{ formattedTimeRemaining }}
+    </div>
+
+    <!-- 活动详情弹窗 -->
+    <v-dialog v-model="dialog" max-width="500">
+      <v-card>
+        <v-img :src="activity.banner_img" height="200px" cover></v-img>
+        <v-card-title>{{ formattedTitle }}</v-card-title>
+        <v-card-subtitle>
+          {{ formatDate(activity.start_time) }} -
+          {{ formatDate(activity.end_time) }}
+        </v-card-subtitle>
+
+        <!-- 弹窗内的倒计时 -->
+        <v-card-text v-if="dialogTimeRemainingText" class="dialog-timer">
+          {{ dialogTimeRemainingText }}
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn color="primary" @click="dialog = false">{{
+            $t("app.close")
+          }}</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { i18n } from "@/i18n";
+const PIXELS_PER_DAY = 36; // 每天36px
+const SECONDS_PER_DAY = 24 * 60 * 60; // 每天86400秒
+const PIXELS_PER_SECOND = PIXELS_PER_DAY / SECONDS_PER_DAY; // 0.000416667px/秒
+const SECONDS_PER_PIXEL = 1 / PIXELS_PER_SECOND; // 2400秒/px (40分钟)
+
+const props = defineProps({
+  activity: Object,
+  startDate: Date,
+  endDate: Date,
+});
+
+// 从本地存储获取游戏信息
+const gameColor = ref("#888888"); // 默认颜色
+
+// 获取游戏颜色
+const getGameColor = () => {
+  try {
+    const savedSelections = localStorage.getItem("userGameSelections");
+    const gameList = localStorage.getItem("gameList");
+
+    if (savedSelections && gameList) {
+      const { games: selectedGames } = JSON.parse(savedSelections);
+      const games = JSON.parse(gameList);
+
+      const game = games.find((g) => g.game_id === props.activity.game_id);
+      if (game && game.color) {
+        gameColor.value = game.color;
+      }
+    }
+  } catch (error) {
+    console.error("Failed to load game color:", error);
+  }
+};
+
+onMounted(() => {
+  getGameColor();
+  startTimer();
+});
+
+// 定时器相关
+const now = ref(new Date());
+let timer = null;
+
+const startTimer = () => {
+  if (timer) clearInterval(timer);
+  timer = setInterval(() => {
+    now.value = new Date();
+  }, 1000);
+};
+
+onUnmounted(() => {
+  if (timer) clearInterval(timer);
+});
+
+const dialog = ref(false);
+const openDialog = () => {
+  dialog.value = true;
+};
+
+// 活动时间计算
+const activityStart = computed(() => new Date(props.activity.start_time));
+const activityEnd = computed(() => new Date(props.activity.end_time));
+
+const isFuture = computed(() => now.value < activityStart.value);
+const isOngoing = computed(
+  () => now.value >= activityStart.value && now.value < activityEnd.value
+);
+const isEnded = computed(() => now.value >= activityEnd.value);
+
+const showLeftIndicator = computed(() => isFuture.value && !isEnded.value);
+const showRightIndicator = computed(() => isOngoing.value && !isEnded.value);
+
+// 计算剩余时间（秒）
+const timeRemaining = computed(() => {
+  if (isFuture.value) {
+    return Math.floor((activityStart.value - now.value) / 1000);
+  } else if (isOngoing.value) {
+    return Math.floor((activityEnd.value - now.value) / 1000);
+  }
+  return 0;
+});
+
+// 格式化剩余时间
+const formattedTimeRemaining = computed(() => {
+  if (isEnded.value) return "";
+
+  const seconds = timeRemaining.value;
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  const t = i18n.global.t;
+  const prefix = isFuture.value
+    ? t("app.pages.timeline.starts_in_prefix")
+    : t("app.pages.timeline.ends_in_prefix");
+
+  if (days > 0) {
+    return prefix + t("app.pages.timeline.time_remaining.days_hours", { days, hours });
+  } else if (hours > 0) {
+    return prefix + t("app.pages.timeline.time_remaining.hours_minutes", { hours, minutes });
+  } else if (minutes > 0) {
+    return prefix + t("app.pages.timeline.time_remaining.minutes", { minutes });
+  } else {
+    return prefix + t("app.pages.timeline.time_remaining.less_than_minute");
+  }
+});
+// 位置计算
+const position = computed(() => {
+  const start = new Date(props.activity.start_time);
+  const timelineStart = new Date(props.startDate);
+  const eventStartOffset = (start.getTime() - timelineStart.getTime()) / 1000;
+  return `${eventStartOffset * PIXELS_PER_SECOND}px`;
+});
+
+const width = computed(() => {
+  const start = new Date(props.activity.start_time);
+  const end = new Date(props.activity.end_time);
+  const durationMs = end - start;
+  const pxWidth = (durationMs / 1000) * PIXELS_PER_SECOND;
+  return `${pxWidth}px`;
+});
+
+// 倒计时指示器位置
+const leftIndicatorStyle = computed(() => {
+  const leftPos = parseFloat(position.value);
+  const textWidth = getTextWidth(formattedTimeRemaining.value, '16px sans-serif');
+  
+  return {
+    left: `${leftPos - textWidth - 19}px`, // 居中
+  };
+});
+
+const rightIndicatorStyle = computed(() => {
+  const leftPos = parseFloat(position.value);
+  const widthVal = parseFloat(width.value);
+  return {
+    left: `${leftPos + widthVal + 5}px`,
+  };
+});
+
+function getTextWidth(text, font = '16px sans-serif') {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  context.font = font;
+  // console.log(context.measureText(text).width)
+  return context.measureText(text).width;
+}
+
+const formatDate = (str) => {
+  return new Date(str).toLocaleString();
+};
+
+const activityStyle = computed(() => {
+  return {
+    left: `${position.value}`,
+    width: `${width.value}`,
+    height: "32px",
+    backgroundColor: gameColor.value,
+    color: "#fff",
+    borderRadius: "4px",
+    padding: "0px 5px",
+    cursor: "pointer",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    lineHeight: "32px",
+    verticalAlign: "middle",
+    fontSize: "1.1em",
+    userSelect: "none",
+    position: "absolute",
+  };
+});
+
+const formattedTitle = computed(() => {
+  if (props.activity.type === "version") {
+    return formatVersionActivity(props.activity);
+  }
+  if (props.activity.type === "event") {
+    return extractTitle(props.activity.title);
+  }
+  return props.activity.title;
+});
+
+function formatVersionActivity(activity) {
+  const versionNumber = activity.title.match(/(\d\.\d)/)[0];
+  const gameName = i18n.global.t(`app.games.${activity.game_id}.title`);
+  return `${gameName} ${formatGameVersion(versionNumber)}`;
+}
+
+function formatGameVersion(version) {
+  return i18n.global.t(`app.version_with_number`, { version });
+}
+
+function extractTitle(title) {
+  const regex = /[「\[]([^「\]」]+)[」\]]/;
+  const match = regex.exec(title);
+  return match ? match[1] : title;
+}
+
+const detailedTimeRemaining = computed(() => {
+  if (isEnded.value) return "";
+
+  const seconds = timeRemaining.value;
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  // 格式化数字为两位数
+  const format = (num) => num.toString().padStart(2, "0");
+
+  if (days > 0) {
+    return `${days}${i18n.global.t("app.pages.timeline.day")} ${format(
+      hours
+    )}:${format(minutes)}:${format(secs)}`;
+  }
+  return `${format(hours)}:${format(minutes)}:${format(secs)}`;
+});
+
+// 修改后的弹窗倒计时文本
+const dialogTimeRemainingText = computed(() => {
+  if (isEnded.value) return i18n.global.t("app.pages.timeline.event_ended");
+
+  if (isFuture.value) {
+    return (
+      i18n.global.t("app.pages.timeline.starts_in") +
+      ": " +
+      detailedTimeRemaining.value
+    );
+  } else if (isOngoing.value) {
+    return (
+      i18n.global.t("app.pages.timeline.ends_in") +
+      ": " +
+      detailedTimeRemaining.value
+    );
+  }
+  return "";
+});
+</script>
+
+<style scoped>
+.activity-item {
+  position: absolute;
+  font-size: 13px;
+  z-index: 15;
+  transition: background-color 0.3s ease;
+}
+
+.activity-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.activity-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time-indicator {
+  position: absolute;
+  top: 4px;
+  z-index: 20;
+  font-size: 16px;
+  white-space: nowrap;
+  background: #0005;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 4px;
+  pointer-events: none;
+  line-height: 20px;
+  z-index: 20;
+}
+
+/* .time-indicator.left {
+  transform: translateY(-100%);
+}
+
+.time-indicator.right {
+} */
+
+.dialog-timer {
+  font-weight: bold;
+  text-align: center;
+  padding: 8px !important;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.v-theme--dark .time-indicator {
+  background: #fff2;
+}
+</style>

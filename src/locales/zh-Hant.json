@@ -1,0 +1,153 @@
+{
+  "app": {
+    "title": "時間線收集器",
+    "documentTitle": "時間線收集器 - Web UI Chrono Collector",
+    "sidebar": {
+      "home": "首頁",
+      "timeline": "時間線",
+      "notification": "通知",
+      "settings": "設定",
+      "about": "關於"
+    },
+    "games": {
+      "genshin": {
+        "title": "原神"
+      },
+      "starrail": {
+        "title": "崩壞：星穹鐵道"
+      },
+      "zenless": {
+        "title": "絕區零"
+      },
+      "wuthering": {
+        "title": "鳴潮"
+      }
+    },
+    "pages": {
+      "home": {
+        "title": "首頁",
+        "welcome": "歡迎來到首頁！"
+      },
+      "timeline": {
+        "title": "時間線",
+        "noActivities": "未找到符合當前選擇的活動。請檢查您的遊戲和活動類型偏好設定。",
+        "loading": "時間線加載中...",
+        "time_remaining": {
+          "days_hours": "{days}天 {hours}小時",
+          "hours_minutes": "{days}小時 {minutes}分鐘",
+          "minutes": "{minutes}分鐘",
+          "less_than_minute": "不到一分鐘"
+        },
+        "starts_in": "開始倒計時",
+        "ends_in": "結束倒計時",
+        "starts_in_prefix": "即將開始 ",
+        "ends_in_prefix": "",
+        "event_ended": "活動已結束",
+        "day": "天"
+      },
+      "notification": {
+        "title": "通知",
+        "content": "這是通知內容。"
+      },
+      "settings": {
+        "title": "設定"
+      },
+      "shortcuts": {
+        "title": "遊戲快捷連結",
+        "links": {
+          "mihoyo_genshin": "官網 (miHoYo, 中國大陸)",
+          "hoyoverse_genshin": "官網 (HoYoVerse, 國際服)",
+          "mihoyo_starrail": "官網 (miHoYo, 中國大陸)",
+          "hoyoverse_starrail": "官網 (HoYoVerse, 國際服)",
+          "mihoyo_zenless": "官網 (miHoYo, 中國大陸)",
+          "hoyoverse_zenless": "官網 (HoYoVerse, 國際服)",
+          "kurogame_cn_wuthering": "官網 (中國大陸)",
+          "kurogame_os_wuthering": "官網 (國際服)"
+        }
+      },
+      "notFound": {
+        "title": "頁面未找到",
+        "message": "您訪問的頁面不存在或已被移除",
+        "backHome": "返回首頁"
+      },
+      "about": {
+        "title": "關於",
+        "projectInfo": "項目信息",
+        "description": "時間線收集器 (WUICC) 是一款用於跨平台追蹤遊戲活動和事件的時間線管理工具。專案開始於2025年5月28日。",
+        "team": "開發團隊",
+        "teamDescription": "我們的團隊致力於為玩家創造實用工具。"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "切換側邊欄",
+      "changeLanguage": "切換語言"
+    },
+    "gameSelection": {
+      "info": "請選擇您遊玩的遊戲並配置您想要追蹤的活動類型",
+      "save": "儲存偏好設定",
+      "saved": "遊戲偏好設定已儲存",
+      "refreshSuccess": "遊戲列表刷新成功",
+      "refreshFailed": "遊戲列表刷新失敗",
+      "noGames": "暫無可用遊戲",
+      "loading": "正在加載遊戲數據..."
+    },
+    "errors": {
+      "network": "網路請求失敗",
+      "invalidResponse": "伺服器回應無效",
+      "unknown": "發生未知錯誤",
+      "loadFailed": "加載遊戲數據失敗",
+      "saveFailed": "儲存偏好設定失敗"
+    },
+    "welcome": {
+      "title": "歡迎使用WUICC",
+      "message": "請選擇您遊玩的遊戲並配置您想要追蹤的活動類型：",
+      "confirm": "確認選擇",
+      "skip": "暫時跳過"
+    },
+    "settings": {
+      "title": "系統設定",
+      "gameSelection": {
+        "title": "遊戲設定",
+        "save": "儲存遊戲偏好",
+        "saved": "遊戲偏好已儲存",
+        "refresh": "刷新遊戲列表",
+        "refreshSuccess": "遊戲列表刷新成功",
+        "refreshFailed": "遊戲列表刷新失敗"
+      },
+      "theme": {
+        "title": "主題設定",
+        "selectLabel": "選擇主題",
+        "light": "淺色主題",
+        "dark": "深色主題",
+        "system": "跟隨系統"
+      },
+      "language": {
+        "title": "語言設定",
+        "selectLabel": "選擇語言",
+        "en": "英文",
+        "zh-CN": "簡體中文",
+        "zh-TW": "繁體中文",
+        "ja": "日本語"
+      },
+      "notifications": {
+        "title": "通知設定",
+        "enable": "啟用通知",
+        "frequency": "通知頻率"
+      }
+    },
+    "gameActivities": {
+      "challenge": "週期挑戰",
+      "event": "普通活動",
+      "gacha": "祈願活動",
+      "version": "版本更新",
+      "maintenance": "維護公告"
+    },
+    "default": "默認",
+    "timeFormat": {
+      "24hour": "24小時制",
+      "12hour": "12小時制"
+    },
+    "version_with_number": "{version} 版本",
+    "close": "關閉"
+  }
+}

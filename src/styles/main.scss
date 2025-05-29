@@ -1,0 +1,16 @@
+// 先加载 settings 配置
+@use 'vuetify/settings' with (
+  $color-pack: false
+);
+
+// 然后加载主样式
+@use 'vuetify/styles/main';
+
+.v-application {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.v-card, .v-btn, .v-list-item {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
