@@ -14,6 +14,7 @@ export default createVuetify({
         dark: false,
         colors: {
           primary: '#ffc0cb',    // 粉色作为主色
+          primary_dark: '#f08d9e',
           secondary: '#f5f5f5',  // 浅灰色作为次色
           accent: '#00b0ff',     // 蓝色作为强调色
           error: '#ff5252',      // 错误红色
@@ -26,6 +27,7 @@ export default createVuetify({
         dark: true,
         colors: {
           primary: '#ffc0cb',    // 保持粉色主色
+          primary_dark: '#f08d9e',
           secondary: '#424242',  // 深灰色作为次色
           accent: '#00b0ff',     // 保持蓝色强调色
           error: '#ff5252',

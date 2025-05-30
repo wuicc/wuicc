@@ -17,16 +17,28 @@
       ></v-switch>
       <!-- 加载状态 -->
     </v-card-title>
-    <v-card-text @wheel="handleWheelScroll" ref="cardTextRef">
+    <v-card-text
+      ref="cardTextRef"
+      @wheel="handleWheelScroll"
+      @mousedown="handleMouseDown"
+      @mouseleave="handleMouseLeave"
+      :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
+    >
       <!-- 错误提示 -->
       <v-alert v-if="error" type="error" class="ma-4">
         {{ error }}
       </v-alert>
-      <v-alert v-else-if="loading" type="info" class="ma-4" color="accent" icon="mdi-reload">
+      <!-- <v-alert
+        v-else-if="loading"
+        type="info"
+        class="ma-4"
+        color="accent"
+        icon="mdi-reload"
+      >
         {{ $t("app.pages.timeline.loading") }}
-      </v-alert>
+      </v-alert> -->
       <v-alert
-        v-else-if="activities.length === 0"
+        v-else-if="!loading && activities.length === 0"
         type="info"
         class="ma-4"
         color="accent"
@@ -34,7 +46,10 @@
         {{ $t("app.pages.timeline.noActivities") }}
       </v-alert>
       <!-- 时间轴容器 -->
-      <div class="timeline-scroll-container" v-else>
+      <div
+        class="timeline-scroll-container"
+        v-if="!error && !loading && activities.length !== 0"
+      >
         <!-- Sticky头部容器 -->
         <div class="sticky-header-container">
           <!-- 月份行 -->
@@ -263,7 +278,7 @@ const calculateTimeRange = () => {
   });
 
   // 扩展3天范围
-  earliestStart -= 3 * 24 * 60 * 60 * 1000;
+  earliestStart -= 0 * 24 * 60 * 60 * 1000;
   latestEnd += 3 * 24 * 60 * 60 * 1000;
 
   startDate.value = new Date(earliestStart);
@@ -279,17 +294,18 @@ watch(locale, () => {
 });
 
 onMounted(() => {
-  // 初始化时间更新
   timeInterval = setInterval(() => {
     currentTime.value = new Date();
   }, 100);
-
-  // 首次加载数据
   fetchAnnouncements();
+  document.addEventListener("mousemove", handleMouseMove);
+  document.addEventListener("mouseup", handleMouseUp);
 });
 
 onBeforeUnmount(() => {
   clearInterval(timeInterval);
+  document.removeEventListener("mousemove", handleMouseMove);
+  document.removeEventListener("mouseup", handleMouseUp);
 });
 
 const handleWheelScroll = (event) => {
@@ -356,7 +372,11 @@ const formatWeekday = (date) => {
     const weekdayMap = ["日", "一", "二", "三", "四", "五", "六"];
     return weekdayMap[date.getDay()];
   } else {
-    return $d(date, { weekday: "short" }).replace(".", "");
+    const weekday = $d(date, { weekday: "short" }).replace(".", "");
+    if (locale.value.includes("en")) {
+      return weekday.slice(0, 2);
+    }
+    return weekday;
   }
 };
 
@@ -433,12 +453,67 @@ const sortActivities = (activities, gameList) => {
     return new Date(a.start_time) - new Date(b.start_time);
   });
 };
+
+const isDragging = ref(false);
+const startX = ref(0);
+const startY = ref(0);
+const scrollLeft = ref(0);
+const scrollTop = ref(0);
+
+const handleMouseDown = (e) => {
+  if (e.button !== 0) return; // 只处理左键
+  if (!cardTextRef.value) return;
+
+  const container = cardTextRef.value.$el;
+  isDragging.value = true;
+  startX.value = e.pageX - container.offsetLeft; // 横向仍用 pageX
+  startY.value = e.clientY; // 纵向改用 clientY
+  scrollLeft.value = container.scrollLeft;
+  scrollTop.value = window.scrollY; // 记录窗口当前滚动位置
+
+  e.preventDefault();
+  e.stopPropagation();
+};
+
+const handleMouseMove = (e) => {
+  if (!isDragging.value || !cardTextRef.value) return;
+
+  const container = cardTextRef.value.$el;
+
+  // 横向滚动（保持不变）
+  const x = e.pageX - container.offsetLeft;
+  const walkX = x - startX.value;
+  container.scrollLeft = scrollLeft.value - walkX;
+
+  // 纵向滚动（改用 clientY）
+  const walkY = e.clientY - startY.value;
+  window.scrollTo({
+    top: scrollTop.value - walkY,
+    behavior: "auto",
+  });
+
+  // 防止默认行为（避免页面意外滚动）
+  e.preventDefault();
+};
+
+const handleMouseUp = (e) => {
+  if (e.button !== 0) return; // Only left button
+  isDragging.value = false;
+};
+
+const handleMouseLeave = () => {
+  isDragging.value = false;
+};
 </script>
 
 <style scoped>
 /* 保持原有样式不变 */
 .timeline-root {
-  max-width: 100%;
+  background-color: #fff8;
+}
+
+.v-theme--dark .timeline-root {
+  background-color: #4448;
 }
 
 .v-card-text {

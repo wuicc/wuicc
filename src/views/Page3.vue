@@ -11,7 +11,7 @@
       <v-row>
         <v-col cols="12" md="6">
           <v-expansion-panels class="mb-6" v-model="panel">
-            <v-expansion-panel>
+            <v-expansion-panel eager>
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <div class="d-flex align-center w-100">
@@ -58,6 +58,29 @@
         <v-col cols="12" md="6">
           <v-card class="mb-4">
             <v-card-title class="text-h6">
+              <v-icon left>mdi-clock</v-icon>
+              {{ $t("app.settings.timezone.title") }}
+            </v-card-title>
+            <v-card-text>
+              <!-- 服务器时区选择 -->
+              <v-select
+                v-model="selectedServerTimezone"
+                :items="timezoneOptions"
+                :label="$t('app.settings.timezone.serverLabel')"
+                item-title="text"
+                item-value="value"
+              ></v-select>
+
+              <!-- 显示时区切换 -->
+              <v-checkbox
+                v-model="useLocalTimezone"
+                :label="$t('app.settings.timezone.useLocalLabel')"
+                color="accent"
+              ></v-checkbox>
+            </v-card-text>
+          </v-card>
+          <v-card class="mb-4">
+            <v-card-title class="text-h6">
               <v-icon left>mdi-palette</v-icon>
               {{ $t("app.settings.theme.title") }}
             </v-card-title>
@@ -79,7 +102,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { i18n } from "@/i18n";
 import GameSelector from "@/components/GameSelector.vue";
 import AppToast from "@/components/AppToast.vue"; // 引入新组件
@@ -164,6 +187,42 @@ systemDarkMode.addEventListener("change", (e) => {
   }
 });
 
+const timezoneOptions = computed(() => [
+  {
+    text: i18n.global.t("app.settings.timezone.options.asia"),
+    value: "UTC+8",
+  },
+  {
+    text: i18n.global.t("app.settings.timezone.options.america"),
+    value: "UTC-5",
+  },
+  {
+    text: i18n.global.t("app.settings.timezone.options.europe"),
+    value: "UTC+1",
+  },
+]);
+
+const selectedServerTimezone = ref("UTC+8");
+const useLocalTimezone = ref(false);
+
+// 从本地存储加载设置
+onMounted(() => {
+  const savedTimezone = localStorage.getItem("serverTimezone");
+  if (savedTimezone) {
+    selectedServerTimezone.value = savedTimezone;
+  }
+
+  const savedDisplayMode = localStorage.getItem("useLocalTimezone");
+  if (savedDisplayMode) {
+    useLocalTimezone.value = savedDisplayMode === "true";
+  }
+});
+
+// 保存设置到本地存储
+watch([selectedServerTimezone, useLocalTimezone], ([timezone, useLocal]) => {
+  localStorage.setItem("serverTimezone", timezone);
+  localStorage.setItem("useLocalTimezone", useLocal.toString());
+});
 </script>
 
 <style scoped>

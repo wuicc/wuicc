@@ -15,12 +15,13 @@ const messages = {
 const getDefaultLanguage = () => {
   const savedLanguage = localStorage.getItem('userLanguage')
   if (savedLanguage) return savedLanguage
-  
+  let lang = "en";
   const browserLanguage = navigator.language || 'en'
   if (browserLanguage.startsWith('zh')) {
-    return browserLanguage.includes('TW') || browserLanguage.includes('HK') ? 'zh-Hant' : 'zh-Hans'
+    lang=browserLanguage.includes('TW') || browserLanguage.includes('HK') ? 'zh-Hant' : 'zh-Hans'
   }
-  return 'en'
+  localStorage.setItem('userLanguage', lang);
+  return lang
 }
 
 // 创建并导出i18n实例

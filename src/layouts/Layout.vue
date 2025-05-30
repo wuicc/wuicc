@@ -30,7 +30,7 @@
             class="pl-2"
           >
             <v-list-item-title
-              :class="{ 'text-primary': locale === lang.value }"
+              :class="{ 'text-accent': locale === lang.value }"
             >
               {{ lang.name }}
             </v-list-item-title>
@@ -56,32 +56,36 @@
         <!-- 导航菜单 -->
         <v-list density="compact" nav>
           <v-list-item
-            prepend-icon="mdi-view-dashboard"
+            prepend-icon="mdi-home"
             :title="$t('app.sidebar.home')"
             value="home"
             to="/"
             exact
+            active-class="text-primary_dark"
           />
 
           <v-list-item
-            prepend-icon="mdi-file-document"
+            prepend-icon="mdi-calendar-text"
             :title="$t('app.sidebar.timeline')"
             value="timeline"
             to="/timeline"
+            active-class="text-primary_dark"
           />
 
-          <v-list-item
+          <!-- <v-list-item
             prepend-icon="mdi-bell"
             :title="$t('app.sidebar.notification')"
             value="notification"
             to="/notification"
-          />
+            active-class="text-primary_dark"
+          /> -->
 
           <v-list-item
             prepend-icon="mdi-cog"
             :title="$t('app.sidebar.settings')"
             value="settings"
             to="/settings"
+            active-class="text-primary_dark"
           />
           <v-divider style="margin: 8px 0" />
           <v-list-item
@@ -89,12 +93,14 @@
             :title="$t('app.pages.shortcuts.title')"
             value="shortcuts"
             to="/shortcuts"
+            active-class="text-primary_dark"
           />
           <v-list-item
             prepend-icon="mdi-information"
             :title="$t('app.pages.about.title')"
             value="about"
             to="/about"
+            active-class="text-primary_dark"
           />
         </v-list>
 

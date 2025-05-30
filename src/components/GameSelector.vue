@@ -35,14 +35,14 @@
           game.name[$i18n.locale] || game.game_id
         }}</span>
 
-        <v-chip small :color="game.color" text-color="white" class="ml-2">
+        <!-- <v-chip small :color="game.color" text-color="white" class="ml-2">
           {{ game.game_id }}
-        </v-chip>
+        </v-chip> -->
       </div>
 
       <!-- 活动选项 - 只在勾选时显示 -->
       <v-expand-transition>
-        <div v-if="selectedGames.includes(game.game_id)">
+        <div v-show="selectedGames.includes(game.game_id)">
           <v-divider></v-divider>
           <v-list class="py-0" density="compact">
             <v-list-item

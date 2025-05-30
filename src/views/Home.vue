@@ -35,6 +35,18 @@
       <v-card-text class="text-center px-4 pb-6">
         {{ $t("app.pages.home.welcome") }}
       </v-card-text>
+
+      <v-card-actions class="justify-center pb-6">
+        <v-btn
+          color="accent"
+          size="large"
+          variant="elevated"
+          :to="{ path: '/timeline' }"
+          style="line-height: 20px"
+        >
+          {{ $t("app.go_to", { target: $t("app.pages.timeline.title") }) }}
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </div>
 </template>

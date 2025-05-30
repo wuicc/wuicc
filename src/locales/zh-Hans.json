@@ -26,7 +26,7 @@
     "pages": {
       "home": {
         "title": "首页",
-        "welcome": "欢迎来到首页！"
+        "welcome": "欢迎来到WUICC首页！"
       },
       "timeline": {
         "title": "时间线",
@@ -133,6 +133,16 @@
         "title": "通知设置",
         "enable": "启用通知",
         "frequency": "通知频率"
+      },
+      "timezone": {
+        "title": "时区设置",
+        "serverLabel": "游戏服务器时区",
+        "useLocalLabel": "使用本地时区显示时间",
+        "options": {
+          "asia": "国服、亚洲服、台湾/香港/澳门服 (UTC+8)",
+          "america": "美洲服 (UTC-5)",
+          "europe": "欧洲服 (UTC+1)"
+        }
       }
     },
     "gameActivities": {
@@ -148,6 +158,7 @@
       "12hour": "12小时制"
     },
     "version_with_number": "{version} 版本",
-    "close": "关闭"
+    "close": "关闭",
+    "go_to": "前往{target}"
   }
 }

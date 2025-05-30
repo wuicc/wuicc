@@ -25,7 +25,7 @@
     "pages": {
       "home": {
         "title": "ホーム",
-        "welcome": "ホームページへようこそ！"
+        "welcome": "WUICCホームページへようこそ！"
       },
       "timeline": {
         "title": "タイムライン",
@@ -132,6 +132,16 @@
         "title": "通知設定",
         "enable": "通知を有効にする",
         "frequency": "通知の頻度"
+      },
+      "timezone": {
+        "title": "タイムゾーン設定",
+        "serverLabel": "ゲームサーバーのタイムゾーン",
+        "useLocalLabel": "表示にローカルタイムゾーンを使用する",
+        "options": {
+          "asia": "アジア、東南アジア、台湾/香港/マカオ (UTC+8)",
+          "america": "アメリカ (UTC-5)",
+          "europe": "ヨーロッパ (UTC+1)"
+        }
       }
     },
     "gameActivities": {
@@ -147,6 +157,7 @@
       "12hour": "12時間表記"
     },
     "version_with_number": "Ver{version}",
-    "close": "閉じる"
+    "close": "閉じる",
+    "go_to": "{target}へ"
   }
 }

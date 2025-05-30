@@ -26,7 +26,7 @@
     "pages": {
       "home": {
         "title": "Home",
-        "welcome": "Welcome to the home page!"
+        "welcome": "Welcome to the WUICC home page!"
       },
       "timeline": {
         "title": "Timeline",
@@ -111,6 +111,16 @@
         "title": "Notification Settings",
         "enable": "Enable Notifications",
         "frequency": "Notification Frequency"
+      },
+      "timezone": {
+        "title": "Timezone Settings",
+        "serverLabel": "Game Server Timezone",
+        "useLocalLabel": "Use local timezone for display",
+        "options": {
+          "asia": "Asia, Southeast Asia, TW/HK/MO (UTC+8)",
+          "america": "America (UTC-5)",
+          "europe": "Europe (UTC+1)"
+        }
       }
     },
     "gameSelection": {
@@ -148,6 +158,7 @@
       "12hour": "12-hour"
     },
     "version_with_number": "Version {version}",
-    "close": "Close"
+    "close": "Close",
+    "go_to": "Go to {target}"
   }
 }

@@ -53,7 +53,7 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-btn color="primary" @click="dialog = false">{{
+          <v-btn color="accent" @click="dialog = false">{{
             $t("app.close")
           }}</v-btn>
         </v-card-actions>
@@ -65,6 +65,8 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { i18n } from "@/i18n";
+import { useI18n } from "vue-i18n";
+
 const PIXELS_PER_DAY = 36; // 每天36px
 const SECONDS_PER_DAY = 24 * 60 * 60; // 每天86400秒
 const PIXELS_PER_SECOND = PIXELS_PER_DAY / SECONDS_PER_DAY; // 0.000416667px/秒
@@ -74,6 +76,26 @@ const props = defineProps({
   activity: Object,
   startDate: Date,
   endDate: Date,
+});
+
+const { d: $d } = useI18n();
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const hour12 = localStorage.getItem("timeline-time-format") === "12";
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: hour12,
+  };
+  return $d(date, options);
+};
+
+const use24HourFormat = computed(() => {
+  return localStorage.getItem("timeline-time-format") !== "12";
 });
 
 // 从本地存储获取游戏信息
@@ -98,6 +120,25 @@ const getGameColor = () => {
     console.error("Failed to load game color:", error);
   }
 };
+
+function getGachaName(activity) {
+  try {
+    const gameList = JSON.parse(localStorage.getItem("gameList"));
+    if (!gameList) return "";
+
+    const game = gameList.find((g) => g.game_id === activity.game_id);
+    if (!game || !game.activities || !game.activities.gacha) return "";
+
+    // 获取当前语言设置
+    const language = localStorage.getItem("userLanguage");
+
+    // 返回对应语言的祈愿名称
+    return game.activities.gacha.name[language] || "";
+  } catch (error) {
+    console.error("Failed to get gacha name:", error);
+    return "";
+  }
+}
 
 onMounted(() => {
   getGameColor();
@@ -222,9 +263,9 @@ function getTextWidth(text, font = "16px sans-serif") {
   return context.measureText(text).width;
 }
 
-const formatDate = (str) => {
-  return new Date(str).toLocaleString();
-};
+// const formatDate = (str) => {
+//   return new Date(str).toLocaleString();
+// };
 
 const activityStyle = computed(() => {
   return {
@@ -267,11 +308,25 @@ const bannerStyle = computed(() => {
 });
 
 const formattedTitle = computed(() => {
+  const language = localStorage.getItem("userLanguage");
   if (props.activity.type === "version") {
     return formatVersionActivity(props.activity);
   }
   if (props.activity.type === "event") {
+    if (language.startsWith("en")) {
+      if (props.activity.title.includes(":")) {
+        const title = extractTitle(props.activity.title);
+        let lastColonIndex = title.lastIndexOf(":");
+        let result = title.substring(0, lastColonIndex);
+        return result;
+      }
+    }
     return extractTitle(props.activity.title);
+  } else if (props.activity.type === "gacha" && language !== "zh-Hans") {
+    console.log(props.activity);
+    return `${getGachaName(props.activity)} - ${extractTitle(
+      props.activity.title
+    )}`;
   }
   return props.activity.title;
 });
@@ -287,9 +342,24 @@ function formatGameVersion(version) {
 }
 
 function extractTitle(title) {
-  const regex = /[「\[]([^「\]」]+)[」\]]/;
-  const match = regex.exec(title);
-  return match ? match[1] : title;
+  // 尝试匹配中文括号或方括号中的内容
+  const cjkRegex = /[「\[]([^「\]」]+)[」\]]/;
+  const cjkMatch = cjkRegex.exec(title);
+
+  if (cjkMatch) {
+    return cjkMatch[1];
+  }
+
+  // 如果没有找到中文括号内容，尝试匹配英文双引号中的内容
+  const quoteRegex = /"([^"]+)"/;
+  const quoteMatch = quoteRegex.exec(title);
+
+  if (quoteMatch) {
+    return quoteMatch[1];
+  }
+
+  // 如果都没有找到，返回原标题
+  return title;
 }
 
 const detailedTimeRemaining = computed(() => {
@@ -334,15 +404,17 @@ const dialogTimeRemainingText = computed(() => {
 
 function getObjectPosition(activity) {
   if (activity.type === "gacha") {
-    if (activity.game_id === "ys") {
-      return "center 45px";
-    } else if (activity.game_id === "sr") {
-      return "center 25px";
-    } else if (activity.game_id === "zzz") {
-      return "center 52px";
+    if (activity.game_id === "genshin") {
+      return "center -10px";
+    } else if (activity.game_id === "starrail") {
+      return "3px -10px";
+    } else if (activity.game_id === "zenless") {
+      return "center -20px";
     } else {
-      return activity.title.includes("武器") ? "center center" : "center 25%";
+      return activity.title.includes("武器") ? "center center" : "center 8%";
     }
+  } else if (activity.game_id === "starrail") {
+    return "3px center";
   } else {
     return "center";
   }
@@ -397,9 +469,13 @@ function getObjectPosition(activity) {
   font-weight: bold;
   text-align: center;
   padding: 8px !important;
-  background-color: #f5f5f5;
+  background-color: #eee;
   border-radius: 4px;
   margin-top: 10px;
+}
+
+.v-theme--dark .dialog-timer {
+  background-color: #333;
 }
 
 .v-theme--dark .time-indicator {
