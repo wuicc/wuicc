@@ -552,7 +552,7 @@ const sortActivities = (activities, gameList) => {
   min-height: 60vh;
   min-width: max-content;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* 时间刻度层 - 作为背景 */

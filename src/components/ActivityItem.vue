@@ -5,6 +5,13 @@
       <div class="activity-content">
         <span class="activity-title">{{ formattedTitle }}</span>
       </div>
+      <img
+        v-if="activity.banner_img"
+        :src="activity.banner_img"
+        class="activity-banner"
+        :style="bannerStyle"
+        referrerpolicy="no-referrer"
+      />
     </div>
 
     <!-- 左侧倒计时（未开始的活动） -->
@@ -28,7 +35,12 @@
     <!-- 活动详情弹窗 -->
     <v-dialog v-model="dialog" max-width="500">
       <v-card>
-        <v-img :src="activity.banner_img" height="200px" cover></v-img>
+        <v-img
+          :src="activity.banner_img"
+          height="200px"
+          cover
+          referrerpolicy="no-referrer"
+        ></v-img>
         <v-card-title>{{ formattedTitle }}</v-card-title>
         <v-card-subtitle>
           {{ formatDate(activity.start_time) }} -
@@ -150,15 +162,22 @@ const formattedTimeRemaining = computed(() => {
     : t("app.pages.timeline.ends_in_prefix");
 
   if (days > 0) {
-    return prefix + t("app.pages.timeline.time_remaining.days_hours", { days, hours });
+    return (
+      prefix +
+      t("app.pages.timeline.time_remaining.days_hours", { days, hours })
+    );
   } else if (hours > 0) {
-    return prefix + t("app.pages.timeline.time_remaining.hours_minutes", { hours, minutes });
+    return (
+      prefix +
+      t("app.pages.timeline.time_remaining.hours_minutes", { hours, minutes })
+    );
   } else if (minutes > 0) {
     return prefix + t("app.pages.timeline.time_remaining.minutes", { minutes });
   } else {
     return prefix + t("app.pages.timeline.time_remaining.less_than_minute");
   }
 });
+
 // 位置计算
 const position = computed(() => {
   const start = new Date(props.activity.start_time);
@@ -172,14 +191,17 @@ const width = computed(() => {
   const end = new Date(props.activity.end_time);
   const durationMs = end - start;
   const pxWidth = (durationMs / 1000) * PIXELS_PER_SECOND;
-  return `${pxWidth}px`;
+  return `${Math.max(pxWidth, 50)}px`; // 设置最小宽度为50px
 });
 
 // 倒计时指示器位置
 const leftIndicatorStyle = computed(() => {
   const leftPos = parseFloat(position.value);
-  const textWidth = getTextWidth(formattedTimeRemaining.value, '16px sans-serif');
-  
+  const textWidth = getTextWidth(
+    formattedTimeRemaining.value,
+    "16px sans-serif"
+  );
+
   return {
     left: `${leftPos - textWidth - 19}px`, // 居中
   };
@@ -193,11 +215,10 @@ const rightIndicatorStyle = computed(() => {
   };
 });
 
-function getTextWidth(text, font = '16px sans-serif') {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
+function getTextWidth(text, font = "16px sans-serif") {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
   context.font = font;
-  // console.log(context.measureText(text).width)
   return context.measureText(text).width;
 }
 
@@ -207,15 +228,15 @@ const formatDate = (str) => {
 
 const activityStyle = computed(() => {
   return {
-    left: `${position.value}`,
-    width: `${width.value}`,
+    left: position.value,
+    width: width.value,
     height: "32px",
     backgroundColor: gameColor.value,
     color: "#fff",
-    borderRadius: "4px",
-    padding: "0px 5px",
+    borderRadius: "16px",
+    padding: "0 24px 0 0 ", // 增加左右padding
     cursor: "pointer",
-    overflow: "hidden",
+    // overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
     lineHeight: "32px",
@@ -223,6 +244,25 @@ const activityStyle = computed(() => {
     fontSize: "1.1em",
     userSelect: "none",
     position: "absolute",
+    display: "flex",
+    alignItems: "center",
+    "--color": gameColor.value,
+  };
+});
+
+const bannerStyle = computed(() => {
+  return {
+    position: "absolute",
+    right: "0",
+    top: "0",
+    height: "32px",
+    width: "150px",
+    maxWidth: "50%",
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
+    objectFit: "cover",
+    zIndex: 14,
+    objectPosition: getObjectPosition(props.activity),
+    pointerEvents: "none",
   };
 });
 
@@ -291,6 +331,22 @@ const dialogTimeRemainingText = computed(() => {
   }
   return "";
 });
+
+function getObjectPosition(activity) {
+  if (activity.type === "gacha") {
+    if (activity.game_id === "ys") {
+      return "center 45px";
+    } else if (activity.game_id === "sr") {
+      return "center 25px";
+    } else if (activity.game_id === "zzz") {
+      return "center 52px";
+    } else {
+      return activity.title.includes("武器") ? "center center" : "center 25%";
+    }
+  } else {
+    return "center";
+  }
+}
 </script>
 
 <style scoped>
@@ -299,18 +355,28 @@ const dialogTimeRemainingText = computed(() => {
   font-size: 13px;
   z-index: 15;
   transition: background-color 0.3s ease;
+  min-width: 50px;
 }
 
 .activity-content {
   display: flex;
-  justify-content: space-between;
   width: 100%;
   height: 100%;
+  position: relative;
+  left: 16px;
 }
 
 .activity-title {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  position: sticky;
+  z-index: 20;
+  max-width: calc(100% - 32px);
+  display: inline-block;
+  left: 16px;
+  text-shadow: var(--color) -1px -1px 4px, var(--color) 1px -1px 4px,
+    var(--color) -1px 1px 4px, var(--color) 1px 1px 4px, var(--color) 0 0 10px;
 }
 
 .time-indicator {
@@ -322,18 +388,10 @@ const dialogTimeRemainingText = computed(() => {
   background: #0005;
   color: white;
   padding: 2px 5px;
-  border-radius: 4px;
+  border-radius: 12px;
   pointer-events: none;
   line-height: 20px;
-  z-index: 20;
 }
-
-/* .time-indicator.left {
-  transform: translateY(-100%);
-}
-
-.time-indicator.right {
-} */
 
 .dialog-timer {
   font-weight: bold;
@@ -346,5 +404,16 @@ const dialogTimeRemainingText = computed(() => {
 
 .v-theme--dark .time-indicator {
   background: #fff2;
+}
+
+.activity-banner {
+  height: 32px;
+  min-width: 50px;
+  background-color: rgba(255, 255, 255, 0.6);
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 70%);
+  mask-image: linear-gradient(to right, transparent 0%, black 70%);
+  flex-shrink: 0;
+  border-radius: 0px 16px 16px 0px;
 }
 </style>
