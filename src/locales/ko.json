@@ -1,0 +1,171 @@
+{
+  "app": {
+    "title": "Web UI 크로노 컬렉터",
+    "documentTitle": "타임라인 컬렉터 - Web UI 크로노 컬렉터",
+    "sidebar": {
+      "home": "홈",
+      "timeline": "타임라인",
+      "notification": "알림",
+      "settings": "설정",
+      "about": "정보"
+    },
+    "games": {
+      "genshin": {
+        "title": "원신"
+      },
+      "starrail": {
+        "title": "붕괴: 스타레일"
+      },
+      "zenless": {
+        "title": "젠레스 존 제로"
+      },
+      "wuthering": {
+        "title": "명조:워더링 웨이브"
+      }
+    },
+    "pages": {
+      "home": {
+        "title": "홈",
+        "welcome": "WUICC 홈페이지에 오신 것을 환영합니다!"
+      },
+      "timeline": {
+        "title": "타임라인",
+        "noActivities": "현재 선택한 게임 및 활동 유형에 해당하는 활동이 없습니다. 게임 및 활동 유형 설정을 확인해 주세요.",
+        "loading": "타임라인 불러오는 중...",
+        "time_remaining": {
+          "days_hours": "{days}일 {hours}시간",
+          "hours_minutes": "{hours}시간 {minutes}분",
+          "minutes": "{minutes}분",
+          "less_than_minute": "1분 미만"
+        },
+        "starts_in": "시작까지",
+        "ends_in": "종료까지",
+        "starts_in_prefix": "시작까지 ",
+        "ends_in_prefix": "",
+        "event_ended": "이벤트가 종료되었습니다",
+        "day": "일",
+        "today": "오늘",
+        "tomorrow": "내일",
+        "yesterday": "어제",
+        "daysAgo": "{count}일 전",
+        "daysLater": "{count}일 후",
+        "noActivitiesForDay": "이 날의 이벤트 없음"
+      },
+      "notification": {
+        "title": "알림",
+        "content": "알림 내용입니다."
+      },
+      "settings": {
+        "title": "설정"
+      },
+      "shortcuts": {
+        "title": "게임 바로가기",
+        "links": {
+          "mihoyo_genshin": "공식 (miHoYo, 중국 본토)",
+          "hoyoverse_genshin": "공식 (HoYoverse, 글로벌)",
+          "mihoyo_starrail": "공식 (miHoYo, 중국 본토)",
+          "hoyoverse_starrail": "공식 (HoYoverse, 글로벌)",
+          "mihoyo_zenless": "공식 (miHoYo, 중국 본토)",
+          "hoyoverse_zenless": "공식 (HoYoverse, 글로벌)",
+          "kurogame_cn_wuthering": "공식 (중국 본토)",
+          "kurogame_os_wuthering": "공식 (글로벌)"
+        }
+      },
+      "notFound": {
+        "title": "페이지를 찾을 수 없음",
+        "message": "찾으시는 페이지가 존재하지 않거나 삭제되었습니다",
+        "backHome": "홈으로 돌아가기"
+      },
+      "about": {
+        "title": "정보",
+        "projectInfo": "프로젝트 정보",
+        "description": "Web UI 크로노 컬렉터(WUICC)는 여러 플랫폼의 게임 활동 및 이벤트를 추적하는 타임라인 관리 도구입니다. 이 프로젝트는 2025년 5월 28일에 시작되었습니다.",
+        "team": "개발 팀",
+        "teamDescription": "우리 팀은 게이머들을 위한 유용한 도구를 만들기 위해 노력하고 있습니다.",
+        "disclaimer": "<h4>면책 조항</h4><p>본 웹사이트는 게임 애호가들이 자발적으로 만든 비영리 프로젝트로, HoYoverse, Kuro Game 등 기업과는 어떠한 소속, 인가 또는 협력 관계도 없습니다. 웹사이트에 포함된 게임 자료, 오디오비주얼 콘텐츠, 텍스트 자료 및 관련 상표권 등 모든 지적 재산권은 각 저작권자에게 귀속됩니다.</p><p><strong>특별 공지</strong></p><ul><li>본 플랫폼의 모든 콘텐츠는 교류 및 학습 목적으로만 사용되며 상업적 사용을 엄격히 금지합니다</li><li>웹사이트 운영은 게임 제작사의 공식 인가를 받지 않았습니다</li><li>인용된 자료의 저작권 및 상표권은 원저작권자에게 있습니다</li></ul>"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "사이드바 토글",
+      "changeLanguage": "언어 변경"
+    },
+    "settings": {
+      "title": "설정",
+      "gameSelection": {
+        "title": "게임 설정",
+        "save": "게임 설정 저장",
+        "saved": "게임 설정이 저장되었습니다",
+        "refresh": "게임 목록 새로고침",
+        "refreshSuccess": "게임 목록이 성공적으로 새로고침되었습니다",
+        "refreshFailed": "게임 목록 새로고침 실패"
+      },
+      "theme": {
+        "title": "테마 설정",
+        "selectLabel": "테마 선택",
+        "light": "라이트 테마",
+        "dark": "다크 테마",
+        "system": "시스템 설정 따름"
+      },
+      "language": {
+        "title": "언어 설정",
+        "selectLabel": "언어 선택",
+        "en": "영어",
+        "zh-CN": "중국어 간체",
+        "zh-TW": "중국어 번체",
+        "ja": "일본어"
+      },
+      "notifications": {
+        "title": "알림 설정",
+        "enable": "알림 활성화",
+        "frequency": "알림 빈도"
+      },
+      "timezone": {
+        "title": "시간대 설정",
+        "serverLabel": "게임 서버 시간대",
+        "useLocalLabel": "표시에 현지 시간대 사용",
+        "options": {
+          "asia": "아시아, 동남아시아, 대만/홍콩/마카오 (UTC+8)",
+          "america": "아메리카 (UTC-5)",
+          "europe": "유럽 (UTC+1)"
+        }
+      }
+    },
+    "gameSelection": {
+      "info": "플레이하는 게임을 선택하고 추적할 활동을 설정하세요",
+      "save": "설정 저장",
+      "saved": "게임 설정이 저장되었습니다",
+      "refreshSuccess": "게임 목록이 성공적으로 새로고침되었습니다",
+      "refreshFailed": "게임 목록 새로고침 실패",
+      "noGames": "사용 가능한 게임이 없습니다",
+      "loading": "게임 데이터 불러오는 중..."
+    },
+    "errors": {
+      "network": "네트워크 요청 실패",
+      "invalidResponse": "잘못된 서버 응답",
+      "unknown": "알 수 없는 오류 발생",
+      "loadFailed": "게임 데이터 불러오기 실패",
+      "saveFailed": "설정 저장 실패"
+    },
+    "welcome": {
+      "title": "WUICC에 오신 것을 환영합니다",
+      "message": "플레이하는 게임을 선택하고 추적할 활동을 설정해 주세요:",
+      "confirm": "선택 확인",
+      "skip": "건너뛰기"
+    },
+    "gameActivities": {
+      "challenge": "도전",
+      "event": "이벤트",
+      "gacha": "가챠",
+      "version": "버전 업데이트",
+      "maintenance": "점검"
+    },
+    "default": "기본값",
+    "timeFormat": {
+      "24hour": "24시간제",
+      "12hour": "12시간제"
+    },
+    "version_with_number": "{version} 버전",
+    "close": "닫기",
+    "go_to": "{target}(으)로 이동"
+  }
+}

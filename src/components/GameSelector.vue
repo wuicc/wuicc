@@ -14,7 +14,7 @@
       :ripple="false"
     >
       <div
-        class="d-flex align-center pa-4"
+        class="d-flex align-center pa-1"
         @click.stop="toggleGameSelection(game.game_id)"
         :ripple="false"
       >
@@ -44,11 +44,12 @@
       <v-expand-transition>
         <div v-show="selectedGames.includes(game.game_id)">
           <v-divider></v-divider>
-          <v-list class="py-0" density="compact">
+          <v-list class="py-0" density="comfortable">
             <v-list-item
               v-for="(activity, activityKey) in game.activities"
               :key="`${game.game_id}-${activityKey}`"
               @click.stop="toggleActivitySelection(game.game_id, activityKey)"
+              class="pl-1"
             >
               <template v-slot:prepend>
                 <v-checkbox
@@ -80,7 +81,7 @@
       </v-expand-transition>
     </v-card>
 
-    <v-btn color="accent" @click="saveSelections" size="large" class="mt-4">
+    <v-btn color="accent" @click="saveSelections" size="large" class="mt-0">
       <v-icon left>mdi-content-save</v-icon>
       {{ saveButtonText }}
     </v-btn>
@@ -361,11 +362,10 @@ onMounted(() => {
   border-left: 4px solid rgba(var(--v-theme-accent), 0.8);
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.1);
 }
-
+/* 
 .v-list-item {
-  padding-left: 12px;
   min-height: 48px;
-}
+} */
 
 .v-chip {
   font-weight: 500;

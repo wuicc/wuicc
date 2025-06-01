@@ -43,7 +43,13 @@
         "starts_in_prefix": "Starts in ",
         "ends_in_prefix": "",
         "event_ended": "This event has ended",
-        "day": "d"
+        "day": "d",
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "yesterday": "Yesterday",
+        "daysAgo": "{count} days ago",
+        "daysLater": "In {count} days",
+        "noActivitiesForDay": "No activities for this day"
       },
       "notification": {
         "title": "Notification",
@@ -56,11 +62,11 @@
         "title": "Game Shortcuts",
         "links": {
           "mihoyo_genshin": "Official (miHoYo, Chinese Mainland)",
-          "hoyoverse_genshin": "Official (HoYoVerse, Global)",
+          "hoyoverse_genshin": "Official (HoYoverse, Global)",
           "mihoyo_starrail": "Official (miHoYo, Chinese Mainland)",
-          "hoyoverse_starrail": "Official (HoYoVerse, Global)",
+          "hoyoverse_starrail": "Official (HoYoverse, Global)",
           "mihoyo_zenless": "Official (miHoYo, Chinese Mainland)",
-          "hoyoverse_zenless": "Official (HoYoVerse, Global)",
+          "hoyoverse_zenless": "Official (HoYoverse, Global)",
           "kurogame_cn_wuthering": "Official (Chinese Mainland)",
           "kurogame_os_wuthering": "Official (Global)"
         }
@@ -75,7 +81,8 @@
         "projectInfo": "Project Information",
         "description": "Web UI Chrono Collector (WUICC) is a timeline management tool for tracking game activities and events across multiple platforms. The project started on May 28, 2025.",
         "team": "Development Team",
-        "teamDescription": "Our team is dedicated to creating useful tools for gamers."
+        "teamDescription": "Our team is dedicated to creating useful tools for gamers.",
+        "disclaimer": "<h4>Disclaimer</h4><p>This website is a non-profit project created spontaneously by game enthusiasts and has no affiliation, authorization, or cooperative relationship with HoYoverse, Kuro Game or other companies. The game materials, audio-visual content, text materials and related trademarks involved in the website are all owned by their respective copyright owners.</p><p><strong>Special Note</strong></p><ul><li>All content on this platform is for communication and learning only, and is prohibited for any commercial use</li><li>The website operation has not obtained official authorization from any game manufacturer</li><li>The copyright and trademark rights of the quoted materials belong to the original rights holders</li></ul>"
       }
     },
     "buttons": {

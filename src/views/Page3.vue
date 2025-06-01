@@ -5,12 +5,9 @@
     </v-card-title>
 
     <v-card-text>
-      <!-- 游戏设置下拉面板 -->
-
-      <!-- 其他设置项 - 两列布局 -->
       <v-row>
-        <v-col cols="12" md="6">
-          <v-expansion-panels class="mb-6" v-model="panel">
+        <v-col cols="12" md="6" class="pb-0">
+          <v-expansion-panels class="mb-2" v-model="panel">
             <v-expansion-panel eager>
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
@@ -69,14 +66,27 @@
                 :label="$t('app.settings.timezone.serverLabel')"
                 item-title="text"
                 item-value="value"
+                density="comfortable"
+                hide-details="auto"
+                class="mb-2"
               ></v-select>
 
               <!-- 显示时区切换 -->
-              <v-checkbox
+              <v-checkbox-btn
                 v-model="useLocalTimezone"
                 :label="$t('app.settings.timezone.useLocalLabel')"
                 color="accent"
-              ></v-checkbox>
+              ></v-checkbox-btn>
+
+              <v-checkbox-btn
+                v-model="use24HourFormat"
+                :label="
+                  use24HourFormat
+                    ? $t('app.timeFormat.24hour')
+                    : $t('app.timeFormat.12hour')
+                "
+                color="accent"
+              ></v-checkbox-btn>
             </v-card-text>
           </v-card>
           <v-card class="mb-4">
@@ -88,8 +98,10 @@
               <v-select
                 :items="themeOptions"
                 :label="$t('app.settings.theme.selectLabel')"
+                density="comfortable"
                 v-model="selectedTheme"
                 @update:modelValue="changeTheme"
+                hide-details="auto"
               ></v-select>
             </v-card-text>
           </v-card>
@@ -125,6 +137,14 @@ const themeOptions = computed(() => [
   { title: i18n.global.t("app.settings.theme.light"), value: "light" },
   { title: i18n.global.t("app.settings.theme.dark"), value: "dark" },
 ]);
+
+const use24HourFormat = ref(localStorage.getItem("timeline-time-format") !== "12");
+
+// Watch and save time format preference
+watch(use24HourFormat, (newVal) => {
+  localStorage.setItem("timeline-time-format", newVal ? "24" : "12");
+});
+
 
 // 强制从服务器刷新游戏数据
 const forceRefreshGames = async () => {
@@ -233,7 +253,7 @@ watch([selectedServerTimezone, useLocalTimezone], ([timezone, useLocal]) => {
 
 /* 下拉面板标题样式 */
 .v-expansion-panel-title {
-  padding: 16px;
+  padding: 12px 12px 12px 20px;
 }
 
 /* 刷新按钮样式 */

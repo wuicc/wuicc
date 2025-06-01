@@ -43,7 +43,13 @@
         "starts_in_prefix": "即将开始 ",
         "ends_in_prefix": "",
         "event_ended": "活动已结束",
-        "day": "天"
+        "day": "天",
+        "today": "今天",
+        "tomorrow": "明天",
+        "yesterday": "昨天",
+        "daysAgo": "{count} 天前",
+        "daysLater": "{count} 天后",
+        "noActivitiesForDay": "当天无活动"
       },
       "notification": {
         "title": "通知",
@@ -75,7 +81,8 @@
         "projectInfo": "项目信息",
         "description": "时间线收集器 (WUICC) 是一款用于跨平台追踪游戏活动和事件的时间线管理工具。项目开始于2025年5月24日。",
         "team": "开发团队",
-        "teamDescription": "我们的团队致力于为玩家创造实用工具。"
+        "teamDescription": "我们的团队致力于为玩家创造实用工具。",
+        "disclaimer": "<h4>免责声明</h4><p>本网站为游戏爱好者自发创建的非营利性项目，与米哈游(miHoYo)、库洛游戏(Kuro Game)等企业不存在任何隶属、授权或合作关系。网站中涉及的游戏素材、视听内容、文字资料及相关注册商标等知识产权，均归各自版权方所有。</p><p><strong>特别声明</strong></p><ul><li>本平台所有内容仅限交流学习之用，禁止用于任何商业用途</li><li>网站运营未获得任何游戏厂商的官方授权</li><li>引用素材的著作权及商标权均归属原权利主体</li></ul>"
       }
     },
     "buttons": {

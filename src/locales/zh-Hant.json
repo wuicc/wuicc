@@ -43,7 +43,13 @@
         "starts_in_prefix": "即將開始 ",
         "ends_in_prefix": "",
         "event_ended": "活動已結束",
-        "day": "天"
+        "day": "天",
+        "today": "今天",
+        "tomorrow": "明天",
+        "yesterday": "昨天",
+        "daysAgo": "{count} 天前",
+        "daysLater": "{count} 天後",
+        "noActivitiesForDay": "當天無活動"
       },
       "notification": {
         "title": "通知",
@@ -56,11 +62,11 @@
         "title": "遊戲快捷連結",
         "links": {
           "mihoyo_genshin": "官網 (miHoYo, 中國大陸)",
-          "hoyoverse_genshin": "官網 (HoYoVerse, 國際服)",
+          "hoyoverse_genshin": "官網 (HoYoverse, 國際服)",
           "mihoyo_starrail": "官網 (miHoYo, 中國大陸)",
-          "hoyoverse_starrail": "官網 (HoYoVerse, 國際服)",
+          "hoyoverse_starrail": "官網 (HoYoverse, 國際服)",
           "mihoyo_zenless": "官網 (miHoYo, 中國大陸)",
-          "hoyoverse_zenless": "官網 (HoYoVerse, 國際服)",
+          "hoyoverse_zenless": "官網 (HoYoverse, 國際服)",
           "kurogame_cn_wuthering": "官網 (中國大陸)",
           "kurogame_os_wuthering": "官網 (國際服)"
         }
@@ -73,9 +79,10 @@
       "about": {
         "title": "關於",
         "projectInfo": "項目信息",
-        "description": "時間線收集器 (WUICC) 是一款用於跨平台追蹤遊戲活動和事件的時間線管理工具。專案開始於2025年5月28日。",
+        "description": "時間線收集器 (WUICC) 是一款用於跨平台追蹤遊戲活動和事件的時間線管理工具。項目開始於2025年5月28日。",
         "team": "開發團隊",
-        "teamDescription": "我們的團隊致力於為玩家創造實用工具。"
+        "teamDescription": "我們的團隊致力於為玩家創造實用工具。",
+        "disclaimer": "<h4>免責聲明</h4><p>本網站為遊戲愛好者自發創建的非營利性項目，與米哈遊(HoYoverse)、庫洛遊戲(Kuro Game)等企業不存在任何隸屬、授權或合作關係。網站中涉及的遊戲素材、視聽內容、文字資料及相關註冊商標等知識產權，均歸各自版權方所有。</p><p><strong>特別聲明</strong></p><ul><li>本平台所有內容僅限交流學習之用，禁止用於任何商業用途</li><li>網站運營未獲得任何遊戲廠商的官方授權</li><li>引用素材的著作權及商標權均歸屬原權利主體</li></ul>"
       }
     },
     "buttons": {

@@ -5,6 +5,9 @@
     </v-card-title>
 
     <v-card-text>
+      <!-- 声明部分 - 使用HTML内容 -->
+      <div v-html="$t('app.pages.about.disclaimer')" class="disclaimer-content"></div>
+
       <v-row>
         <v-col cols="12" md="6">
           <v-card class="mb-4" variant="outlined">
@@ -53,8 +56,8 @@
     </v-card-text>
   </v-card>
 </template>
-  
-  <script setup>
+
+<script setup>
 const teamMembers = [
   {
     name: "Shoyu",
@@ -63,15 +66,40 @@ const teamMembers = [
   },
 ];
 </script>
-  
-  <style scoped>
+
+<style scoped>
 a {
-  color: inherit;
+  color: #00b0ff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: var(--v-primary-base);
+  color: #33beff
+}
+
+.disclaimer-content {
+  background-color: #fff8e1; /* 浅黄色背景，类似警告样式 */
+  border-left: 4px solid #ffc107; /* 左侧黄色边框 */
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+}
+
+.disclaimer-content h4 {
+  color: #ff6d00; /* 标题颜色 */
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.disclaimer-content ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.disclaimer-content li {
+  margin-bottom: 6px;
+  line-height: 1.6;
 }
 </style>

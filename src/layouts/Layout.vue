@@ -31,8 +31,18 @@
           >
             <v-list-item-title
               :class="{ 'text-accent': locale === lang.value }"
+              style="line-height: 32px"
             >
               {{ lang.name }}
+              <v-chip
+                small
+                :color="locale === lang.value ? 'accent' : ''"
+                :variant="locale === lang.value ? 'tonal' : 'outlined'"
+                class="ml-2 float-right"
+              >
+                {{ lang.value }}
+              </v-chip>
+              <!-- ({{lang.value}}) -->
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -173,12 +183,16 @@ const availableLanguages = [
   { value: "zh-Hans", name: "简体中文", icon: "mdi-language-zh" },
   { value: "zh-Hant", name: "繁體中文", icon: "mdi-language-zh" },
   { value: "ja", name: "日本語", icon: "mdi-language-jp" },
+  { value: "ko", name: "한국어", icon: "mdi-language-ko" },
+  { value: "fr", name: "Français", icon: "mdi-language-fr" },
+  { value: "es", name: "Español", icon: "mdi-language-es" },
+  { value: "de", name: "Deutsch", icon: "mdi-language-de" },
 ];
 
 // 计算当前语言名称
 const currentLanguageName = computed(() => {
   const lang = availableLanguages.find((l) => l.value === locale.value);
-  return lang ? lang.name : "English";
+  return lang ? `${lang.name} (${lang})` : "English";
 });
 
 // 切换语言

@@ -41,7 +41,9 @@
           cover
           referrerpolicy="no-referrer"
         ></v-img>
-        <v-card-title>{{ formattedTitle }}</v-card-title>
+        <v-card-title>{{
+          activity.type === "event" ? activity.title : formattedTitle
+        }}</v-card-title>
         <v-card-subtitle>
           {{ formatDate(activity.start_time) }} -
           {{ formatDate(activity.end_time) }}
@@ -61,16 +63,14 @@
     </v-dialog>
   </div>
 </template>
-
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { i18n } from "@/i18n";
 import { useI18n } from "vue-i18n";
 
-const PIXELS_PER_DAY = 36; // 每天36px
-const SECONDS_PER_DAY = 24 * 60 * 60; // 每天86400秒
-const PIXELS_PER_SECOND = PIXELS_PER_DAY / SECONDS_PER_DAY; // 0.000416667px/秒
-const SECONDS_PER_PIXEL = 1 / PIXELS_PER_SECOND; // 2400秒/px (40分钟)
+const PIXELS_PER_DAY = 36;
+const SECONDS_PER_DAY = 24 * 60 * 60;
+const PIXELS_PER_SECOND = PIXELS_PER_DAY / SECONDS_PER_DAY;
 
 const props = defineProps({
   activity: Object,
@@ -79,95 +79,78 @@ const props = defineProps({
 });
 
 const { d: $d } = useI18n();
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const hour12 = localStorage.getItem("timeline-time-format") === "12";
-  const options = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: hour12,
-  };
-  return $d(date, options);
-};
-
-const use24HourFormat = computed(() => {
-  return localStorage.getItem("timeline-time-format") !== "12";
-});
-
-// 从本地存储获取游戏信息
-const gameColor = ref("#888888"); // 默认颜色
-
-// 获取游戏颜色
-const getGameColor = () => {
-  try {
-    const savedSelections = localStorage.getItem("userGameSelections");
-    const gameList = localStorage.getItem("gameList");
-
-    if (savedSelections && gameList) {
-      const { games: selectedGames } = JSON.parse(savedSelections);
-      const games = JSON.parse(gameList);
-
-      const game = games.find((g) => g.game_id === props.activity.game_id);
-      if (game && game.color) {
-        gameColor.value = game.color;
-      }
-    }
-  } catch (error) {
-    console.error("Failed to load game color:", error);
-  }
-};
-
-function getGachaName(activity) {
-  try {
-    const gameList = JSON.parse(localStorage.getItem("gameList"));
-    if (!gameList) return "";
-
-    const game = gameList.find((g) => g.game_id === activity.game_id);
-    if (!game || !game.activities || !game.activities.gacha) return "";
-
-    // 获取当前语言设置
-    const language = localStorage.getItem("userLanguage");
-
-    // 返回对应语言的祈愿名称
-    return game.activities.gacha.name[language] || "";
-  } catch (error) {
-    console.error("Failed to get gacha name:", error);
-    return "";
-  }
-}
-
-onMounted(() => {
-  getGameColor();
-  startTimer();
-});
+const dialog = ref(false);
+const gameColor = ref("#888888");
 
 // 定时器相关
 const now = ref(new Date());
 let timer = null;
 
+// 从本地存储加载时区设置
+const useLocalTimezone = computed(() => {
+  const saved = localStorage.getItem("useLocalTimezone");
+  return saved === "true";
+});
+
+// 获取服务器时区偏移量（小时）
+const getServerTimezoneOffset = () => {
+  const savedTimezone = localStorage.getItem("serverTimezone") || "UTC+8";
+  const match = savedTimezone.match(/UTC([+-])(\d+)/);
+  if (!match) return 8; // 默认 UTC+8
+
+  const sign = match[1] === "+" ? 1 : -1;
+  const hours = parseInt(match[2], 10);
+  return sign * hours;
+};
+
+// 获取时区调整后的时间
+const getAdjustedTime = (date) => {
+  if (!useLocalTimezone.value) return new Date(date);
+
+  const serverOffsetHours = getServerTimezoneOffset();
+  const serverOffset = serverOffsetHours * 60 * 60 * 1000; // 转换为毫秒
+  const localOffset = date.getTimezoneOffset() * 60 * 1000;
+  // console.log((localOffset + serverOffset)/1000);
+  return new Date(date.getTime() - (localOffset + serverOffset));
+};
+
+// 获取时区调整后的当前时间
+const getAdjustedCurrentTime = () => {
+  return getAdjustedTime(new Date());
+};
+
 const startTimer = () => {
   if (timer) clearInterval(timer);
   timer = setInterval(() => {
-    now.value = new Date();
-  }, 1000);
+    now.value = getAdjustedCurrentTime();
+  }, 10000);
 };
 
-onUnmounted(() => {
-  if (timer) clearInterval(timer);
+// 活动位置计算 - 不使用时区调整（保持位置不变）
+const position = computed(() => {
+  const start = getAdjustedTime(new Date(props.activity.start_time));
+  const timelineStart = new Date(props.startDate);
+  const eventStartOffset = (start - timelineStart) / 1000;
+  return `${eventStartOffset * PIXELS_PER_SECOND}px`;
 });
 
-const dialog = ref(false);
-const openDialog = () => {
-  dialog.value = true;
-};
+// 活动宽度计算 - 不使用时区调整（保持位置不变）
+const width = computed(() => {
+  const start = new Date(props.activity.start_time);
+  const end = new Date(props.activity.end_time);
+  const durationMs = end - start;
+  const pxWidth = (durationMs / 1000) * PIXELS_PER_SECOND;
+  return `${Math.max(pxWidth, 50)}px`;
+});
 
-// 活动时间计算
-const activityStart = computed(() => new Date(props.activity.start_time));
-const activityEnd = computed(() => new Date(props.activity.end_time));
+// 活动时间状态计算 - 使用时区调整后的时间
+const activityStart = computed(() =>
+  getAdjustedTime(new Date(props.activity.start_time))
+);
+
+const activityEnd = computed(() =>
+  getAdjustedTime(new Date(props.activity.end_time))
+);
 
 const isFuture = computed(() => now.value < activityStart.value);
 const isOngoing = computed(
@@ -180,10 +163,21 @@ const showRightIndicator = computed(() => isOngoing.value && !isEnded.value);
 
 // 计算剩余时间（秒）
 const timeRemaining = computed(() => {
+  if (isEnded.value) return 0;
+
+  // 获取当前时间（根据时区设置调整）
+  const currentTime = useLocalTimezone.value
+    ? getAdjustedCurrentTime()
+    : new Date();
+  let offset = 0;
+  const serverOffsetHours = getServerTimezoneOffset();
+  const serverOffset = serverOffsetHours * 60 * 60 * 1000; // 转换为毫秒
+  const localOffset = currentTime.getTimezoneOffset() * 60 * 1000;
+  offset = serverOffset + localOffset;
   if (isFuture.value) {
-    return Math.floor((activityStart.value - now.value) / 1000);
+    return Math.floor((activityStart.value - currentTime - offset) / 1000);
   } else if (isOngoing.value) {
-    return Math.floor((activityEnd.value - now.value) / 1000);
+    return Math.floor((activityEnd.value - currentTime - offset) / 1000);
   }
   return 0;
 });
@@ -219,43 +213,18 @@ const formattedTimeRemaining = computed(() => {
   }
 });
 
-// 位置计算
-const position = computed(() => {
-  const start = new Date(props.activity.start_time);
-  const timelineStart = new Date(props.startDate);
-  const eventStartOffset = (start.getTime() - timelineStart.getTime()) / 1000;
-  return `${eventStartOffset * PIXELS_PER_SECOND}px`;
-});
+// 倒计时显示位置计算
+const leftIndicatorStyle = computed(() => ({
+  left: `calc(${position.value} - ${getTextWidth(
+    formattedTimeRemaining.value
+  )}px - 19px)`,
+}));
 
-const width = computed(() => {
-  const start = new Date(props.activity.start_time);
-  const end = new Date(props.activity.end_time);
-  const durationMs = end - start;
-  const pxWidth = (durationMs / 1000) * PIXELS_PER_SECOND;
-  return `${Math.max(pxWidth, 50)}px`; // 设置最小宽度为50px
-});
+const rightIndicatorStyle = computed(() => ({
+  left: `calc(${position.value} + ${width.value} + 5px)`,
+}));
 
-// 倒计时指示器位置
-const leftIndicatorStyle = computed(() => {
-  const leftPos = parseFloat(position.value);
-  const textWidth = getTextWidth(
-    formattedTimeRemaining.value,
-    "16px sans-serif"
-  );
-
-  return {
-    left: `${leftPos - textWidth - 19}px`, // 居中
-  };
-});
-
-const rightIndicatorStyle = computed(() => {
-  const leftPos = parseFloat(position.value);
-  const widthVal = parseFloat(width.value);
-  return {
-    left: `${leftPos + widthVal + 5}px`,
-  };
-});
-
+// 获取文本宽度
 function getTextWidth(text, font = "16px sans-serif") {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -263,105 +232,86 @@ function getTextWidth(text, font = "16px sans-serif") {
   return context.measureText(text).width;
 }
 
-// const formatDate = (str) => {
-//   return new Date(str).toLocaleString();
-// };
+// 活动样式
+const activityStyle = computed(() => ({
+  left: position.value,
+  width: width.value,
+  height: "32px",
+  backgroundColor: gameColor.value,
+  color: "#fff",
+  borderRadius: "16px",
+  padding: "0 24px 0 0",
+  cursor: "pointer",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  lineHeight: "32px",
+  verticalAlign: "middle",
+  fontSize: "1.1em",
+  userSelect: "none",
+  position: "absolute",
+  display: "flex",
+  alignItems: "center",
+  "--color": gameColor.value,
+}));
 
-const activityStyle = computed(() => {
-  return {
-    left: position.value,
-    width: width.value,
-    height: "32px",
-    backgroundColor: gameColor.value,
-    color: "#fff",
-    borderRadius: "16px",
-    padding: "0 24px 0 0 ", // 增加左右padding
-    cursor: "pointer",
-    // overflow: "hidden",
-    whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
-    lineHeight: "32px",
-    verticalAlign: "middle",
-    fontSize: "1.1em",
-    userSelect: "none",
-    position: "absolute",
-    display: "flex",
-    alignItems: "center",
-    "--color": gameColor.value,
-  };
-});
+// Banner样式
+const bannerStyle = computed(() => ({
+  position: "absolute",
+  right: "0",
+  top: "0",
+  height: "32px",
+  width: "150px",
+  maxWidth: "50%",
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  objectFit: "cover",
+  zIndex: 14,
+  objectPosition: getObjectPosition(props.activity),
+  pointerEvents: "none",
+}));
 
-const bannerStyle = computed(() => {
-  return {
-    position: "absolute",
-    right: "0",
-    top: "0",
-    height: "32px",
-    width: "150px",
-    maxWidth: "50%",
-    backgroundColor: "rgba(255, 255, 255, 0.6)",
-    objectFit: "cover",
-    zIndex: 14,
-    objectPosition: getObjectPosition(props.activity),
-    pointerEvents: "none",
-  };
-});
+// 获取游戏颜色
+const getGameColor = () => {
+  try {
+    const savedSelections = localStorage.getItem("userGameSelections");
+    const gameList = localStorage.getItem("gameList");
 
-const formattedTitle = computed(() => {
-  const language = localStorage.getItem("userLanguage");
-  if (props.activity.type === "version") {
-    return formatVersionActivity(props.activity);
-  }
-  if (props.activity.type === "event") {
-    if (language.startsWith("en")) {
-      if (props.activity.title.includes(":")) {
-        const title = extractTitle(props.activity.title);
-        let lastColonIndex = title.lastIndexOf(":");
-        let result = title.substring(0, lastColonIndex);
-        return result;
+    if (savedSelections && gameList) {
+      const { games: selectedGames } = JSON.parse(savedSelections);
+      const games = JSON.parse(gameList);
+
+      const game = games.find((g) => g.game_id === props.activity.game_id);
+      if (game && game.color) {
+        gameColor.value = game.color;
       }
     }
-    return extractTitle(props.activity.title);
-  } else if (props.activity.type === "gacha" && language !== "zh-Hans") {
-    console.log(props.activity);
-    return `${getGachaName(props.activity)} - ${extractTitle(
-      props.activity.title
-    )}`;
+  } catch (error) {
+    console.error("Failed to load game color:", error);
   }
-  return props.activity.title;
-});
+};
 
-function formatVersionActivity(activity) {
-  const versionNumber = activity.title.match(/(\d\.\d)/)[0];
-  const gameName = i18n.global.t(`app.games.${activity.game_id}.title`);
-  return `${gameName} ${formatGameVersion(versionNumber)}`;
-}
+// 格式化日期 - 使用时区调整后的时间
+const formatDate = (dateString) => {
+  const date = getAdjustedTime(new Date(dateString));
+  const hour12 = localStorage.getItem("timeline-time-format") === "12";
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: hour12,
+  };
 
-function formatGameVersion(version) {
-  return i18n.global.t(`app.version_with_number`, { version });
-}
+  return $d(date, options);
+};
 
-function extractTitle(title) {
-  // 尝试匹配中文括号或方括号中的内容
-  const cjkRegex = /[「\[]([^「\]」]+)[」\]]/;
-  const cjkMatch = cjkRegex.exec(title);
+// 活动标题格式化
+import { formatActivityTitle } from "@/utils/activityTitleFormatter";
 
-  if (cjkMatch) {
-    return cjkMatch[1];
-  }
+// 替换原来的 formattedTitle computed 属性
+const formattedTitle = computed(() => formatActivityTitle(props.activity));
 
-  // 如果没有找到中文括号内容，尝试匹配英文双引号中的内容
-  const quoteRegex = /"([^"]+)"/;
-  const quoteMatch = quoteRegex.exec(title);
-
-  if (quoteMatch) {
-    return quoteMatch[1];
-  }
-
-  // 如果都没有找到，返回原标题
-  return title;
-}
-
+// 详细倒计时文本
 const detailedTimeRemaining = computed(() => {
   if (isEnded.value) return "";
 
@@ -371,7 +321,6 @@ const detailedTimeRemaining = computed(() => {
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
 
-  // 格式化数字为两位数
   const format = (num) => num.toString().padStart(2, "0");
 
   if (days > 0) {
@@ -382,7 +331,7 @@ const detailedTimeRemaining = computed(() => {
   return `${format(hours)}:${format(minutes)}:${format(secs)}`;
 });
 
-// 修改后的弹窗倒计时文本
+// 弹窗倒计时文本
 const dialogTimeRemainingText = computed(() => {
   if (isEnded.value) return i18n.global.t("app.pages.timeline.event_ended");
 
@@ -402,6 +351,7 @@ const dialogTimeRemainingText = computed(() => {
   return "";
 });
 
+// 获取Banner图片位置
 function getObjectPosition(activity) {
   if (activity.type === "gacha") {
     if (activity.game_id === "genshin") {
@@ -419,14 +369,34 @@ function getObjectPosition(activity) {
     return "center";
   }
 }
-</script>
 
+// 打开弹窗
+const openDialog = () => {
+  dialog.value = true;
+};
+
+onMounted(() => {
+  getGameColor();
+  startTimer();
+});
+
+onUnmounted(() => {
+  if (timer) clearInterval(timer);
+});
+
+defineExpose({
+  openDialog,
+  formattedTitle,
+  formatDate,
+  dialogTimeRemainingText,
+});
+</script>
 <style scoped>
 .activity-item {
   position: absolute;
   font-size: 13px;
   z-index: 15;
-  transition: background-color 0.3s ease;
+  /* transition: background-color 0.3s ease; */
   min-width: 50px;
 }
 
@@ -491,5 +461,10 @@ function getObjectPosition(activity) {
   mask-image: linear-gradient(to right, transparent 0%, black 70%);
   flex-shrink: 0;
   border-radius: 0px 16px 16px 0px;
+}
+
+.v-card-title,
+.v-card-subtitle {
+  white-space: normal;
 }
 </style>

@@ -1,0 +1,171 @@
+{
+  "app": {
+    "title": "Web UI Chrono Collector",
+    "documentTitle": "Zeitplan-Sammler - Web UI Chrono Collector",
+    "sidebar": {
+      "home": "Startseite",
+      "timeline": "Zeitplan",
+      "notification": "Benachrichtigungen",
+      "settings": "Einstellungen",
+      "about": "Über"
+    },
+    "games": {
+      "genshin": {
+        "title": "Genshin Impact"
+      },
+      "starrail": {
+        "title": "Honkai: Star Rail"
+      },
+      "zenless": {
+        "title": "Zenless Zone Zero"
+      },
+      "wuthering": {
+        "title": "Wuthering Waves"
+      }
+    },
+    "pages": {
+      "home": {
+        "title": "Startseite",
+        "welcome": "Willkommen auf der WUICC-Startseite!"
+      },
+      "timeline": {
+        "title": "Zeitplan",
+        "noActivities": "Keine Aktivitäten für Ihre aktuellen Auswahl gefunden. Bitte überprüfen Sie Ihre Spiel- und Aktivitätseinstellungen.",
+        "loading": "Zeitplan wird geladen...",
+        "time_remaining": {
+          "days_hours": "{days}T {hours}Std",
+          "hours_minutes": "{hours}Std {minutes}Min",
+          "minutes": "{minutes}Min",
+          "less_than_minute": "Weniger als 1 Minute"
+        },
+        "starts_in": "Beginnt in",
+        "ends_in": "Endet in",
+        "starts_in_prefix": "Beginnt in ",
+        "ends_in_prefix": "",
+        "event_ended": "Dieses Event ist beendet",
+        "day": "T",
+        "today": "Heute",
+        "tomorrow": "Morgen",
+        "yesterday": "Gestern",
+        "daysAgo": "Vor {count} Tagen",
+        "daysLater": "In {count} Tagen",
+        "noActivitiesForDay": "Keine Aktivitäten für diesen Tag"
+      },
+      "notification": {
+        "title": "Benachrichtigungen",
+        "content": "Dies ist der Benachrichtigungsinhalt."
+      },
+      "settings": {
+        "title": "Einstellungen"
+      },
+      "shortcuts": {
+        "title": "Spiel-Verknüpfungen",
+        "links": {
+          "mihoyo_genshin": "Offiziell (miHoYo, Festlandchina)",
+          "hoyoverse_genshin": "Offiziell (HoYoverse, Global)",
+          "mihoyo_starrail": "Offiziell (miHoYo, Festlandchina)",
+          "hoyoverse_starrail": "Offiziell (HoYoverse, Global)",
+          "mihoyo_zenless": "Offiziell (miHoYo, Festlandchina)",
+          "hoyoverse_zenless": "Offiziell (HoYoverse, Global)",
+          "kurogame_cn_wuthering": "Offiziell (Festlandchina)",
+          "kurogame_os_wuthering": "Offiziell (Global)"
+        }
+      },
+      "notFound": {
+        "title": "Seite nicht gefunden",
+        "message": "Die gesuchte Seite existiert nicht oder wurde entfernt",
+        "backHome": "Zurück zur Startseite"
+      },
+      "about": {
+        "title": "Über",
+        "projectInfo": "Projektinformation",
+        "description": "Web UI Chrono Collector (WUICC) ist ein Zeitplan-Verwaltungstool zur Verfolgung von Spielaktivitäten und Events über mehrere Plattformen hinweg. Das Projekt begann am 28. Mai 2025.",
+        "team": "Entwicklungsteam",
+        "teamDescription": "Unser Team ist darauf spezialisiert, nützliche Tools für Spieler zu entwickeln.",
+        "disclaimer": "<h4>Haftungsausschluss</h4><p>Diese Website ist ein gemeinnütziges Projekt, das spontan von Spieleenthusiasten erstellt wurde und keine Zugehörigkeit, Autorisierung oder Kooperationsbeziehung zu HoYoverse, Kuro Game oder anderen Unternehmen hat. Die auf der Website enthaltenen Spielmaterialien, audiovisuellen Inhalte, Textmaterialien und verwandten Markenrechte gehören den jeweiligen Rechteinhabern.</p><p><strong>Besondere Hinweise</strong></p><ul><li>Alle Inhalte dieser Plattform dienen nur dem Austausch und Lernen, jede kommerzielle Nutzung ist verboten</li><li>Der Betrieb der Website hat keine offizielle Genehmigung von Spieleherstellern erhalten</li><li>Urheberrechte und Markenrechte der zitierten Materialien gehören den ursprünglichen Rechteinhabern</li></ul>"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "Sidebar umschalten",
+      "changeLanguage": "Sprache ändern"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "gameSelection": {
+        "title": "Spieleinstellungen",
+        "save": "Einstellungen speichern",
+        "saved": "Einstellungen gespeichert",
+        "refresh": "Spielliste aktualisieren",
+        "refreshSuccess": "Spielliste erfolgreich aktualisiert",
+        "refreshFailed": "Aktualisierung fehlgeschlagen"
+      },
+      "theme": {
+        "title": "Design-Einstellungen",
+        "selectLabel": "Design auswählen",
+        "light": "Helles Design",
+        "dark": "Dunkles Design",
+        "system": "Systemeinstellung folgen"
+      },
+      "language": {
+        "title": "Spracheinstellungen",
+        "selectLabel": "Sprache auswählen",
+        "en": "Englisch",
+        "zh-CN": "Chinesisch (vereinfacht)",
+        "zh-TW": "Chinesisch (traditionell)",
+        "ja": "Japanisch"
+      },
+      "notifications": {
+        "title": "Benachrichtigungseinstellungen",
+        "enable": "Benachrichtigungen aktivieren",
+        "frequency": "Benachrichtigungshäufigkeit"
+      },
+      "timezone": {
+        "title": "Zeitzoneneinstellungen",
+        "serverLabel": "Server-Zeitzone",
+        "useLocalLabel": "Lokale Zeitzone verwenden",
+        "options": {
+          "asia": "Asien, Südostasien, TW/HK/MO (UTC+8)",
+          "america": "Amerika (UTC-5)",
+          "europe": "Europa (UTC+1)"
+        }
+      }
+    },
+    "gameSelection": {
+      "info": "Wählen Sie die Spiele aus, die Sie spielen, und konfigurieren Sie, welche Aktivitäten Sie verfolgen möchten",
+      "save": "Einstellungen speichern",
+      "saved": "Ihre Einstellungen wurden gespeichert",
+      "refreshSuccess": "Spielliste erfolgreich aktualisiert",
+      "refreshFailed": "Aktualisierung fehlgeschlagen",
+      "noGames": "Keine Spiele verfügbar",
+      "loading": "Spieldaten werden geladen..."
+    },
+    "errors": {
+      "network": "Netzwerkfehler",
+      "invalidResponse": "Ungültige Serverantwort",
+      "unknown": "Unbekannter Fehler",
+      "loadFailed": "Laden fehlgeschlagen",
+      "saveFailed": "Speichern fehlgeschlagen"
+    },
+    "welcome": {
+      "title": "Willkommen bei WUICC",
+      "message": "Bitte wählen Sie die Spiele aus, die Sie spielen, und konfigurieren Sie, welche Aktivitäten Sie verfolgen möchten:",
+      "confirm": "Auswahl bestätigen",
+      "skip": "Jetzt überspringen"
+    },
+    "gameActivities": {
+      "challenge": "Herausforderung",
+      "event": "Event",
+      "gacha": "Gacha",
+      "version": "Version-Update",
+      "maintenance": "Wartung"
+    },
+    "default": "Standard",
+    "timeFormat": {
+      "24hour": "24-Stunden",
+      "12hour": "12-Stunden"
+    },
+    "version_with_number": "Version {version}",
+    "close": "Schließen",
+    "go_to": "Gehe zu {target}"
+  }
+}

@@ -3,12 +3,20 @@ import en from './locales/en.json'
 import zhHans from './locales/zh-Hans.json'
 import zhHant from './locales/zh-Hant.json'
 import ja from './locales/ja.json'
+import ko from './locales/ko.json'
+import fr from './locales/fr.json'
+import es from './locales/es.json'
+import de from './locales/de.json'
 
 const messages = {
   en,
   'zh-Hans': zhHans,
   'zh-Hant': zhHant,
-  ja
+  ja,
+  ko,
+  fr,
+  es,
+  de
 }
 
 // 获取默认语言
@@ -29,6 +37,7 @@ export const i18n = createI18n({
   legacy: false,
   locale: getDefaultLanguage(),
   fallbackLocale: 'en',
+  warnHtmlMessage: false,
   messages,
   datetimeFormats: {
     'en': {

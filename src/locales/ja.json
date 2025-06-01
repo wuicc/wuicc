@@ -42,7 +42,13 @@
         "starts_in_prefix": "開始まで ",
         "ends_in_prefix": "",
         "event_ended": "イベントは終了しました",
-        "day": "日"
+        "day": "日",
+        "today": "今日",
+        "tomorrow": "明日",
+        "yesterday": "昨日",
+        "daysAgo": "{count}日前",
+        "daysLater": "{count}日後",
+        "noActivitiesForDay": "この日のイベントはありません"
       },
       "notification": {
         "title": "通知",
@@ -55,11 +61,11 @@
         "title": "ゲームショートカット",
         "links": {
           "mihoyo_genshin": "公式サイト (miHoYo, 中国大陸)",
-          "hoyoverse_genshin": "公式サイト (HoYoVerse, グローバル)",
+          "hoyoverse_genshin": "公式サイト (HoYoverse, グローバル)",
           "mihoyo_starrail": "公式サイト (miHoYo, 中国大陸)",
-          "hoyoverse_starrail": "公式サイト (HoYoVerse, グローバル)",
+          "hoyoverse_starrail": "公式サイト (HoYoverse, グローバル)",
           "mihoyo_zenless": "公式サイト (miHoYo, 中国大陸)",
-          "hoyoverse_zenless": "公式サイト (HoYoVerse, グローバル)",
+          "hoyoverse_zenless": "公式サイト (HoYoverse, グローバル)",
           "kurogame_cn_wuthering": "公式サイト (中国大陸)",
           "kurogame_os_wuthering": "公式サイト (グローバル)"
         }
@@ -74,7 +80,8 @@
         "projectInfo": "プロジェクト情報",
         "description": "Web UI Chrono Collector (WUICC)は、複数のプラットフォームにわたるゲーム活動とイベントを管理するタイムライン機能です。プロジェクトは2025年5月28日に開始しました。",
         "team": "開発チーム",
-        "teamDescription": "私たちのチームはゲーマーのための便利なツールを作成することに専念しています。"
+        "teamDescription": "私たちのチームはゲーマーのための便利なツールを作成することに専念しています。",
+        "disclaimer": "<h4>免責事項</h4><p>本ウェブサイトはゲーム愛好者によって自主的に作成された非営利プロジェクトであり、HoYoverse、Kuro Gameなどの企業とは一切の提携、認可、協力関係はありません。本サイトで使用されているゲーム素材、オーディオビジュアルコンテンツ、テキスト資料及び関連する登録商標などの知的財産権は、すべて各著作権者に帰属します。</p><p><strong>特別な声明</strong></p><ul><li>本プラットフォームのすべてのコンテンツは交流と学習のみを目的としており、商用利用を禁止します</li><li>サイト運営はゲームメーカーからの正式な認可を受けておりません</li><li>引用素材の著作権および商標権はすべて原権利者に帰属します</li></ul>"
       }
     },
     "buttons": {
