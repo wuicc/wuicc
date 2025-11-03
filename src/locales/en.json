@@ -1,13 +1,98 @@
 {
   "app": {
-    "title": "Web UI Chrono Collector",
-    "documentTitle": "Timeline Collector - Web UI Chrono Collector",
+    "title": "WUICC",
+    "documentTitle": "WUICC",
+    "common": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "submit": "Submit",
+      "save": "Save",
+      "import": "Import",
+      "loading": "Loading...",
+      "paused": "(Paused)",
+      "copy": "Copy",
+      "copied": "Copied",
+      "close": "Close",
+      "go_to": "Go to {target}",
+      "default": "Default",
+      "retry": "Retry"
+    },
+    "error": {
+      "network": "Network request failed",
+      "invalidResponse": "Invalid server response",
+      "unknown": "An unknown error occurred",
+      "loadFailed": "Failed to load game data",
+      "saveFailed": "Failed to save preferences",
+      "codes": {
+        "unknown": "An unknown error occurred",
+        "100001": "Missing required parameter",
+        "100002": "Invalid parameter format",
+        "100003": "Unsupported language",
+        "100004": "The requested resource does not exist",
+        "100005": "Method not allowed",
+        "100006": "Unsupported media type",
+        "100007": "Internal server error",
+        "100008": "Request rate limit exceeded",
+        "200001": "Verification required",
+        "200002": "Verification failed",
+        "200003": "Invalid token",
+        "200004": "Invalid credentials",
+        "200005": "Email already exists",
+        "200006": "Username already exists",
+        "200007": "Failed to send email",
+        "200008": "Email verification has expired",
+        "200009": "Account is already activated",
+        "200010": "Email sent too frequently",
+        "200011": "Account not activated",
+        "200012": "Account has been suspended",
+        "200013": "Account not activated",
+        "200014": "Invalid email format",
+        "200015": "Registration limit exceeded",
+        "200016": "Third-party authentication failed",
+        "200017": "Token has expired",
+        "200018": "Insufficient permissions",
+        "200019": "Password reset token has expired",
+        "200020": "Invalid password reset token",
+        "200021": "Current password is incorrect",
+        "200022": "Password strength is insufficient",
+        "200023": "New password cannot be the same as old password",
+        "200030": "QR code session expired",
+        "200031": "Invalid QR code status",
+        "200032": "Request rate limit exceeded",
+        "300001": "Game data does not exist",
+        "300002": "Challenge data does not exist",
+        "300003": "Configuration does not exist",
+        "300004": "Configuration parsing error",
+        "300005": "Invalid JSON format",
+        "300006": "Request data too large",
+        "400001": "No announcements currently",
+        "400002": "No challenges currently",
+        "400003": "Invalid game ID",
+        "400004": "Invalid event type",
+        "500001": "The requested resource does not exist",
+        "500002": "Invalid event type",
+        "500003": "Invalid parameter format",
+        "500004": "Invalid game ID",
+        "600001": "Gacha record import failed",
+        "600002": "Gacha record export failed",
+        "600003": "Gacha records not found",
+        "600004": "Invalid UIGF format",
+        "600005": "Gacha database error",
+        "600006": "Gacha data validation failed"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "Toggle sidebar",
+      "changeLanguage": "Change language"
+    },
     "sidebar": {
       "home": "Home",
       "timeline": "Timeline",
       "notification": "Notification",
+      "gacha": "Gacha Counter",
       "settings": "Settings",
-      "about": "About"
+      "about": "About",
+      "genshinActivities": "Genshin Impact Activities"
     },
     "games": {
       "genshin": {
@@ -23,14 +108,45 @@
         "title": "Wuthering Waves"
       }
     },
+    "gameActivities": {
+      "challenge": "Challenge",
+      "event": "Event",
+      "gacha": "Gacha",
+      "version": "Version Update",
+      "maintenance": "Maintenance"
+    },
     "pages": {
       "home": {
         "title": "Home",
-        "welcome": "Welcome to the WUICC home page!"
+        "intro": "One-stop game management tool",
+        "go_to_login": "Go to Login",
+        "login_support": "Supports ",
+        "qq_login": "QQ Login",
+        "install_app": "Install App",
+        "pwa_install_accepted": "User accepted PWA install prompt",
+        "pwa_install_declined": "User declined PWA install prompt",
+        "features": {
+          "multi_game": {
+            "title": "Multi-Game Timeline",
+            "description": "Track limited events, version updates, and limited banners across multiple popular games"
+          },
+          "reminders": {
+            "title": "Custom Reminders",
+            "description": "Set preferences for games and event types to never miss important activities"
+          },
+          "timezones": {
+            "title": "Multi-Time Zone",
+            "description": "View global server events at a glance with automatic local time zone conversion"
+          },
+          "interface": {
+            "title": "Clean Interface",
+            "description": "Thoughtfully designed interface makes information access easy and enjoyable"
+          }
+        }
       },
       "timeline": {
         "title": "Timeline",
-        "noActivities": "No activities found for your current selections. Please check your game and activity type preferences.",
+        "noActivities": "No events found for your current selections. Please check your game and event type preferences.",
         "loading": "Loading timeline...",
         "time_remaining": {
           "days_hours": "{days}d {hours}h",
@@ -49,14 +165,37 @@
         "yesterday": "Yesterday",
         "daysAgo": "{count} days ago",
         "daysLater": "In {count} days",
-        "noActivitiesForDay": "No activities for this day"
+        "noActivitiesForDay": "No events for this day",
+        "vote": {
+          "loading": "Loading vote data...",
+          "none": "N/A",
+          "no_options": "No options available",
+          "submit": "Submit Vote",
+          "success": "Vote submitted successfully",
+          "error": "Voting failed",
+          "login_required": "Login required to vote",
+          "retry": "Vote failed, please try again",
+          "title": "Event Voting",
+          "no_tags": "No voting options available",
+          "cancel": {
+            "failed": "Failed to cancel vote",
+            "success": "Vote cancelled"
+          },
+          "count": "{count} votes"
+        },
+        "launch_game": "Launch Game",
+        "china_server": "China Server",
+        "global_server": "Global Server",
+        "launch_pc": "PC Client",
+        "launch_mobile": "Mobile Client",
+        "launch_cloud_mobile": "Cloud Gaming (Mobile)",
+        "launch_cloud_web": "Cloud Gaming (Web)",
+        "defaultSort": "Default Sort",
+        "endTimeDesc": "Sort by End Time (Ascending)"
       },
       "notification": {
         "title": "Notification",
-        "content": "This is the notification content."
-      },
-      "settings": {
-        "title": "Settings"
+        "content": "Coming soon..."
       },
       "shortcuts": {
         "title": "Game Shortcuts",
@@ -71,23 +210,150 @@
           "kurogame_os_wuthering": "Official (Global)"
         }
       },
-      "notFound": {
-        "title": "Page Not Found",
-        "message": "The page you're looking for doesn't exist or has been removed",
-        "backHome": "Back to Home"
+      "gacha": {
+        "title": "Gacha Counter",
+        "overview": {
+          "title": "Gacha Overview",
+          "fiveStarCount": "5★ Count",
+          "fourStarCount": "4★ Count",
+          "sRankCount": "S Rank Count",
+          "aRankCount": "A Rank Count",
+          "totalPulls": "Total Pulls",
+          "selectGame": "Select Game",
+          "noUidSelected": "No game account selected",
+          "selectUid": "Select Account",
+          "changeUid": "Change Account",
+          "pulls": "pulls",
+          "noRecordsHint": "No gacha records, please download data first",
+          "gachaTypeStats": "Banner Statistics",
+          "chartTitle": "Gacha Statistics Chart",
+          "chartComingSoon": "Statistics chart feature coming soon"
+        },
+        "records": {
+          "title": "Gacha Records",
+          "time": "Time",
+          "name": "Name",
+          "rarity": "Rarity",
+          "type": "Type",
+          "character": "Character",
+          "weapon": "Weapon",
+          "noData": "No gacha records available",
+          "selectGachaType": "Select Banner",
+          "pullCount": "Pulls",
+          "lastCount": "Pity",
+          "rank": " Rank",
+          "noUidSelected": "No UID selected"
+        },
+        "settings": {
+          "title": "Gacha Settings",
+          "accountInfo": "Account Information",
+          "notLoggedIn": "Not logged in",
+          "goToLogin": "Go to Login",
+          "authorizedAccounts": "Authorized Game Accounts",
+          "game": "Game",
+          "uid": "UID",
+          "nickname": "Nickname",
+          "lastUsed": "Last Used",
+          "actions": "Actions",
+          "downloadRecords": "Download Records",
+          "revoke": "Revoke",
+          "confirmRevoke": "Are you sure you want to revoke this UID authorization?",
+          "downloading": "Downloading...",
+          "downloadSuccess": "Successfully imported {count} records from {type}",
+          "downloadFailed": "Failed to download records",
+          "updateSuccess": "Nickname updated successfully",
+          "updateFailed": "Failed to update nickname",
+          "revokeSuccess": "UID authorization revoked",
+          "revokeFailed": "Failed to revoke authorization",
+          "edit": "Edit",
+          "editNickname": "Edit Name",
+          "confirmRevokeTitle": "Confirm Revoke Authorization",
+          "confirmRevokeMessage": "Are you sure you want to revoke authorization for this account? You will no longer be able to retrieve gacha records for this account after revocation.",
+          "selectGachaTypeToDownload": "Select A Banner To Download",
+          "recordsDownloaded": "Downloaded",
+          "importOfficialLink": "Import Official Link",
+          "selectGame": "Select Game",
+          "officialLink": "Official Gacha Record Link",
+          "linkPlaceholder": "Please enter the gacha record link obtained in-game",
+          "importPending": "Import task created, queued for processing",
+          "importProcessing": "Importing gacha records, please wait...",
+          "importCompleted": "Gacha records import completed!",
+          "importFailed": "Gacha records import failed",
+          "selectPlatform": "Select Platform",
+          "windowsInstructions": "Please copy the following script, run it in PowerShell and follow the prompts:",
+          "androidInstructions": "Android platform import method is under development, please refer to other methods to obtain the link.",
+          "iosInstructions": "iOS platform import method is under development, please refer to other methods to obtain the link.",
+          "pasteLink": "Paste the obtained link",
+          "invalidUrl": "Please enter a valid URL",
+          "unsupportedDomain": "Only official HoYoverse/Kuro Game domains are supported",
+          "loadUidsFailed": "Failed to load authorized accounts",
+          "networkError": "Network error, please check your internet connection and try again",
+          "deleteRecords": "Delete Records",
+          "deleteRecordsTitle": "Delete Records",
+          "deleteRecordsMessage": "Please choose where to delete the records from:",
+          "deleteLocal": "Delete Local",
+          "deleteCloud": "Delete Cloud",
+          "confirmDeleteTitle": "Confirm Deletion",
+          "confirmDeleteLocal": "Are you sure you want to delete all local records for this UID? This action cannot be undone.",
+          "confirmDeleteCloud": "Are you sure you want to delete all cloud records for this UID? This action cannot be undone."
+        },
+        "types": {
+          "genshin": {
+            "301": "Character Event Wish",
+            "302": "Weapon Event Wish",
+            "500": "Chronicled Wish",
+            "200": "Standard Wish",
+            "100": "Beginner's Wish"
+          },
+          "starrail": {
+            "11": "Character Event Warp",
+            "12": "Light Cone Event Warp",
+            "21": "Character Collaboration Warp",
+            "22": "Light Cone Collaboration Warp",
+            "1": "Standard Warp",
+            "2": "Departure Warp"
+          },
+          "zenless": {
+            "2": "Agent Channel",
+            "3": "W-Engine Channel",
+            "1": "Standard Channel",
+            "5": "Bangboo Channel"
+          },
+          "wuthering": {
+            "1": "Character Event Convenes",
+            "2": "Weapon Event Convenes",
+            "3": "Character Standard Convenes",
+            "4": "Weapon Standard Convenes",
+            "5": "Beginner Convenes",
+            "6": "Beginner Select Convenes",
+            "7": "Beginner Select Convenes (Gratitude)",
+            "8": "Character New Journey Convenes",
+            "9": "Weapon New Journey Convenes"
+          }
+        },
+        "itemTypes": {
+          "character": "Character",
+          "weapon": "Weapon",
+          "lightCone": "Light Cone",
+          "agents": "Agents",
+          "wEngines": "W-Engines",
+          "resonator": "Resonator",
+          "Bangboo": "Bangboo"
+        }
       },
       "about": {
         "title": "About",
         "projectInfo": "Project Information",
-        "description": "Web UI Chrono Collector (WUICC) is a timeline management tool for tracking game activities and events across multiple platforms. The project started on May 28, 2025.",
+        "description": "Web UI Chrono Collector (WUICC, wik) is a gacha analysis and event timeline management tool for multiple games. The project started on May 24, 2025.",
         "team": "Development Team",
         "teamDescription": "Our team is dedicated to creating useful tools for gamers.",
-        "disclaimer": "<h4>Disclaimer</h4><p>This website is a non-profit project created spontaneously by game enthusiasts and has no affiliation, authorization, or cooperative relationship with HoYoverse, Kuro Game or other companies. The game materials, audio-visual content, text materials and related trademarks involved in the website are all owned by their respective copyright owners.</p><p><strong>Special Note</strong></p><ul><li>All content on this platform is for communication and learning only, and is prohibited for any commercial use</li><li>The website operation has not obtained official authorization from any game manufacturer</li><li>The copyright and trademark rights of the quoted materials belong to the original rights holders</li></ul>"
+        "disclaimer": "<h4>About This Site</h4><p>This website is a non-profit project created spontaneously by game enthusiasts and has no affiliation, authorization, or cooperative relationship with HoYoverse, Kuro Game or other companies.</p><p><strong>Special Note</strong></p><ul><li>All content on this platform is for communication and learning only, and is prohibited for any commercial use.</li><li>All data, text, and images on this site are sourced from the community or wikis. This site only compiles and summarizes the corresponding content.</li><li>The copyright and trademark rights of the quoted materials belong to the original rights holders.</li></ul>"
+      },
+      "notFound": {
+        "title": "Page Not Found",
+        "message": "The page you're looking for doesn't exist or has been removed",
+        "backHome": "Back to Home"
       }
-    },
-    "buttons": {
-      "toggleSidebar": "Toggle sidebar",
-      "changeLanguage": "Change language"
     },
     "settings": {
       "title": "Settings",
@@ -104,7 +370,8 @@
         "selectLabel": "Select Theme",
         "light": "Light Theme",
         "dark": "Dark Theme",
-        "system": "Follow System"
+        "system": "Follow System",
+        "showBackgroundImage": "Show background image"
       },
       "language": {
         "title": "Language Settings",
@@ -128,44 +395,204 @@
           "america": "America (UTC-5)",
           "europe": "Europe (UTC+1)"
         }
+      },
+      "account": {
+        "title": "Account & Data",
+        "login": "Login",
+        "logout": "Logout",
+        "logoutAll": "Logout All Devices",
+        "username": "Username",
+        "password": "Password",
+        "loginSuccess": "Login successful",
+        "loginFailed": "Login failed, please check username and password",
+        "logoutSuccess": "Logout successful",
+        "logoutFailed": "Logout failed",
+        "logoutAllSuccess": "All devices logged out",
+        "logoutAllFailed": "Logout all devices failed",
+        "networkError": "Network error, please try again later",
+        "uploadSettings": "Upload",
+        "downloadSettings": "Download",
+        "uploadSuccess": "Settings uploaded to slot {slot}!",
+        "uploadFailed": "Upload settings failed",
+        "downloadSuccess": "Settings downloaded from slot {slot}!",
+        "downloadFailed": "Download settings failed",
+        "noLocalSettings": "No local settings found",
+        "invalidSettingsFormat": "Invalid cloud settings format",
+        "activityStatusLastUpdated": "Activity Status Last Updated",
+        "clearLocal": "Clear local settings",
+        "clearCloud": "Delete",
+        "clearLocalSuccess": "Local settings cleared",
+        "clearLocalFailed": "Clear local settings failed",
+        "clearCloudSuccess": "Cloud data in slot {slot} cleared!",
+        "clearCloudFailed": "Clear cloud settings failed",
+        "clearLocalConfirmTitle": "Confirm clear local settings",
+        "clearLocalConfirmMessage": "This will permanently delete all local settings on your device. Are you sure you want to continue?",
+        "clearCloudConfirmTitle": "Confirm clear cloud settings",
+        "clearCloudConfirmMessage": "Are you sure you want to clear cloud settings in slot {slot}? This action cannot be undone!",
+        "overwriteConfirmTitle": "Overwrite Confirmation",
+        "overwriteConfirmMessage": "Slot {slot} already has sync data. Are you sure you want to overwrite it?",
+        "turnstileError": "Please complete verification",
+        "fillAllFields": "Please fill in all fields",
+        "logoutAllConfirmTitle": "Confirm logout all devices",
+        "logoutAllConfirmMessage": "Are you sure you want to logout from all devices? This action cannot be undone.",
+        "registerTitle": "Register New Account",
+        "register": "Register",
+        "email": "Email",
+        "confirmPassword": "Confirm Password",
+        "passwordMismatch": "Passwords do not match",
+        "registerSuccess": "Registration successful! Please check your email to activate your account.",
+        "registerFailed": "Registration failed",
+        "backToLogin": "Back to Login",
+        "accountBanned": "Your account has been banned",
+        "accountNotActivated": "Your account is not activated yet. Please check your email.",
+        "resendVerification": "Resend verification email",
+        "verificationResent": "Verification email resent",
+        "verificationSendFailed": "Failed to send verification email",
+        "invalidEmail": "Please enter a valid email address",
+        "emailVerifiedSuccess": "Email verified successfully",
+        "emailVerifiedFailed": "Email verification failed",
+        "resendFailed": "Failed to resend verification email",
+        "accountStatus": {
+          "active": "Active",
+          "inactive": "Inactive",
+          "banned": "Banned"
+        },
+        "loginWithQQ": "Login with QQ",
+        "loginWithMicrosoft": "Login with Microsoft",
+        "qqLoginFailed": "Failed to get QQ login URL",
+        "qqLoginError": "Error during QQ login",
+        "qqCallbackError": "Failed to process QQ callback",
+        "thirdPartyLoggingIn": "Logging in via third party...",
+        "microsoftLoginFailed": "Microsoft login failed",
+        "microsoftLoginError": "Microsoft login error",
+        "microsoftCallbackError": "Microsoft callback error",
+        "showLoginForm": "Show login form",
+        "hideLoginForm": "Hide login form",
+        "qrLogin": "QR Code Login",
+        "passwordLogin": "Password Login",
+        "scanQRCode": "Scan this QR code with your device",
+        "qrExpiresIn": "Expires in {minutes} seconds",
+        "refreshQRCode": "Refresh QR Code",
+        "generatingQRCode": "Generating QR Code...",
+        "qrCodeGenerated": "QR code generated successfully",
+        "qrCodeGenerateFailed": "Failed to generate QR code",
+        "qrCodeScanned": "QR code scanned, please confirm on your device",
+        "qrCodeConfirmed": "Login confirmed, signing in...",
+        "qrCodeExpired": "QR code expired, please refresh",
+        "qrSessionNotFound": "QR session not found",
+        "qrScannerNotSupported": "QR scanner not supported on this device",
+        "qrScannerError": "QR scanner error",
+        "qrCodeScannedSuccess": "QR code scanned successfully",
+        "qrCodeScanFailed": "Failed to scan QR code",
+        "qrConfirmFailed": "Login confirmation failed",
+        "startScan": "Scan QR Code",
+        "stopScan": "Stop Scan",
+        "qrScanError": "QR code scan error",
+        "invalidQRCode": "Invalid QR code",
+        "qrConfirmSuccess": "Login confirmation successful",
+        "qrLoginConfirmTitle": "Login by QR code Confirmation",
+        "qrLoginConfirmMessage": "A login request from the following device has been detected. Confirm login?",
+        "cloudSync": "Cloud Data Sync",
+        "slotNumber": "Slot {slot}",
+        "lastUpdated": "Last updated",
+        "neverUpdated": "Never updated",
+        "changePassword": "Change Password",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmNewPassword": "Confirm New Password",
+        "passwordChangedSuccess": "Password changed successfully",
+        "changePasswordFailed": "Password change failed",
+        "resetPassword": "Reset Password",
+        "requestReset": "Request Reset",
+        "sendResetLink": "Send Reset Link",
+        "resetEmailSent": "Reset email sent",
+        "resetRequestFailed": "Reset request failed",
+        "resetToken": "Reset Token",
+        "tokenValidFor": "Token valid for user: {username}",
+        "invalidResetToken": "Invalid reset token",
+        "resetPasswordFailed": "Password reset failed",
+        "passwordResetSuccess": "Password reset successful",
+        "emailRequired": "Email address is required",
+        "currentPasswordRequired": "Please enter current password",
+        "newPasswordRequired": "Please enter new password",
+        "confirmPasswordRequired": "Please confirm new password",
+        "passwordTooShort": "Password is too short",
+        "passwordNoUpper": "Password must contain at least one uppercase letter",
+        "passwordNoLower": "Password must contain at least one lowercase letter",
+        "passwordNoNumber": "Password must contain at least one number",
+        "passwordStrong": "Strong password"
+      },
+      "gameOrder": {
+        "title": "Game Order Settings",
+        "restoreDefault": "Restore default order",
+        "restored": "Game order restored to default",
+        "restoreFailed": "Failed to restore default order"
+      },
+      "debug": {
+        "title": "Debug Settings",
+        "resetLanguageCache": "Reset Language Cache",
+        "languageCacheCleared": "Language cache has been cleared",
+        "languageCacheClearFailed": "Failed to clear language cache"
       }
     },
     "gameSelection": {
-      "info": "Select the games you play and configure which activities you want to track",
+      "info": "Select the games you play and configure which events you want to track",
       "save": "Save Preferences",
       "saved": "Your game preferences have been saved",
       "refreshSuccess": "Game list refreshed successfully",
       "refreshFailed": "Failed to refresh game list",
       "noGames": "No games available",
-      "loading": "Loading game data..."
-    },
-    "errors": {
-      "network": "Network request failed",
-      "invalidResponse": "Invalid server response",
-      "unknown": "An unknown error occurred",
-      "loadFailed": "Failed to load game data",
-      "saveFailed": "Failed to save preferences"
+      "loading": "Loading game data...",
+      "refresh": "Refresh",
+      "selectGamePrompt": "Select a game to view available events",
+      "dragHint": "Hold the up/down arrows to drag and reorder games",
+      "resetOrder": "Reset order",
+      "dragHintSettings": "Go to settings page to modify order"
     },
     "welcome": {
       "title": "Welcome to WUICC",
-      "message": "Please select the games you play and configure which activities you want to track:",
+      "message": "Please select the games you play and configure which events you want to track:",
       "confirm": "Confirm Selections",
       "skip": "Skip for now"
     },
-    "gameActivities": {
-      "challenge": "Challenge",
-      "event": "Event",
-      "gacha": "Gacha",
-      "version": "Version Update",
-      "maintenance": "Maintenance"
+    "tabLock": {
+      "title": "Application Already Open",
+      "message": "This application is already open in another window.",
+      "lostLockTitle": "Session Conflict",
+      "lostLockMessage": "You cannot open the application in multiple windows simultaneously.",
+      "warning": "Warning: Continuing in this window may cause data conflicts.",
+      "continue": "Force Open in This Window",
+      "forceAcquire": "Force Open in This Window"
     },
-    "default": "Default",
     "timeFormat": {
-      "24hour": "24-hour",
-      "12hour": "12-hour"
+      "24hour": "24-hour format",
+      "12hour": "12-hour format"
     },
-    "version_with_number": "Version {version}",
+    "version_with_number": "Version {version}"
+  },
+  "$vuetify": {
+    "open": "Open",
     "close": "Close",
-    "go_to": "Go to {target}"
+    "dataIterator": {
+      "loadingText": "Loading..."
+    },
+    "pagination": {
+      "ariaLabel": {
+        "root": "Pagination Navigation"
+      }
+    },
+    "carousel": {
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "Items per page:",
+      "itemsPerPageAll": "All",
+      "nextPage": "Next page",
+      "prevPage": "Previous page",
+      "firstPage": "First page",
+      "lastPage": "Last page",
+      "pageText": "{0} - {1} of {2}"
+    }
   }
 }

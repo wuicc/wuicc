@@ -1,11 +1,95 @@
 {
   "app": {
-    "title": "Web UI Chrono Collector",
-    "documentTitle": "Collectionneur de Chronologie - Web UI Chrono Collector",
+    "title": "WUICC",
+    "documentTitle": "WUICC",
+    "common": {
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "submit": "Soumettre",
+      "save": "Sauvegarder",
+      "import": "Importer",
+      "loading": "Chargement...",
+      "paused": "(En pause)",
+      "copy": "Copier",
+      "copied": "Copié",
+      "close": "Fermer",
+      "go_to": "Aller à {target}",
+      "default": "Par défaut",
+      "retry": "Réessayer"
+    },
+    "error": {
+      "network": "Échec de la requête réseau",
+      "invalidResponse": "Réponse invalide du serveur",
+      "unknown": "Une erreur inconnue s'est produite",
+      "loadFailed": "Échec du chargement des données du jeu",
+      "saveFailed": "Échec de la sauvegarde des préférences",
+      "codes": {
+        "unknown": "Une erreur inconnue s'est produite",
+        "100001": "Paramètre requis manquant",
+        "100002": "Format de paramètre invalide",
+        "100003": "Langue non supportée",
+        "100004": "La ressource demandée n'existe pas",
+        "100005": "Méthode non autorisée",
+        "100006": "Type de média non supporté",
+        "100007": "Erreur interne du serveur",
+        "100008": "Limite de fréquence de requête dépassée",
+        "200001": "Vérification requise",
+        "200002": "Échec de la vérification",
+        "200003": "Jeton invalide",
+        "200004": "Identifiants invalides",
+        "200005": "L'email existe déjà",
+        "200006": "Le nom d'utilisateur existe déjà",
+        "200007": "Échec de l'envoi de l'email",
+        "200008": "La vérification de l'email a expiré",
+        "200009": "Le compte est déjà activé",
+        "200010": "Email envoyé trop fréquemment",
+        "200011": "Compte non activé",
+        "200012": "Le compte a été suspendu",
+        "200013": "Compte non activé",
+        "200014": "Format d'email invalide",
+        "200015": "Limite d'inscription dépassée",
+        "200016": "Échec de l'authentification tierce",
+        "200017": "Le jeton a expiré",
+        "200018": "Permissions insuffisantes",
+        "200019": "Le jeton de réinitialisation du mot de passe a expiré",
+        "200020": "Jeton de réinitialisation du mot de passe invalide",
+        "200021": "Le mot de passe actuel est incorrect",
+        "200022": "La force du mot de passe est insuffisante",
+        "200023": "Le nouveau mot de passe ne peut pas être identique à l'ancien",
+        "200030": "Session QR code expirée",
+        "200031": "Statut QR code invalide",
+        "200032": "Limite de fréquence de requête dépassée",
+        "300001": "Les données du jeu n'existent pas",
+        "300002": "Les données de défi n'existent pas",
+        "300003": "La configuration n'existe pas",
+        "300004": "Erreur d'analyse de configuration",
+        "300005": "Format JSON invalide",
+        "300006": "Données de requête trop volumineuses",
+        "400001": "Aucune annonce actuellement",
+        "400002": "Aucun défi actuellement",
+        "400003": "ID de jeu invalide",
+        "400004": "Type d'événement invalide",
+        "500001": "La ressource demandée n'existe pas",
+        "500002": "Type d'événement invalide",
+        "500003": "Format de paramètre invalide",
+        "500004": "ID de jeu invalide",
+        "600001": "Échec de l'importation des archives de gacha",
+        "600002": "Échec de l'exportation des archives de gacha",
+        "600003": "Aucune archive de gacha trouvée",
+        "600004": "Format UIGF invalide",
+        "600005": "Erreur de base de données gacha",
+        "600006": "Échec de la validation des données gacha"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "Basculer la barre latérale",
+      "changeLanguage": "Changer la langue"
+    },
     "sidebar": {
       "home": "Accueil",
       "timeline": "Chronologie",
       "notification": "Notifications",
+      "gacha": "Compteur de Gacha",
       "settings": "Paramètres",
       "about": "À propos"
     },
@@ -23,14 +107,45 @@
         "title": "Wuthering Waves"
       }
     },
+    "gameActivities": {
+      "challenge": "Défi",
+      "event": "Événement",
+      "gacha": "Gacha",
+      "version": "Mise à jour de version",
+      "maintenance": "Maintenance"
+    },
     "pages": {
       "home": {
         "title": "Accueil",
-        "welcome": "Bienvenue sur la page d'accueil de WUICC !"
+        "intro": "Outil de gestion de jeu tout-en-un",
+        "go_to_login": "Aller à la connexion",
+        "login_support": "Prend en charge ",
+        "qq_login": "Connexion QQ",
+        "install_app": "Installer l'application",
+        "pwa_install_accepted": "L'utilisateur a accepté l'invite d'installation PWA",
+        "pwa_install_declined": "L'utilisateur a refusé l'invite d'installation PWA",
+        "features": {
+          "multi_game": {
+            "title": "Chronologie multi-jeux",
+            "description": "Suivez les événements limités, les mises à jour de version et les bannières limitées sur plusieurs jeux populaires"
+          },
+          "reminders": {
+            "title": "Rappels personnalisés",
+            "description": "Définissez vos préférences pour les jeux et types d'événements pour ne jamais manquer d'activités importantes"
+          },
+          "timezones": {
+            "title": "Multi-fuseaux horaires",
+            "description": "Visualisez d'un coup d'œil les événements des serveurs mondiaux avec conversion automatique du fuseau horaire local"
+          },
+          "interface": {
+            "title": "Interface épurée",
+            "description": "Une interface soigneusement conçue rend l'accès à l'information facile et agréable"
+          }
+        }
       },
       "timeline": {
         "title": "Chronologie",
-        "noActivities": "Aucune activité trouvée pour vos sélections actuelles. Veuillez vérifier vos préférences de jeu et de type d'activité.",
+        "noActivities": "Aucun événement trouvé pour vos sélections actuelles. Veuillez vérifier vos préférences de jeu et de type d'événement.",
         "loading": "Chargement de la chronologie...",
         "time_remaining": {
           "days_hours": "{days}j {hours}h",
@@ -49,14 +164,37 @@
         "yesterday": "Hier",
         "daysAgo": "Il y a {count} jours",
         "daysLater": "Dans {count} jours",
-        "noActivitiesForDay": "Aucune activité ce jour-là"
+        "noActivitiesForDay": "Aucun événement ce jour-là",
+        "vote": {
+          "loading": "Chargement des données de vote...",
+          "none": "N/A",
+          "no_options": "Aucune option disponible",
+          "submit": "Soumettre le vote",
+          "success": "Vote soumis avec succès",
+          "error": "Échec du vote",
+          "login_required": "Connexion requise pour voter",
+          "retry": "Échec du vote, veuillez réessayer",
+          "title": "Vote d'événement",
+          "no_tags": "Aucune option de vote disponible",
+          "cancel": {
+            "failed": "Échec de l'annulation du vote",
+            "success": "Vote annulé"
+          },
+          "count": "{count} votes"
+        },
+        "launch_game": "Lancer le jeu",
+        "china_server": "Serveur Chine",
+        "global_server": "Serveur Global",
+        "launch_pc": "Client PC",
+        "launch_mobile": "Client Mobile",
+        "launch_cloud_mobile": "Gaming Cloud (Mobile)",
+        "launch_cloud_web": "Gaming Cloud (Web)",
+        "defaultSort": "Tri par défaut",
+        "endTimeDesc": "Trier par heure de fin (Croissant)"
       },
       "notification": {
         "title": "Notifications",
-        "content": "Ceci est le contenu de la notification."
-      },
-      "settings": {
-        "title": "Paramètres"
+        "content": "Bientôt disponible..."
       },
       "shortcuts": {
         "title": "Raccourcis de jeux",
@@ -71,40 +209,158 @@
           "kurogame_os_wuthering": "Officiel (Global)"
         }
       },
-      "notFound": {
-        "title": "Page non trouvée",
-        "message": "La page que vous recherchez n'existe pas ou a été supprimée",
-        "backHome": "Retour à l'accueil"
+      "gacha": {
+        "title": "Compteur de Gacha",
+        "overview": {
+          "title": "Aperçu du Gacha",
+          "fiveStarCount": "Nombre 5★",
+          "fourStarCount": "Nombre 4★",
+          "sRankCount": "Nombre Rang S",
+          "aRankCount": "Nombre Rang A",
+          "totalPulls": "Total des tirages",
+          "selectGame": "Sélectionner le jeu",
+          "noUidSelected": "Aucun compte de jeu sélectionné",
+          "selectUid": "Sélectionner le compte",
+          "changeUid": "Changer de compte",
+          "pulls": "tirages",
+          "noRecordsHint": "Aucune archive de gacha, veuillez d'abord télécharger les données",
+          "gachaTypeStats": "Statistiques des bannières",
+          "chartTitle": "Graphique de statistiques de Gacha",
+          "chartComingSoon": "La fonction de graphique de statistiques arrive bientôt"
+        },
+        "records": {
+          "title": "Archives de Gacha",
+          "time": "Heure",
+          "name": "Nom",
+          "rarity": "Rareté",
+          "type": "Type",
+          "character": "Personnage",
+          "weapon": "Arme",
+          "noData": "Aucune archive de gacha disponible",
+          "selectGachaType": "Sélectionner la bannière",
+          "pullCount": "Tirages",
+          "lastCount": "Pitié",
+          "rank": " Rang",
+          "noUidSelected": "Aucun UID sélectionné"
+        },
+        "settings": {
+          "title": "Paramètres Gacha",
+          "accountInfo": "Informations du compte",
+          "notLoggedIn": "Non connecté",
+          "goToLogin": "Aller à la connexion",
+          "authorizedAccounts": "Comptes de jeu autorisés",
+          "game": "Jeu",
+          "uid": "UID",
+          "nickname": "Pseudonyme",
+          "lastUsed": "Dernière utilisation",
+          "actions": "Actions",
+          "downloadRecords": "Télécharger les archives",
+          "revoke": "Révoquer",
+          "confirmRevoke": "Êtes-vous sûr de vouloir révoquer l'autorisation de cet UID ?",
+          "downloading": "Téléchargement...",
+          "downloadSuccess": "{count} archives importées avec succès depuis {type}",
+          "downloadFailed": "Échec du téléchargement des archives",
+          "updateSuccess": "Pseudonyme mis à jour avec succès",
+          "updateFailed": "Échec de la mise à jour du pseudonyme",
+          "revokeSuccess": "Autorisation UID révoquée",
+          "revokeFailed": "Échec de la révocation de l'autorisation",
+          "edit": "Modifier",
+          "editNickname": "Modifier le nom",
+          "confirmRevokeTitle": "Confirmer la révocation de l'autorisation",
+          "confirmRevokeMessage": "Êtes-vous sûr de vouloir révoquer l'autorisation pour ce compte ? Vous ne pourrez plus récupérer les archives de gacha de ce compte après la révocation.",
+          "selectGachaTypeToDownload": "Sélectionner une bannière à télécharger",
+          "recordsDownloaded": "Téléchargé",
+          "importOfficialLink": "Importer le lien officiel",
+          "selectGame": "Sélectionner le jeu",
+          "officialLink": "Lien des archives de gacha officiel",
+          "linkPlaceholder": "Veuillez saisir le lien des archives de gacha obtenu en jeu",
+          "importPending": "Tâche d'importation créée, en file d'attente pour traitement",
+          "importProcessing": "Importation des archives de gacha, veuillez patienter...",
+          "importCompleted": "Importation des archives de gacha terminée !",
+          "importFailed": "Échec de l'importation des archives de gacha",
+          "selectPlatform": "Sélectionner la plateforme",
+          "windowsInstructions": "Veuillez copier le script suivant, l'exécuter dans PowerShell et suivre les invites :",
+          "androidInstructions": "La méthode d'importation pour Android est en cours de développement, veuillez vous référer à d'autres méthodes pour obtenir le lien.",
+          "iosInstructions": "La méthode d'importation pour iOS est en cours de développement, veuillez vous référer à d'autres méthodes pour obtenir le lien.",
+          "pasteLink": "Coller le lien obtenu",
+          "invalidUrl": "Veuillez saisir une URL valide",
+          "unsupportedDomain": "Seuls les domaines officiels HoYoverse/Kuro Game sont supportés"
+        },
+        "types": {
+          "genshin": {
+            "301": "Vœu d'événement personnage",
+            "302": "Vœu d'événement arme",
+            "500": "Vœu chroniqué",
+            "200": "Vœu standard",
+            "100": "Vœu du débutant"
+          },
+          "starrail": {
+            "11": "Distorsion d'événement personnage",
+            "12": "Distorsion d'événement cône de lumière",
+            "21": "Distorsion collaboration personnage",
+            "22": "Distorsion collaboration cône de lumière",
+            "1": "Distorsion standard",
+            "2": "Distorsion de départ"
+          },
+          "zenless": {
+            "2": "Canal Agent",
+            "3": "Canal Moteur-W",
+            "1": "Canal standard",
+            "5": "Canal Bangboo"
+          },
+          "wuthering": {
+            "1": "Invocation d'événement personnage",
+            "2": "Invocation d'événement arme",
+            "3": "Invocation standard personnage",
+            "4": "Invocation standard arme",
+            "5": "Invocation débutant",
+            "6": "Invocation débutant sélection",
+            "7": "Invocation débutant sélection (Gratitude)",
+            "8": "Invocation nouveau voyage personnage",
+            "9": "Invocation nouveau voyage arme"
+          }
+        },
+        "itemTypes": {
+          "character": "Personnage",
+          "weapon": "Arme",
+          "lightCone": "Cône de lumière",
+          "agents": "Agents",
+          "wEngines": "Moteurs-W",
+          "resonator": "Résonateur",
+          "Bangboo": "Bangboo"
+        }
       },
       "about": {
         "title": "À propos",
         "projectInfo": "Informations sur le projet",
-        "description": "Web UI Chrono Collector (WUICC) est un outil de gestion de chronologie pour suivre les activités et événements de jeux sur plusieurs plateformes. Le projet a commencé le 28 mai 2025.",
+        "description": "Web UI Chrono Collector (WUICC) est un outil d'analyse de gacha et de gestion de chronologie d'événements pour plusieurs jeux. Le projet a commencé le 24 mai 2025.",
         "team": "Équipe de développement",
         "teamDescription": "Notre équipe est dédiée à la création d'outils utiles pour les joueurs.",
-        "disclaimer": "<h4>Clause de non-responsabilité</h4><p>Ce site est un projet à but non lucratif créé spontanément par des passionnés de jeux et n'a aucune affiliation, autorisation ou relation de coopération avec HoYoverse, Kuro Game ou d'autres entreprises. Les éléments de jeu, contenus audiovisuels, documents textuels et marques déposées concernés sur le site appartiennent tous à leurs propriétaires respectifs.</p><p><strong>Déclaration spéciale</strong></p><ul><li>Tous les contenus de cette plateforme sont uniquement destinés à des fins d'échange et d'apprentissage, interdits à toute utilisation commerciale</li><li>L'exploitation du site n'a obtenu aucune autorisation officielle des fabricants de jeux</li><li>Les droits d'auteur et marques des matériels cités appartiennent aux détenteurs originaux</li></ul>"
+        "disclaimer": "<h4>À Propos de Ce Site</h4><p>Ce site est un projet à but non lucratif créé spontanément par des passionnés de jeux et n'a aucune affiliation, autorisation ou relation de coopération avec HoYoverse, Kuro Game ou d'autres entreprises.</p><p><strong>Déclaration spéciale</strong></p><ul><li>Tous les contenus de cette plateforme sont uniquement destinés à des fins d'échange et d'apprentissage, interdits à toute utilisation commerciale.</li><li>Toutes les données, textes et images sur ce site proviennent de la communauté ou des wikis. Ce site ne fait que compiler et résumer le contenu correspondant.</li><li>Les droits d'auteur et marques des matériels cités appartiennent aux détenteurs originaux.</li></ul>"
+      },
+      "notFound": {
+        "title": "Page non trouvée",
+        "message": "La page que vous recherchez n'existe pas ou a été supprimée",
+        "backHome": "Retour à l'accueil"
       }
-    },
-    "buttons": {
-      "toggleSidebar": "Basculer la barre latérale",
-      "changeLanguage": "Changer la langue"
     },
     "settings": {
       "title": "Paramètres",
       "gameSelection": {
         "title": "Paramètres des jeux",
-        "save": "Enregistrer les préférences",
-        "saved": "Préférences enregistrées",
-        "refresh": "Actualiser la liste",
-        "refreshSuccess": "Liste actualisée avec succès",
-        "refreshFailed": "Échec de l'actualisation"
+        "save": "Sauvegarder les préférences de jeu",
+        "saved": "Préférences de jeu sauvegardées",
+        "refresh": "Actualiser la liste des jeux",
+        "refreshSuccess": "Liste des jeux actualisée avec succès",
+        "refreshFailed": "Échec de l'actualisation de la liste des jeux"
       },
       "theme": {
         "title": "Paramètres du thème",
         "selectLabel": "Sélectionner un thème",
         "light": "Thème clair",
         "dark": "Thème sombre",
-        "system": "Suivre le système"
+        "system": "Suivre le système",
+        "showBackgroundImage": "Afficher l'image de fond"
       },
       "language": {
         "title": "Paramètres de langue",
@@ -112,7 +368,8 @@
         "en": "Anglais",
         "zh-CN": "Chinois simplifié",
         "zh-TW": "Chinois traditionnel",
-        "ja": "Japonais"
+        "ja": "Japonais",
+        "fr": "Français"
       },
       "notifications": {
         "title": "Paramètres des notifications",
@@ -121,51 +378,210 @@
       },
       "timezone": {
         "title": "Paramètres de fuseau horaire",
-        "serverLabel": "Fuseau horaire du serveur",
-        "useLocalLabel": "Utiliser le fuseau local",
+        "serverLabel": "Fuseau horaire du serveur de jeu",
+        "useLocalLabel": "Utiliser le fuseau horaire local pour l'affichage",
         "options": {
           "asia": "Asie, Asie du Sud-Est, TW/HK/MO (UTC+8)",
           "america": "Amérique (UTC-5)",
           "europe": "Europe (UTC+1)"
         }
+      },
+      "account": {
+        "title": "Compte & Données",
+        "login": "Connexion",
+        "logout": "Déconnexion",
+        "logoutAll": "Déconnexion de tous les appareils",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "loginSuccess": "Connexion réussie",
+        "loginFailed": "Échec de la connexion, veuillez vérifier le nom d'utilisateur et le mot de passe",
+        "logoutSuccess": "Déconnexion réussie",
+        "logoutFailed": "Échec de la déconnexion",
+        "logoutAllSuccess": "Déconnexion de tous les appareils",
+        "logoutAllFailed": "Échec de la déconnexion de tous les appareils",
+        "networkError": "Erreur réseau, veuillez réessayer plus tard",
+        "uploadSettings": "Téléverser",
+        "downloadSettings": "Télécharger",
+        "uploadSuccess": "Paramètres téléversés vers l'emplacement {slot} !",
+        "uploadFailed": "Échec du téléversement des paramètres",
+        "downloadSuccess": "Paramètres téléchargés depuis l'emplacement {slot} !",
+        "downloadFailed": "Échec du téléchargement des paramètres",
+        "noLocalSettings": "Aucun paramètre local trouvé",
+        "invalidSettingsFormat": "Format de paramètres cloud invalide",
+        "clearLocal": "Effacer les paramètres locaux",
+        "clearCloud": "Supprimer",
+        "clearLocalSuccess": "Paramètres locaux effacés",
+        "clearLocalFailed": "Échec de l'effacement des paramètres locaux",
+        "clearCloudSuccess": "Données cloud de l'emplacement {slot} effacées !",
+        "clearCloudFailed": "Échec de l'effacement des paramètres cloud",
+        "clearLocalConfirmTitle": "Confirmer l'effacement des paramètres locaux",
+        "clearLocalConfirmMessage": "Cela supprimera définitivement tous les paramètres locaux de votre appareil. Êtes-vous sûr de vouloir continuer ?",
+        "clearCloudConfirmTitle": "Confirmer l'effacement des paramètres cloud",
+        "clearCloudConfirmMessage": "Êtes-vous sûr de vouloir effacer les paramètres cloud de l'emplacement {slot} ? Cette action ne peut pas être annulée !",
+        "overwriteConfirmTitle": "Confirmation de remplacement",
+        "overwriteConfirmMessage": "L'emplacement {slot} contient déjà des données de synchronisation. Êtes-vous sûr de vouloir les remplacer ?",
+        "turnstileError": "Veuillez compléter la vérification",
+        "fillAllFields": "Veuillez remplir tous les champs",
+        "logoutAllConfirmTitle": "Confirmer la déconnexion de tous les appareils",
+        "logoutAllConfirmMessage": "Êtes-vous sûr de vouloir vous déconnecter de tous les appareils ? Cette action ne peut pas être annulée.",
+        "registerTitle": "Créer un nouveau compte",
+        "register": "S'inscrire",
+        "email": "Email",
+        "confirmPassword": "Confirmer le mot de passe",
+        "passwordMismatch": "Les mots de passe ne correspondent pas",
+        "registerSuccess": "Inscription réussie ! Veuillez vérifier votre email pour activer votre compte.",
+        "registerFailed": "Échec de l'inscription",
+        "backToLogin": "Retour à la connexion",
+        "accountBanned": "Votre compte a été suspendu",
+        "accountNotActivated": "Votre compte n'est pas encore activé. Veuillez vérifier votre email.",
+        "resendVerification": "Renvoyer l'email de vérification",
+        "verificationResent": "Email de vérification renvoyé",
+        "verificationSendFailed": "Échec de l'envoi de l'email de vérification",
+        "invalidEmail": "Veuillez saisir une adresse email valide",
+        "emailVerifiedSuccess": "Email vérifié avec succès",
+        "emailVerifiedFailed": "Échec de la vérification de l'email",
+        "resendFailed": "Échec du renvoi de l'email de vérification",
+        "accountStatus": {
+          "active": "Actif",
+          "inactive": "Inactif",
+          "banned": "Suspendu"
+        },
+        "loginWithQQ": "Se connecter avec QQ",
+        "loginWithMicrosoft": "Se connecter avec Microsoft",
+        "qqLoginFailed": "Échec de l'obtention de l'URL de connexion QQ",
+        "qqLoginError": "Erreur lors de la connexion QQ",
+        "qqCallbackError": "Échec du traitement du callback QQ",
+        "thirdPartyLoggingIn": "Connexion via tiers en cours...",
+        "microsoftLoginFailed": "Échec de la connexion Microsoft",
+        "microsoftLoginError": "Erreur de connexion Microsoft",
+        "microsoftCallbackError": "Erreur de callback Microsoft",
+        "showLoginForm": "Afficher le formulaire de connexion",
+        "hideLoginForm": "Masquer le formulaire de connexion",
+        "qrLogin": "Connexion par QR code",
+        "passwordLogin": "Connexion par mot de passe",
+        "scanQRCode": "Scannez ce QR code avec votre appareil",
+        "qrExpiresIn": "Expire dans {minutes} secondes",
+        "refreshQRCode": "Actualiser le QR code",
+        "generatingQRCode": "Génération du QR code...",
+        "qrCodeGenerated": "QR code généré avec succès",
+        "qrCodeGenerateFailed": "Échec de la génération du QR code",
+        "qrCodeScanned": "QR code scanné, veuillez confirmer sur votre appareil",
+        "qrCodeConfirmed": "Connexion confirmée, connexion en cours...",
+        "qrCodeExpired": "QR code expiré, veuillez actualiser",
+        "qrSessionNotFound": "Session QR code introuvable",
+        "qrScannerNotSupported": "Scanner QR code non supporté sur cet appareil",
+        "qrScannerError": "Erreur du scanner QR code",
+        "qrCodeScannedSuccess": "QR code scanné avec succès",
+        "qrCodeScanFailed": "Échec du scan du QR code",
+        "qrConfirmFailed": "Échec de la confirmation de connexion",
+        "startScan": "Scanner le QR code",
+        "stopScan": "Arrêter le scan",
+        "qrScanError": "Erreur de scan du QR code",
+        "invalidQRCode": "QR code invalide",
+        "qrConfirmSuccess": "Confirmation de connexion réussie",
+        "qrLoginConfirmTitle": "Confirmation de connexion par QR code",
+        "qrLoginConfirmMessage": "Une demande de connexion depuis l'appareil suivant a été détectée. Confirmer la connexion ?",
+        "cloudSync": "Synchronisation des données cloud",
+        "slotNumber": "Emplacement {slot}",
+        "lastUpdated": "Dernière mise à jour",
+        "neverUpdated": "Jamais mis à jour",
+        "changePassword": "Changer le mot de passe",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "confirmNewPassword": "Confirmer le nouveau mot de passe",
+        "passwordChangedSuccess": "Mot de passe changé avec succès",
+        "changePasswordFailed": "Échec du changement de mot de passe",
+        "resetPassword": "Réinitialiser le mot de passe",
+        "requestReset": "Demander une réinitialisation",
+        "sendResetLink": "Envoyer le lien de réinitialisation",
+        "resetEmailSent": "Email de réinitialisation envoyé",
+        "resetRequestFailed": "Échec de la demande de réinitialisation",
+        "resetToken": "Jeton de réinitialisation",
+        "tokenValidFor": "Jeton valide pour l'utilisateur : {username}",
+        "invalidResetToken": "Jeton de réinitialisation invalide",
+        "resetPasswordFailed": "Échec de la réinitialisation du mot de passe",
+        "passwordResetSuccess": "Réinitialisation du mot de passe réussie",
+        "emailRequired": "L'adresse email est requise",
+        "currentPasswordRequired": "Veuillez saisir le mot de passe actuel",
+        "newPasswordRequired": "Veuillez saisir le nouveau mot de passe",
+        "confirmPasswordRequired": "Veuillez confirmer le nouveau mot de passe",
+        "passwordTooShort": "Le mot de passe est trop court",
+        "passwordNoUpper": "Le mot de passe doit contenir au moins une lettre majuscule",
+        "passwordNoLower": "Le mot de passe doit contenir au moins une lettre minuscule",
+        "passwordNoNumber": "Le mot de passe doit contenir au moins un chiffre",
+        "passwordStrong": "Mot de passe fort"
+      },
+      "gameOrder": {
+        "title": "Paramètres de l'ordre des jeux",
+        "restoreDefault": "Restaurer l'ordre par défaut",
+        "restored": "Ordre des jeux restauré par défaut",
+        "restoreFailed": "Échec de la restauration de l'ordre par défaut"
+      },
+      "debug": {
+        "title": "Paramètres de débogage",
+        "resetLanguageCache": "Réinitialiser le cache de langue",
+        "languageCacheCleared": "Cache de langue réinitialisé",
+        "languageCacheClearFailed": "Échec de la réinitialisation du cache de langue"
       }
     },
     "gameSelection": {
-      "info": "Sélectionnez les jeux auxquels vous jouez et configurez les activités à suivre",
-      "save": "Enregistrer",
-      "saved": "Préférences enregistrées",
-      "refreshSuccess": "Liste actualisée avec succès",
-      "refreshFailed": "Échec de l'actualisation",
+      "info": "Sélectionnez les jeux auxquels vous jouez et configurez les événements à suivre",
+      "save": "Sauvegarder les préférences",
+      "saved": "Vos préférences de jeu ont été sauvegardées",
+      "refreshSuccess": "Liste des jeux actualisée avec succès",
+      "refreshFailed": "Échec de l'actualisation de la liste des jeux",
       "noGames": "Aucun jeu disponible",
-      "loading": "Chargement des données..."
-    },
-    "errors": {
-      "network": "Échec de la requête réseau",
-      "invalidResponse": "Réponse invalide du serveur",
-      "unknown": "Erreur inconnue",
-      "loadFailed": "Échec du chargement",
-      "saveFailed": "Échec de l'enregistrement"
+      "loading": "Chargement des données du jeu...",
+      "refresh": "Actualiser",
+      "selectGamePrompt": "Sélectionnez un jeu pour voir les événements disponibles",
+      "dragHint": "Maintenez les flèches haut/bas pour faire glisser et réorganiser les jeux",
+      "resetOrder": "Réinitialiser l'ordre",
+      "dragHintSettings": "Allez sur la page des paramètres pour modifier l'ordre"
     },
     "welcome": {
       "title": "Bienvenue sur WUICC",
-      "message": "Sélectionnez les jeux auxquels vous jouez et configurez les activités à suivre :",
-      "confirm": "Confirmer",
-      "skip": "Passer"
+      "message": "Veuillez sélectionner les jeux auxquels vous jouez et configurer les événements que vous souhaitez suivre :",
+      "confirm": "Confirmer les sélections",
+      "skip": "Passer pour l'instant"
     },
-    "gameActivities": {
-      "challenge": "Défi",
-      "event": "Événement",
-      "gacha": "Gacha",
-      "version": "Mise à jour",
-      "maintenance": "Maintenance"
+    "tabLock": {
+      "title": "Application déjà ouverte",
+      "message": "Cette application est déjà ouverte dans une autre fenêtre.",
+      "lostLockTitle": "Conflit de session",
+      "lostLockMessage": "Vous ne pouvez pas ouvrir l'application dans plusieurs fenêtres simultanément.",
+      "warning": "Avertissement : Continuer dans cette fenêtre peut causer des conflits de données.",
+      "continue": "Forcer l'ouverture dans cette fenêtre",
+      "forceAcquire": "Forcer l'ouverture dans cette fenêtre"
     },
-    "default": "Par défaut",
     "timeFormat": {
-      "24hour": "24 heures",
-      "12hour": "12 heures"
+      "24hour": "Format 24 heures",
+      "12hour": "Format 12 heures"
     },
-    "version_with_number": "Version {version}",
+    "version_with_number": "Version {version}"
+  },
+  "$vuetify": {
+    "open": "Ouvrir",
     "close": "Fermer",
-    "go_to": "Aller à {target}"
+    "dataIterator": {
+      "loadingText": "Chargement..."
+    },
+    "pagination": {
+      "ariaLabel": {
+        "root": "Navigation de pagination"
+      }
+    },
+    "carousel": {
+      "prev": "Précédent",
+      "next": "Suivant"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "Éléments par page :",
+      "itemsPerPageAll": "Tous",
+      "nextPage": "Page suivante",
+      "prevPage": "Page précédente",
+      "firstPage": "Première page",
+      "lastPage": "Dernière page",
+      "pageText": "{0} - {1} sur {2}"
+    }
   }
 }

@@ -1,25 +1,34 @@
 {
-  "name": "vuetify-sidebar-app",
+  "name": "wuicc-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "start": "vite build && vite preview --port 14173",
+    "preview": "vite preview --port 14173"
   },
   "dependencies": {
-    "@mdi/font": "^7.4.47",
     "axios": "^1.9.0",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
+    "jsqr": "^1.4.0",
+    "pinia": "^3.0.3",
+    "qrcode.vue": "^3.6.0",
     "vue": "^3.5.13",
+    "vue-draggable-plus": "^0.6.0",
     "vue-i18n": "^11.1.4",
     "vue-router": "^4.5.1",
-    "vuetify": "^3.8.6"
+    "vue-turnstile": "^1.0.11",
+    "vuetify": "^3.8.6",
+    "broadcast-channel": "7.1.0",
+    "vue-virtual-scroller": "^2.0.0-beta.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
     "sass": "^1.89.0",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-html": "^3.2.2"
   }
 }

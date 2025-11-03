@@ -3,38 +3,34 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>时间线收集器 - Web UI Chrono Collector - WUICC.net</title>
+  <title><%- title %></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="theme-color" content="#3f51b5">
-  <meta name="description" content="WUICC.net - 高效管理您的时间线数据，跨平台同步，多语言支持">
-  <meta name="keywords" content="时间线,收集器,管理工具,Web应用,wuicc,wuicc.net">
+  <meta name="theme-color" content="#FFC0CB">
+  <meta name="description" content="<%- description %>">
+  <meta name="keywords" content="<%- keywords %>">
   <meta name="author" content="Shoyu">
-  <link rel="canonical" href="https://wuicc.net">
+  <link rel="canonical" href="<%- canonicalUrl %>">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-title" content="Web UI Chrono Collector">
-  <!-- <link rel="touch-icon" href="/icons/touch-180x180.png"> -->
+  <meta name="mobile-web-app-title" content="<%- ogTitle %>">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Web UI Chrono Collector">
-  <meta property="og:description" content="高效管理您的时间线数据，跨平台同步，多语言支持">
-  <meta property="og:url" content="https://wuicc.net">
-  <meta property="og:image" content="https://wuicc.net/logo-blue.svg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:title" content="<%- ogTitle %>">
+  <meta property="og:description" content="<%- description %>">
+  <meta property="og:url" content="<%- canonicalUrl %>">
+  <meta property="og:image" content="<%- ogImage %>">
+  <meta property="og:image:width" content="256">
+  <meta property="og:image:height" content="256">
   <link rel="alternate icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="preload" href="/src/main.js" as="script">
-  <link rel="preload" href="/src/assets/main.css" as="style">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://st.kokomi.cn/*; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*; font-src 'self' https://fonts.gstatic.com;"> -->
   <meta name="format-detection" content="telephone=no">
-  <script defer src="https://st.kokomi.cn/script.js" data-website-id="464e5a5f-5337-4dfc-9f60-1755ada4982b"></script>
+  <link href="https://unpkg.com/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
+  <% if (analyticsUrl&&analyticsId) { %>
+    <script defer src="<%- analyticsUrl %>" data-website-id="<%- analyticsId %>"></script>
+    <% } %>
 </head>
 
 <body>

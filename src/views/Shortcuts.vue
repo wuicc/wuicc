@@ -1,10 +1,24 @@
 <template>
   <v-container class="pa-4">
     <v-row>
-      <v-col cols="12" md="6" v-for="(game, index) in games" :key="index">
-        <v-card class="h-100" :color="game.color" dark>
+      <v-col
+        cols="12"
+        md="6"
+        v-for="(game, index) in filteredGames"
+        :key="index"
+      >
+        <v-card class="h-100 text-white" :style="getCardStyle(game.color)" dark>
           <v-card-title class="text-h5">
             {{ $t(`app.games.${game.id}.title`) }}
+            <v-btn
+              variant="text"
+              @click="openGameLaunchDialog(game.id)"
+              prepend-icon="mdi-television-play"
+            >
+              <span class="ml-1">{{
+                $t("app.pages.timeline.launch_game")
+              }}</span>
+            </v-btn>
           </v-card-title>
 
           <v-card-text>
@@ -43,10 +57,24 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <!-- 游戏启动弹窗组件 -->
+    <GameLaunchDialog v-model="gameLaunchDialog" :game-id="currentGameId" />
   </v-container>
 </template>
-  
-  <script setup>
+
+<script setup>
+import { ref, computed } from "vue";
+import { useI18n } from "vue-i18n";
+import GameLaunchDialog from "@/components/GameLaunchDialog.vue";
+import StorageManager from "@/utils/StorageManager";
+
+const { t } = useI18n();
+
+// 游戏启动相关状态
+const gameLaunchDialog = ref(false);
+const currentGameId = ref("");
+
 const games = [
   {
     id: "genshin",
@@ -80,13 +108,38 @@ const games = [
     color: "#18a0e8",
     official: [
       { id: "kurogame_cn_wuthering", url: "https://mc.kurogame.com" },
-      { id: "kurogame_os_wuthering", url: "https://wutheringwaves.kurogame.com" },
+      {
+        id: "kurogame_os_wuthering",
+        url: "https://wutheringwaves.kurogame.com",
+      },
     ],
     links: [{ name: "WuWa Tracker", url: "https://wuwatracker.com/" }],
   },
 ];
+
+const filteredGames = computed(() => {
+  const userId = StorageManager.get("user_id");
+  if (userId == 1) {
+    return games;
+  }
+  return games; // games.filter((game) => game.id !== "wuthering");
+});
+
+function openGameLaunchDialog(gameId) {
+  currentGameId.value = gameId;
+  gameLaunchDialog.value = true;
+}
+
+function getCardStyle(color) {
+  return {
+    "--color": color,
+    "--color-darkened": `color-mix(in srgb, ${color} 70%, #000)`,
+    "background-color": color,
+  };
+}
 </script>
-  <style scoped>
+
+<style scoped>
 .h-100 {
   height: 100%;
 }
@@ -98,5 +151,9 @@ const games = [
 /* 官网链接使用不同图标颜色 */
 .v-list-item--active .v-icon {
   color: inherit !important;
+}
+
+.v-theme--dark .v-card {
+  background-color: var(--color-darkened) !important;
 }
 </style>

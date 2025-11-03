@@ -27,3 +27,8 @@ a-pack/
 *-lock.*
 
 -/
+secure/
+secure_data.json
+.env
+
+.VSCodeCounter/

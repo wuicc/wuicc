@@ -1,12 +1,97 @@
 {
   "app": {
-    "title": "タイムラインコレクター",
-    "documentTitle": "タイムラインコレクター - Web UI Chrono Collector",
+    "title": "WUICC",
+    "documentTitle": "WUICC",
+    "common": {
+      "cancel": "キャンセル",
+      "confirm": "確認",
+      "submit": "送信する",
+      "save": "保存",
+      "import": "インポート",
+      "loading": "ロード中...",
+      "paused": "（一時停止中）",
+      "copy": "コピー",
+      "copied": "コピー済み",
+      "close": "閉じる",
+      "go_to": "{target}へ",
+      "default": "デフォルト",
+      "retry": "再試行"
+    },
+    "error": {
+      "network": "ネットワークリクエストが失敗しました",
+      "invalidResponse": "無効なサーバー応答",
+      "unknown": "予期せぬエラーが発生しました",
+      "loadFailed": "ゲームデータの読み込みに失敗しました",
+      "saveFailed": "設定の保存に失敗しました",
+      "codes": {
+        "unknown": "不明なエラーが発生しました",
+        "100001": "必須パラメータが不足しています",
+        "100002": "パラメータ形式が不正です",
+        "100003": "サポートされていない言語です",
+        "100004": "リクエストされたリソースは存在しません",
+        "100005": "許可されていないリクエストメソッドです",
+        "100006": "サポートされていないメディアタイプです",
+        "100007": "サーバー内部エラー",
+        "100008": "リクエスト頻度制限を超えました",
+        "200001": "認証が必要です",
+        "200002": "認証に失敗しました",
+        "200003": "無効なトークンです",
+        "200004": "無効な認証情報です",
+        "200005": "メールアドレスは既に存在します",
+        "200006": "ユーザー名は既に存在します",
+        "200007": "メール送信に失敗しました",
+        "200008": "メール確認の有効期限が切れています",
+        "200009": "アカウントは既に有効化されています",
+        "200010": "メール送信が頻繁すぎます",
+        "200011": "アカウントが有効化されていません",
+        "200012": "アカウントは停止されています",
+        "200013": "アカウントが有効化されていません",
+        "200014": "メールアドレスの形式が不正です",
+        "200015": "登録回数制限を超えました",
+        "200016": "第三者認証に失敗しました",
+        "200017": "トークンの有効期限が切れています",
+        "200018": "権限が不足しています",
+        "200019": "パスワードリセットトークンの有効期限が切れています",
+        "200020": "無効なパスワードリセットトークンです",
+        "200021": "現在のパスワードが正しくありません",
+        "200022": "パスワードの強度が不十分です",
+        "200023": "新しいパスワードは古いパスワードと同じにできません",
+        "200030": "QRコードのセッションが期限切れです",
+        "200031": "無効なQRコードの状態です",
+        "200032": "リクエスト頻度制限を超えました",
+        "300001": "ゲームデータが存在しません",
+        "300002": "チャレンジデータが存在しません",
+        "300003": "設定が存在しません",
+        "300004": "設定の解析エラー",
+        "300005": "無効なJSON形式です",
+        "300006": "リクエストデータが大きすぎます",
+        "400001": "現在お知らせはありません",
+        "400002": "現在チャレンジはありません",
+        "400003": "無効なゲームIDです",
+        "400004": "無効なイベントタイプです",
+        "500001": "リクエストされたリソースは存在しません",
+        "500002": "無効なイベントタイプです",
+        "500003": "パラメータ形式が不正です",
+        "500004": "無効なゲームIDです",
+        "600001": "ガチャ記録のインポートに失敗しました",
+        "600002": "ガチャ記録のエクスポートに失敗しました",
+        "600003": "ガチャ記録が見つかりません",
+        "600004": "無効なUIGF形式です",
+        "600005": "ガチャデータベースエラーです",
+        "600006": "ガチャデータの検証に失敗しました"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "サイドバーの切り替え",
+      "changeLanguage": "言語の変更"
+    },
     "sidebar": {
       "home": "ホーム",
       "timeline": "タイムライン",
       "notification": "通知",
-      "settings": "設定"
+      "gacha": "ガチャカウンター",
+      "settings": "設定",
+      "about": "このアプリについて"
     },
     "games": {
       "genshin": {
@@ -22,19 +107,50 @@
         "title": "鳴潮"
       }
     },
+    "gameActivities": {
+      "challenge": "期間限定チャレンジ",
+      "event": "限定イベント",
+      "gacha": "ガチャイベント",
+      "version": "バージョンアップデート",
+      "maintenance": "メンテナンス"
+    },
     "pages": {
       "home": {
         "title": "ホーム",
-        "welcome": "WUICCホームページへようこそ！"
+        "intro": "ゲームイベントのタイムライン管理ツール",
+        "go_to_login": "ログインへ",
+        "login_support": "サポート",
+        "qq_login": "QQログイン",
+        "install_app": "アプリをインストール",
+        "pwa_install_accepted": "ユーザーがPWAインストールを承諾しました",
+        "pwa_install_declined": "ユーザーがPWAインストールを拒否しました",
+        "features": {
+          "multi_game": {
+            "title": "複数ゲームのタイムライン管理",
+            "description": "複数の人気ゲームの期間限定イベント、バージョンサイクル、ガチャ情報などをリアルタイムで追跡"
+          },
+          "reminders": {
+            "title": "カスタマイズ可能なリマインダー",
+            "description": "ゲームの好みやイベントタイプに合わせたリマインダーで、重要なイベントを見逃しません"
+          },
+          "timezones": {
+            "title": "複数タイムゾーン対応",
+            "description": "世界中のサーバーイベントを一目で確認、自動的に現地時間に変換"
+          },
+          "interface": {
+            "title": "シンプルで直感的なインターフェース",
+            "description": "使いやすいデザインで、情報を簡単に取得できます"
+          }
+        }
       },
       "timeline": {
         "title": "タイムライン",
-        "noActivities": "現在の選択条件に該当するアクティビティが見つかりませんでした。ゲームとアクティビティタイプの設定をご確認ください。",
+        "noActivities": "現在の選択条件に該当するイベントが見つかりませんでした。ゲームとイベントタイプの設定をご確認ください。",
         "loading": "タイムライン読み込み中...",
         "time_remaining": {
-          "days_hours": "あと {days}日 {hours}時間",
-          "hours_minutes": "あと {hours}時間 {minutes}分",
-          "minutes": "あと {minutes}分",
+          "days_hours": "{days}日 {hours}時間",
+          "hours_minutes": "{hours}時間 {minutes}分",
+          "minutes": "{minutes}分",
           "less_than_minute": "まもなく"
         },
         "starts_in": "開始まで",
@@ -48,14 +164,37 @@
         "yesterday": "昨日",
         "daysAgo": "{count}日前",
         "daysLater": "{count}日後",
-        "noActivitiesForDay": "この日のイベントはありません"
+        "noActivitiesForDay": "この日のイベントはありません",
+        "vote": {
+          "loading": "投票データを読み込み中...",
+          "none": "なし",
+          "no_options": "選択肢がありません",
+          "submit": "投票する",
+          "success": "投票が成功しました",
+          "error": "投票に失敗しました",
+          "login_required": "投票にはログインが必要です",
+          "retry": "投票に失敗しました。もう一度お試しください",
+          "title": "イベント投票",
+          "no_tags": "投票する選択肢がありません",
+          "cancel": {
+            "failed": "投票のキャンセルに失敗しました",
+            "success": "投票をキャンセルしました"
+          },
+          "count": "{count}票"
+        },
+        "launch_game": "ゲームを起動",
+        "china_server": "中国サーバー",
+        "global_server": "グローバルサーバー",
+        "launch_pc": "PCクライアント",
+        "launch_mobile": "モバイルクライアント",
+        "launch_cloud_mobile": "クラウドゲーム(モバイル)",
+        "launch_cloud_web": "クラウドゲーム(ウェブ)",
+        "defaultSort": "デフォルト順",
+        "endTimeDesc": "終了時間順（昇順）"
       },
       "notification": {
         "title": "通知",
-        "content": "これは通知内容です。"
-      },
-      "settings": {
-        "title": "設定"
+        "content": "通知購読機能は近日公開予定..."
       },
       "shortcuts": {
         "title": "ゲームショートカット",
@@ -70,45 +209,148 @@
           "kurogame_os_wuthering": "公式サイト (グローバル)"
         }
       },
-      "notFound": {
-        "title": "ページが見つかりません",
-        "message": "お探しのページは存在しないか、削除されています",
-        "backHome": "ホームに戻る"
+      "gacha": {
+        "title": "ガチャカウンター",
+        "overview": {
+          "title": "ガチャ概要",
+          "fiveStarCount": "5★ 数",
+          "fourStarCount": "4★ 数",
+          "sRankCount": "Sランク数",
+          "aRankCount": "Aランク数",
+          "totalPulls": "合計抽選数",
+          "selectGame": "ゲームを選択",
+          "noUidSelected": "ゲームアカウントが選択されていません",
+          "selectUid": "アカウントを選択",
+          "changeUid": "アカウントを変更",
+          "pulls": "回",
+          "noRecordsHint": "ガチャ記録がありません。まずデータをダウンロードしてください",
+          "gachaTypeStats": "バナー統計",
+          "chartTitle": "ガチャ統計チャート",
+          "chartComingSoon": "統計チャート機能は近日公開予定です"
+        },
+        "records": {
+          "title": "ガチャ履歴",
+          "time": "時間",
+          "name": "名前",
+          "rarity": "★",
+          "type": "タイプ",
+          "character": "キャラクター",
+          "weapon": "武器",
+          "noData": "ガチャ履歴はありません",
+          "selectGachaType": "バナーを選択",
+          "pullCount": "抽選回数",
+          "lastCount": "天井",
+          "rank": " ランク",
+          "noUidSelected": "UIDが選択されていません"
+        },
+        "settings": {
+      "title": "ガチャ設定",
+      "accountInfo": "アカウント情報",
+      "notLoggedIn": "ログインしていません",
+      "goToLogin": "ログインに移動",
+      "authorizedAccounts": "認証済みゲームアカウント",
+      "game": "ゲーム",
+      "uid": "UID",
+      "nickname": "ニックネーム",
+      "lastUsed": "最終使用日",
+      "actions": "操作",
+      "downloadRecords": "記録をダウンロード",
+      "revoke": "権限を取り消す",
+      "confirmRevoke": "このUIDの認証を取り消してもよろしいですか？",
+      "downloading": "ダウンロード中...",
+      "downloadSuccess": "{type}から{count}件の記録を正常にインポートしました",
+      "downloadFailed": "記録のダウンロードに失敗しました",
+      "updateSuccess": "ニックネームが正常に更新されました",
+      "updateFailed": "ニックネームの更新に失敗しました",
+      "revokeSuccess": "UID認証が取り消されました",
+      "revokeFailed": "認証の取り消しに失敗しました",
+      "edit": "編集",
+      "editNickname": "名前を編集",
+      "confirmRevokeTitle": "認証の取り消しを確認",
+      "confirmRevokeMessage": "このアカウントの認証を取り消してもよろしいですか？取り消し後はこのアカウントのガチャ記録を取得できなくなります。",
+      "selectGachaTypeToDownload": "ダウンロードするバナーを選択",
+      "recordsDownloaded": "ダウンロード済み",
+      "importOfficialLink": "公式リンクをインポート",
+      "selectGame": "ゲームを選択",
+      "officialLink": "公式ガチャ記録リンク",
+      "linkPlaceholder": "ゲーム内で取得したガチャ記録リンクを入力してください",
+      "importPending": "インポートタスクが作成されました。処理待ち中...",
+      "importProcessing": "ガチャ記録をインポート中です。しばらくお待ちください...",
+      "importCompleted": "ガチャ記録のインポートが完了しました！",
+      "importFailed": "ガチャ記録のインポートに失敗しました",
+      "selectPlatform": "プラットフォームを選択",
+      "windowsInstructions": "以下のスクリプトをコピーし、PowerShellで実行してプロンプトに従ってください:",
+      "androidInstructions": "Androidプラットフォームのインポート方法は開発中です。リンクを取得するには他の方法を参照してください。",
+      "iosInstructions": "iOSプラットフォームのインポート方法は開発中です。リンクを取得するには他の方法を参照してください。",
+      "pasteLink": "取得したリンクを貼り付け",
+      "invalidUrl": "有効なURLを入力してください",
+      "unsupportedDomain": "HoYoverse/Kuro Gameの公式ドメインのみサポートされています",
+      "deleteRecords": "レコードを削除",
+      "deleteRecordsTitle": "レコードを削除",
+      "deleteRecordsMessage": "レコードの削除先を選択してください：",
+      "deleteLocal": "ローカルを削除",
+      "deleteCloud": "クラウドを削除",
+      "confirmDeleteTitle": "削除確認",
+      "confirmDeleteLocal": "このUIDのすべてのローカルレコードを削除しますか？この操作は元に戻せません。",
+      "confirmDeleteCloud": "このUIDのすべてのクラウドレコードを削除しますか？この操作は元に戻せません。"
+        },
+        "types": {
+          "genshin": {
+            "301": "キャラクターイベント祈願",
+            "302": "武器イベント祈願",
+            "500": "集録祈願",
+            "200": "通常祈願",
+            "100": "初心者の祈願"
+          },
+          "starrail": {
+            "11": "キャラクターイベント跳躍",
+            "12": "光円錐イベント跳躍",
+            "21": "キャラクターコラボ跳躍",
+            "22": "光円錐コラボ跳躍",
+            "1": "通常跳躍",
+            "2": "出発跳躍"
+          },
+          "zenless": {
+            "2": "エージェントチャンネル",
+            "3": "音動機チャンネル",
+            "1": "通常チャンネル",
+            "5": "ボンプチャンネル"
+          },
+          "wuthering": {
+            "1": "キャラクターイベント集音",
+            "2": "武器イベント集音",
+            "3": "キャラクター通常集音",
+            "4": "武器通常集音",
+            "5": "初心者集音",
+            "6": "初心者選択集音",
+            "7": "初心者選択集音 (感謝)",
+            "8": "キャラクター新しい旅集音",
+            "9": "武器新しい旅集音"
+          }
+        },
+        "itemTypes": {
+          "character": "キャラクター",
+          "weapon": "武器",
+          "lightCone": "光円錐",
+          "agents": "エージェント",
+          "wEngines": "音動機",
+          "resonator": "共鳴者",
+          "Bangboo": "ボンプ"
+        }
       },
       "about": {
         "title": "について",
         "projectInfo": "プロジェクト情報",
-        "description": "Web UI Chrono Collector (WUICC)は、複数のプラットフォームにわたるゲーム活動とイベントを管理するタイムライン機能です。プロジェクトは2025年5月28日に開始しました。",
+        "description": "WUICC (WUICC, ウイック)は、複数のゲームにわたるガチャ分析とイベントのタイムライン管理ツールです。プロジェクトは2025年5月24日に開始しました。",
         "team": "開発チーム",
         "teamDescription": "私たちのチームはゲーマーのための便利なツールを作成することに専念しています。",
-        "disclaimer": "<h4>免責事項</h4><p>本ウェブサイトはゲーム愛好者によって自主的に作成された非営利プロジェクトであり、HoYoverse、Kuro Gameなどの企業とは一切の提携、認可、協力関係はありません。本サイトで使用されているゲーム素材、オーディオビジュアルコンテンツ、テキスト資料及び関連する登録商標などの知的財産権は、すべて各著作権者に帰属します。</p><p><strong>特別な声明</strong></p><ul><li>本プラットフォームのすべてのコンテンツは交流と学習のみを目的としており、商用利用を禁止します</li><li>サイト運営はゲームメーカーからの正式な認可を受けておりません</li><li>引用素材の著作権および商標権はすべて原権利者に帰属します</li></ul>"
+        "disclaimer": "<h4>本サイトについて</h4><p>本ウェブサイトはゲーム愛好者によって自主的に作成された非営利プロジェクトであり、HoYoverse、Kuro Game などの企業とは一切の提携、認可、協力関係はありません。</p><p><strong>特別な声明</strong></p><ul><li>本プラットフォームのすべてのコンテンツは交流と学習のみを目的としており、商用利用を禁止します。</li><li>本サイトのすべてのデータ、テキスト、画像はコミュニティまたはウィキから引用されています。本サイトは対応するコンテンツを整理・まとめたものです。</li><li>引用素材の著作権および商標権はすべて原権利者に帰属します。</li></ul>"
+      },
+      "notFound": {
+        "title": "ページが見つかりません",
+        "message": "お探しのページは存在しないか、削除されています",
+        "backHome": "ホームに戻る"
       }
-    },
-    "buttons": {
-      "toggleSidebar": "サイドバーの切り替え",
-      "changeLanguage": "言語の変更"
-    },
-    "gameSelection": {
-      "info": "プレイしているゲームと追跡したいアクティビティを選択してください",
-      "save": "設定を保存",
-      "saved": "ゲーム設定が保存されました",
-      "refreshSuccess": "ゲームリストの更新に成功しました",
-      "refreshFailed": "ゲームリストの更新に失敗しました",
-      "noGames": "利用可能なゲームがありません",
-      "loading": "ゲームデータ読み込み中..."
-    },
-    "errors": {
-      "network": "ネットワークリクエストが失敗しました",
-      "invalidResponse": "無効なサーバー応答",
-      "unknown": "予期せぬエラーが発生しました",
-      "loadFailed": "ゲームデータの読み込みに失敗しました",
-      "saveFailed": "設定の保存に失敗しました"
-    },
-    "welcome": {
-      "title": "WUICCへようこそ",
-      "message": "プレイしているゲームと追跡したいアクティビティを選択してください：",
-      "confirm": "選択を確認",
-      "skip": "スキップ"
     },
     "settings": {
       "title": "設定",
@@ -125,7 +367,8 @@
         "selectLabel": "テーマを選択",
         "light": "ライトテーマ",
         "dark": "ダークテーマ",
-        "system": "システム設定に合わせる"
+        "system": "システム設定に合わせる",
+        "showBackgroundImage": "背景画像を表示"
       },
       "language": {
         "title": "言語設定",
@@ -145,26 +388,207 @@
         "serverLabel": "ゲームサーバーのタイムゾーン",
         "useLocalLabel": "表示にローカルタイムゾーンを使用する",
         "options": {
-          "asia": "アジア、東南アジア、台湾/香港/マカオ (UTC+8)",
+          "asia": "アジア, 東南アジア, TW/HK/MO (UTC+8)",
           "america": "アメリカ (UTC-5)",
           "europe": "ヨーロッパ (UTC+1)"
         }
+      },
+      "account": {
+        "title": "アカウント & データ",
+        "login": "ログイン",
+        "logout": "ログアウト",
+        "logoutAll": "全てのデバイスからログアウト",
+        "username": "ユーザー名",
+        "password": "パスワード",
+        "loginSuccess": "ログイン成功",
+        "loginFailed": "ログイン失敗、ユーザー名とパスワードを確認してください",
+        "logoutSuccess": "ログアウト成功",
+        "logoutFailed": "ログアウト失敗",
+        "logoutAllSuccess": "全ての端末からログアウトしました",
+        "logoutAllFailed": "全ての端末からのログアウトに失敗しました",
+        "networkError": "ネットワークエラー、後ほど再試行してください",
+        "uploadSettings": "アップロード",
+        "downloadSettings": "ダウンロード",
+        "uploadSuccess": "設定をスロット {slot} にアップロードしました!",
+        "uploadFailed": "アップロードに失敗しました",
+        "downloadSuccess": "スロット {slot} から設定をダウンロードしました!",
+        "downloadFailed": "ダウンロードに失敗しました",
+        "noLocalSettings": "ローカル設定が見つかりません",
+        "invalidSettingsFormat": "クラウド設定の形式が無効です",
+        "clearLocal": "ローカル設定をクリア",
+        "clearCloud": "設定をクリア",
+        "clearLocalSuccess": "ローカル設定をクリアしました",
+        "clearLocalFailed": "ローカル設定のクリアに失敗しました",
+        "clearCloudSuccess": "スロット {slot} のクラウドデータをクリアしました!",
+        "clearCloudFailed": "クラウド設定のクリアに失敗しました",
+        "clearLocalConfirmTitle": "ローカル設定のクリアを確認",
+        "clearLocalConfirmMessage": "これによりデバイス上の全てのローカル設定が永久に削除されます。続行しますか？",
+        "clearCloudConfirmTitle": "クラウド設定のクリアを確認",
+        "clearCloudConfirmMessage": "スロット {slot} のクラウド設定をクリアしますか？この操作は元に戻せません！",
+        "overwriteConfirmTitle": "上書き確認",
+        "overwriteConfirmMessage": "スロット {slot} には既に同期データがあります。上書きしてもよろしいですか？",
+        "turnstileError": "認証チェックを完了してください",
+        "fillAllFields": "全てのフィールドに入力してください",
+        "logoutAllConfirmTitle": "全デバイスからのログアウトを確認",
+        "logoutAllConfirmMessage": "全てのデバイスからログアウトしますか？この操作は取り消せません。",
+        "registerTitle": "新規アカウント登録",
+        "register": "登録",
+        "email": "メールアドレス",
+        "confirmPassword": "パスワード確認",
+        "passwordMismatch": "パスワードが一致しません",
+        "registerSuccess": "登録が成功しました！アカウントを有効化するためメールを確認してください",
+        "registerFailed": "登録に失敗しました",
+        "backToLogin": "ログインに戻る",
+        "accountBanned": "アカウントが停止されました",
+        "accountNotActivated": "アカウントが有効化されていません。メールを確認してください",
+        "resendVerification": "確認メールを再送信",
+        "verificationResent": "確認メールを再送信しました",
+        "verificationSendFailed": "確認メールの送信に失敗しました",
+        "invalidEmail": "有効なメールアドレスを入力してください",
+        "emailVerifiedSuccess": "メール認証に成功しました",
+        "emailVerifiedFailed": "メール認証に失敗しました",
+        "resendFailed": "確認メールの再送信に失敗しました",
+        "accountStatus": {
+          "active": "有効",
+          "inactive": "無効",
+          "banned": "停止中"
+        },
+        "loginWithQQ": "QQでログイン",
+        "loginWithMicrosoft": "Microsoftアカウントでログイン",
+        "qqLoginFailed": "QQログインURLの取得に失敗しました",
+        "qqLoginError": "QQログイン中にエラーが発生しました",
+        "qqCallbackError": "QQコールバックの処理に失敗しました",
+        "thirdPartyLoggingIn": "サードパーティーでログイン中...",
+        "microsoftLoginFailed": "Microsoftログインに失敗しました",
+        "microsoftLoginError": "Microsoftログインエラー",
+        "microsoftCallbackError": "Microsoftコールバックエラー",
+        "showLoginForm": "ログインフォームを表示",
+        "hideLoginForm": "ログインフォームを非表示",
+        "qrLogin": "QRコードログイン",
+        "passwordLogin": "パスワードログイン",
+        "scanQRCode": "デバイスでこのQRコードをスキャンしてください",
+        "qrExpiresIn": "{minutes}秒後に期限切れ",
+        "refreshQRCode": "QRコードを更新",
+        "generatingQRCode": "QRコードを生成中...",
+        "qrCodeGenerated": "QRコードの生成に成功しました",
+        "qrCodeGenerateFailed": "QRコードの生成に失敗しました",
+        "qrCodeScanned": "QRコードがスキャンされました。デバイスで確認してください",
+        "qrCodeConfirmed": "ログインが確認されました。サインイン中...",
+        "qrCodeExpired": "QRコードの有効期限が切れました。更新してください",
+        "qrSessionNotFound": "QRセッションが見つかりません",
+        "qrScannerNotSupported": "このデバイスはQRコードスキャンをサポートしていません",
+        "qrScannerError": "QRコードスキャンエラー",
+        "qrCodeScannedSuccess": "QRコードのスキャンに成功しました",
+        "qrCodeScanFailed": "QRコードのスキャンに失敗しました",
+        "qrConfirmFailed": "ログイン確認に失敗しました",
+        "startScan": "QRコードをスキャン",
+        "stopScan": "スキャンを停止",
+        "qrScanError": "QRコードスキャンエラー",
+        "invalidQRCode": "無効なQRコード",
+        "qrConfirmSuccess": "ログイン確認に成功しました",
+        "qrLoginConfirmTitle": "QRコードスキャンでログイン確認",
+        "qrLoginConfirmMessage": "以下のデバイスからのログインリクエストを検出しました。ログインを確認しますか？",
+        "cloudSync": "クラウド設定同期",
+        "slotNumber": "スロット {slot}",
+        "lastUpdated": "最終更新日時",
+        "neverUpdated": "未更新",
+        "changePassword": "パスワードを変更",
+        "currentPassword": "現在のパスワード",
+        "newPassword": "新しいパスワード",
+        "confirmNewPassword": "新しいパスワードを確認",
+        "passwordChangedSuccess": "パスワードが正常に変更されました",
+        "changePasswordFailed": "パスワードの変更に失敗しました",
+        "resetPassword": "パスワードをリセット",
+        "requestReset": "リセットをリクエスト",
+        "sendResetLink": "リセットリンクを送信",
+        "resetEmailSent": "リセットメールが送信されました",
+        "resetRequestFailed": "リセットリクエストに失敗しました",
+        "resetToken": "リセットトークン",
+        "tokenValidFor": "ユーザーのトークンが有効: {username}",
+        "invalidResetToken": "無効なリセットトークン",
+        "resetPasswordFailed": "パスワードのリセットに失敗しました",
+        "passwordResetSuccess": "パスワードのリセットに成功しました",
+        "emailRequired": "メールアドレスが必要です",
+        "currentPasswordRequired": "現在のパスワードを入力してください",
+        "newPasswordRequired": "新しいパスワードを入力してください",
+        "confirmPasswordRequired": "新しいパスワードを確認してください",
+        "passwordTooShort": "パスワードが短すぎます",
+        "passwordNoUpper": "パスワードには少なくとも1つの大文字が含まれている必要があります",
+        "passwordNoLower": "パスワードには少なくとも1つの小文字が含まれている必要があります",
+        "passwordNoNumber": "パスワードには少なくとも1つの数字が含まれている必要があります",
+        "passwordStrong": "強いパスワード"
+      },
+      "gameOrder": {
+        "title": "ゲーム順序設定",
+        "restoreDefault": "デフォルト順序に戻す",
+        "restored": "ゲーム順序をデフォルトに戻しました",
+        "restoreFailed": "デフォルト順序の復元に失敗しました"
+      },
+      "debug": {
+        "title": "デバッグ設定",
+        "resetLanguageCache": "言語キャッシュをリセット",
+        "languageCacheCleared": "言語キャッシュがリセットされました",
+        "languageCacheClearFailed": "言語キャッシュのリセットに失敗しました"
       }
     },
-    "gameActivities": {
-      "challenge": "期間限定チャレンジ",
-      "event": "限定イベント",
-      "gacha": "ガチャイベント",
-      "version": "バージョンアップデート",
-      "maintenance": "メンテナンス"
+    "gameSelection": {
+      "info": "プレイしているゲームと追跡したいイベントを選択してください",
+      "save": "設定を保存",
+      "saved": "ゲーム設定が保存されました",
+      "refreshSuccess": "ゲームリストの更新に成功しました",
+      "refreshFailed": "ゲームリストの更新に失敗しました",
+      "noGames": "利用可能なゲームがありません",
+      "loading": "ゲームデータ読み込み中...",
+      "refresh": "更新",
+      "selectGamePrompt": "ゲームを選択して利用可能なイベントを表示",
+      "dragHint": "上下矢印を押したままドラッグしてゲーム順番を変更",
+      "resetOrder": "順序をリセット",
+      "dragHintSettings": "設定ページで順序を変更する"
     },
-    "default": "デフォルト",
+    "welcome": {
+      "title": "WUICCへようこそ",
+      "message": "プレイしているゲームと追跡したいイベントを選択してください：",
+      "confirm": "選択を確認",
+      "skip": "スキップ"
+    },
+    "tabLock": {
+      "title": "アプリケーションは既に開いています",
+      "message": "このアプリケーションは別のウィンドウで既に開いています。",
+      "lostLockTitle": "セッションの競合",
+      "lostLockMessage": "複数のウィンドウでアプリケーションを同時に開くことはできません。",
+      "warning": "警告: このウィンドウで続行すると、データの競合が発生する可能性があります。",
+      "continue": "このウィンドウで強制的に開く",
+      "forceAcquire": "このウィンドウで強制的に開く"
+    },
     "timeFormat": {
       "24hour": "24時間表記",
       "12hour": "12時間表記"
     },
-    "version_with_number": "Ver{version}",
+    "version_with_number": "Ver{version}"
+  },
+  "$vuetify": {
+    "open": "開く",
     "close": "閉じる",
-    "go_to": "{target}へ"
+    "dataIterator": {
+      "loadingText": "読み込み中..."
+    },
+    "pagination": {
+      "ariaLabel": {
+        "root": "ページネーションナビゲーション"
+      }
+    },
+    "carousel": {
+      "prev": "前へ",
+      "next": "次へ"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "1ページあたりのアイテム数:",
+      "itemsPerPageAll": "すべて",
+      "nextPage": "次のページ",
+      "prevPage": "前のページ",
+      "firstPage": "最初のページ",
+      "lastPage": "最後のページ",
+      "pageText": "{0} - {1} / 合計 {2}"
+    }
   }
 }

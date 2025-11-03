@@ -1,11 +1,96 @@
 {
   "app": {
-    "title": "时间线收集器",
-    "documentTitle": "时间线收集器 - Web UI Chrono Collector",
+    "title": "雾忆刻",
+    "documentTitle": "雾忆刻 - WUICC",
+    "common": {
+      "cancel": "取消",
+      "confirm": "确认",
+      "submit": "提交",
+      "save": "保存",
+      "import": "导入",
+      "loading": "加载中...",
+      "paused": "(请等待)",
+      "copy": "复制",
+      "copied": "已复制",
+      "close": "关闭",
+      "go_to": "前往{target}",
+      "default": "默认",
+      "retry": "重试"
+    },
+    "error": {
+      "network": "网络请求失败",
+      "invalidResponse": "服务器响应无效",
+      "unknown": "发生未知错误",
+      "loadFailed": "加载游戏数据失败",
+      "saveFailed": "保存偏好设置失败",
+      "codes": {
+        "unknown": "发生未知错误",
+        "100001": "缺少必要参数",
+        "100002": "参数格式错误",
+        "100003": "不支持的语言",
+        "100004": "请求的资源不存在",
+        "100005": "请求方法不允许",
+        "100006": "不支持的媒体类型",
+        "100007": "服务器内部错误",
+        "100008": "请求频率超限",
+        "200001": "需要验证",
+        "200002": "验证失败",
+        "200003": "无效令牌",
+        "200004": "无效凭证",
+        "200005": "邮箱已存在",
+        "200006": "用户名已存在",
+        "200007": "邮件发送失败",
+        "200008": "邮箱验证已过期",
+        "200009": "账号已激活",
+        "200010": "邮件发送过于频繁",
+        "200011": "账号未激活",
+        "200012": "账号已被封禁",
+        "200013": "账号未激活",
+        "200014": "邮箱格式错误",
+        "200015": "注册次数超限",
+        "200016": "第三方认证失败",
+        "200017": "令牌已过期",
+        "200018": "权限不足",
+        "200019": "密码重置令牌已过期",
+        "200020": "无效的密码重置令牌",
+        "200021": "当前密码不正确",
+        "200022": "密码强度不足",
+        "200023": "新密码不能与旧密码相同",
+        "200030": "二维码会话已过期",
+        "200031": "无效的二维码状态",
+        "200032": "请求频率超限",
+        "300001": "游戏数据不存在",
+        "300002": "挑战数据不存在",
+        "300003": "配置不存在",
+        "300004": "配置解析错误",
+        "300005": "无效的JSON格式",
+        "300006": "请求数据过大",
+        "400001": "暂无公告",
+        "400002": "暂无挑战",
+        "400003": "无效的游戏ID",
+        "400004": "无效的活动类型",
+        "500001": "请求的资源不存在",
+        "500002": "无效的活动类型",
+        "500003": "参数格式错误",
+        "500004": "无效的游戏ID",
+        "600001": "抽卡记录导入失败",
+        "600002": "抽卡记录导出失败",
+        "600003": "未找到抽卡记录",
+        "600004": "无效的UIGF格式",
+        "600005": "抽卡数据库错误",
+        "600006": "抽卡数据验证失败"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "切换侧边栏",
+      "changeLanguage": "切换语言"
+    },
     "sidebar": {
       "home": "首页",
       "timeline": "时间线",
       "notification": "通知",
+      "gacha": "抽卡分析",
+      "genshinActivities": "原神活动数据",
       "settings": "设置",
       "about": "关于"
     },
@@ -23,10 +108,41 @@
         "title": "鸣潮"
       }
     },
+    "gameActivities": {
+      "challenge": "周期挑战",
+      "event": "普通活动",
+      "gacha": "祈愿活动",
+      "version": "版本更新",
+      "maintenance": "维护公告"
+    },
     "pages": {
       "home": {
         "title": "首页",
-        "welcome": "欢迎来到WUICC首页！"
+        "intro": "一站式游戏管理工具",
+        "go_to_login": "前往登录",
+        "login_support": "支持",
+        "qq_login": "QQ登录",
+        "install_app": "安装应用",
+        "pwa_install_accepted": "用户接受了PWA安装提示",
+        "pwa_install_declined": "用户拒绝了PWA安装提示",
+        "features": {
+          "multi_game": {
+            "title": "多游戏时间线管理",
+            "description": "实时追踪多款热门游戏的限时活动、版本周期和限定卡池等信息"
+          },
+          "reminders": {
+            "title": "个性化提醒",
+            "description": "自定义游戏偏好和活动类型提醒，不错过任何重要活动"
+          },
+          "timezones": {
+            "title": "多时区支持",
+            "description": "全球服务器活动一目了然，自动适配您的本地时区"
+          },
+          "interface": {
+            "title": "简洁直观",
+            "description": "精心设计的界面，让信息获取变得轻松愉快"
+          }
+        }
       },
       "timeline": {
         "title": "时间线",
@@ -34,12 +150,12 @@
         "loading": "正在加载时间线...",
         "time_remaining": {
           "days_hours": "{days}天 {hours}小时",
-          "hours_minutes": "{hours}小时 {minutes}分钟",
-          "minutes": "{minutes}分钟",
-          "less_than_minute": "不到一分钟"
+          "hours_minutes": "{hours}小时 {minutes}分",
+          "minutes": "{minutes}分",
+          "less_than_minute": "不足1分"
         },
-        "starts_in": "开始倒计时",
-        "ends_in": "结束倒计时",
+        "starts_in": "距开始",
+        "ends_in": "剩余",
         "starts_in_prefix": "即将开始 ",
         "ends_in_prefix": "",
         "event_ended": "活动已结束",
@@ -49,14 +165,37 @@
         "yesterday": "昨天",
         "daysAgo": "{count} 天前",
         "daysLater": "{count} 天后",
-        "noActivitiesForDay": "当天无活动"
+        "noActivitiesForDay": "当天无活动",
+        "vote": {
+          "loading": "加载投票数据中...",
+          "none": "暂无",
+          "no_options": "暂无选项",
+          "submit": "提交投票",
+          "success": "投票成功",
+          "error": "投票失败",
+          "login_required": "登录后参与投票",
+          "retry": "投票失败，请重试",
+          "title": "活动投票",
+          "no_tags": "暂无投票选项",
+          "cancel": {
+            "failed": "取消投票失败",
+            "success": "已取消投票"
+          },
+          "count": "{count}票"
+        },
+        "launch_game": "启动游戏",
+        "china_server": "中国服",
+        "global_server": "国际服",
+        "launch_pc": "PC客户端",
+        "launch_mobile": "手机客户端",
+        "launch_cloud_mobile": "云游戏(手机)",
+        "launch_cloud_web": "云游戏(网页)",
+        "defaultSort": "默认排序",
+        "endTimeDesc": "按结束时间排序（升序）"
       },
       "notification": {
         "title": "通知",
-        "content": "这是通知内容。"
-      },
-      "settings": {
-        "title": "设置"
+        "content": "通知订阅功能即将上线……"
       },
       "shortcuts": {
         "title": "游戏快捷链接",
@@ -71,48 +210,153 @@
           "kurogame_os_wuthering": "官网 (国际服)"
         }
       },
-      "notFound": {
-        "title": "页面未找到",
-        "message": "您访问的页面不存在或已被移除",
-        "backHome": "返回首页"
+      "gacha": {
+        "title": "抽卡分析",
+        "overview": {
+          "title": "抽卡数据总览",
+          "fiveStarCount": "五星数",
+          "fourStarCount": "四星数",
+          "sRankCount": "S级数",
+          "aRankCount": "A级数",
+          "totalPulls": "总抽数",
+          "selectGame": "选择游戏",
+          "noUidSelected": "未选择游戏账号",
+          "selectUid": "选择账号",
+          "changeUid": "更改账号",
+          "pulls": "抽",
+          "noRecordsHint": "没有抽卡记录，请先下载数据",
+          "gachaTypeStats": "卡池类型统计",
+          "chartTitle": "抽卡统计图表",
+          "chartComingSoon": "统计图表功能即将上线"
+        },
+        "records": {
+          "title": "抽卡记录详情",
+          "time": "时间",
+          "name": "名称",
+          "rarity": "星级",
+          "type": "类型",
+          "character": "角色",
+          "weapon": "武器",
+          "noData": "暂无抽卡记录",
+          "selectGachaType": "选择卡池",
+          "pullCount": "抽数",
+          "lastCount": "保底",
+          "rank": "级",
+          "noUidSelected": "未选择UID"
+        },
+        "settings": {
+          "title": "抽卡设置",
+          "accountInfo": "账户信息",
+          "notLoggedIn": "未登录",
+          "goToLogin": "前往登录",
+          "authorizedAccounts": "已授权游戏账号",
+          "game": "游戏",
+          "uid": "UID",
+          "nickname": "备注名",
+          "lastUsed": "最后使用",
+          "actions": "操作",
+          "downloadRecords": "下载记录",
+          "revoke": "撤销授权",
+          "confirmRevoke": "确定要撤销此UID的授权吗？",
+          "downloading": "下载中...",
+          "downloadSuccess": "成功导入 {count} 条{type}记录",
+          "downloadFailed": "记录下载失败",
+          "updateSuccess": "备注名更新成功",
+          "updateFailed": "备注名更新失败",
+          "revokeSuccess": "UID授权已撤销",
+          "revokeFailed": "撤销授权失败",
+          "edit": "编辑",
+          "editNickname": "编辑别名",
+          "confirmRevokeTitle": "确认撤销授权",
+          "confirmRevokeMessage": "您确定要撤销此账号的授权吗？撤销后将无法获取该账号的抽卡记录。",
+          "selectGachaTypeToDownload": "选择要下载的卡池类型",
+          "recordsDownloaded": "已下载记录",
+          "importOfficialLink": "导入官方链接",
+          "selectGame": "选择游戏",
+          "officialLink": "官方抽卡记录链接",
+          "linkPlaceholder": "请输入游戏内获取的抽卡记录链接",
+          "importPending": "导入任务已创建，正在排队处理",
+          "importProcessing": "正在导入抽卡记录，请稍候...",
+          "importCompleted": "抽卡记录导入完成！",
+          "importFailed": "抽卡记录导入失败",
+          "selectPlatform": "选择平台",
+          "windowsInstructions": "请复制以下脚本，在PowerShell中运行并按照提示操作：",
+          "androidInstructions": "Android平台导入方法正在开发中，请参考其他途径获取链接。",
+          "iosInstructions": "iOS平台导入方法正在开发中，请参考其他途径获取链接。",
+          "pasteLink": "粘贴获取到的链接",
+          "invalidUrl": "请输入有效的URL链接",
+          "unsupportedDomain": "仅支持米哈游/库洛游戏官方域名",
+          "loadUidsFailed": "加载授权账号失败",
+          "networkError": "网络错误，请检查网络连接后重试",
+          "deleteRecords": "删除记录",
+          "deleteRecordsTitle": "删除记录",
+          "deleteRecordsMessage": "请选择要从何处删除记录：",
+          "deleteLocal": "删除本地",
+          "deleteCloud": "删除云端",
+          "confirmDeleteTitle": "确认删除",
+          "confirmDeleteLocal": "确定要删除此UID的所有本地记录吗？此操作无法撤销。",
+          "confirmDeleteCloud": "确定要删除此UID的所有云端记录吗？此操作无法撤销。"
+        },
+        "types": {
+          "genshin": {
+            "301": "角色活动祈愿",
+            "302": "武器活动祈愿",
+            "500": "集录祈愿",
+            "200": "常驻祈愿",
+            "100": "新手祈愿"
+          },
+          "starrail": {
+            "11": "角色活动跃迁",
+            "12": "光锥活动跃迁",
+            "21": "角色联动跃迁",
+            "22": "光锥联动跃迁",
+            "1": "常驻跃迁",
+            "2": "新手跃迁"
+          },
+          "zenless": {
+            "2": "代理人频段",
+            "3": "音擎频段",
+            "1": "常驻频段",
+            "5": "邦布频段"
+          },
+          "wuthering": {
+            "1": "角色活动唤取",
+            "2": "武器活动唤取",
+            "3": "角色常驻唤取",
+            "4": "武器常驻唤取",
+            "5": "新手唤取",
+            "6": "新手自选唤取",
+            "7": "新手自选唤取（感恩定向唤取）",
+            "8": "角色新旅唤取",
+            "9": "武器新旅唤取"
+          }
+        },
+        "itemTypes": {
+          "character": "角色",
+          "weapon": "武器",
+          "lightCone": "光锥",
+          "agents": "代理人",
+          "wEngines": "音擎",
+          "resonator": "共鸣者",
+          "Bangboo": "邦布"
+        }
       },
       "about": {
         "title": "关于",
         "projectInfo": "项目信息",
-        "description": "时间线收集器 (WUICC) 是一款用于跨平台追踪游戏活动和事件的时间线管理工具。项目开始于2025年5月24日。",
+        "description": "雾忆刻 (WUICC) 是一款用于跨多个游戏的抽卡分析和活动时间线管理工具。项目开始于2025年5月24日。",
         "team": "开发团队",
         "teamDescription": "我们的团队致力于为玩家创造实用工具。",
-        "disclaimer": "<h4>免责声明</h4><p>本网站为游戏爱好者自发创建的非营利性项目，与米哈游(miHoYo)、库洛游戏(Kuro Game)等企业不存在任何隶属、授权或合作关系。网站中涉及的游戏素材、视听内容、文字资料及相关注册商标等知识产权，均归各自版权方所有。</p><p><strong>特别声明</strong></p><ul><li>本平台所有内容仅限交流学习之用，禁止用于任何商业用途</li><li>网站运营未获得任何游戏厂商的官方授权</li><li>引用素材的著作权及商标权均归属原权利主体</li></ul>"
+        "disclaimer": "<h4>关于本站</h4><p>本网站为游戏爱好者自发创建的非营利性项目，与米哈游(miHoYo)、库洛游戏(Kuro Game)等企业不存在任何隶属、授权或合作关系。</p><p><strong>特别声明</strong></p><ul><li>本平台所有内容仅限交流学习之用，禁止用于任何商业用途。</li><li>本站所有数据、文本和图片均来自社区或Wiki。本站仅对相应内容进行整理汇总。</li><li>引用素材的著作权及商标权均归属原权利主体。</li></ul>"
+      },
+      "notFound": {
+        "title": "页面未找到",
+        "message": "您访问的页面不存在或已被移除",
+        "backHome": "返回首页"
       }
     },
-    "buttons": {
-      "toggleSidebar": "切换侧边栏",
-      "changeLanguage": "切换语言"
-    },
-    "gameSelection": {
-      "info": "请选择您游玩的游戏并配置您想要追踪的活动类型",
-      "save": "保存偏好设置",
-      "saved": "游戏偏好设置已保存",
-      "refreshSuccess": "游戏列表刷新成功",
-      "refreshFailed": "游戏列表刷新失败",
-      "noGames": "暂无可用游戏",
-      "loading": "正在加载游戏数据..."
-    },
-    "errors": {
-      "network": "网络请求失败",
-      "invalidResponse": "服务器响应无效",
-      "unknown": "发生未知错误",
-      "loadFailed": "加载游戏数据失败",
-      "saveFailed": "保存偏好设置失败"
-    },
-    "welcome": {
-      "title": "欢迎使用WUICC",
-      "message": "请选择您游玩的游戏并配置您想要追踪的活动类型：",
-      "confirm": "确认选择",
-      "skip": "暂时跳过"
-    },
     "settings": {
-      "title": "系统设置",
+      "title": "设置",
       "gameSelection": {
         "title": "游戏设置",
         "save": "保存游戏偏好",
@@ -126,7 +370,8 @@
         "selectLabel": "选择主题",
         "light": "浅色主题",
         "dark": "深色主题",
-        "system": "跟随系统"
+        "system": "跟随系统",
+        "showBackgroundImage": "显示背景图片"
       },
       "language": {
         "title": "语言设置",
@@ -146,26 +391,208 @@
         "serverLabel": "游戏服务器时区",
         "useLocalLabel": "使用本地时区显示时间",
         "options": {
-          "asia": "国服、亚洲服、台湾/香港/澳门服 (UTC+8)",
+          "asia": "国服, 亚洲服, 港澳台服 (UTC+8)",
           "america": "美洲服 (UTC-5)",
           "europe": "欧洲服 (UTC+1)"
         }
+      },
+      "account": {
+        "title": "账户 & 数据",
+        "login": "登录",
+        "logout": "退出登录",
+        "logoutAll": "登出所有设备",
+        "username": "用户名",
+        "password": "密码",
+        "loginSuccess": "登录成功",
+        "loginFailed": "登录失败，请检查用户名和密码",
+        "logoutSuccess": "退出登录成功",
+        "logoutFailed": "退出登录失败",
+        "logoutAllSuccess": "所有设备已登出",
+        "logoutAllFailed": "登出所有设备失败",
+        "networkError": "网络错误，请稍后重试",
+        "uploadSettings": "上传",
+        "downloadSettings": "下载",
+        "uploadFailed": "上传设置失败",
+        "downloadFailed": "下载设置失败",
+        "noLocalSettings": "找不到本地设置",
+        "invalidSettingsFormat": "云端设置格式无效",
+        "activityStatusLastUpdated": "活动状态最后更新时间",
+        "clearLocal": "清空本地设置",
+        "clearCloud": "删除",
+        "clearLocalSuccess": "本地设置已清空",
+        "clearLocalFailed": "清空本地设置失败",
+        "clearCloudFailed": "清空云端设置失败",
+        "clearLocalConfirmTitle": "确认清空本地设置",
+        "clearLocalConfirmMessage": "这将永久删除您设备上的所有本地设置，确定要继续吗？",
+        "turnstileError": "请完成人机验证",
+        "fillAllFields": "请填写所有字段",
+        "logoutAllConfirmTitle": "确认退出所有设备",
+        "logoutAllConfirmMessage": "您确定要退出所有设备上的登录吗？此操作不可撤销。",
+        "registerTitle": "注册新账户",
+        "register": "注册",
+        "email": "电子邮箱",
+        "confirmPassword": "确认密码",
+        "passwordMismatch": "密码不匹配",
+        "registerSuccess": "注册成功！请检查您的邮箱以激活账户。",
+        "registerFailed": "注册失败",
+        "backToLogin": "返回登录",
+        "accountBanned": "您的账户已被封禁",
+        "accountNotActivated": "您的账户尚未激活，请检查您的邮箱。",
+        "resendVerification": "重发验证邮件",
+        "verificationResent": "验证邮件已重新发送",
+        "verificationSendFailed": "验证邮件发送失败",
+        "invalidEmail": "请输入有效的邮箱地址",
+        "emailVerifiedSuccess": "邮箱验证成功",
+        "emailVerifiedFailed": "邮箱验证失败",
+        "resendFailed": "重新发送验证邮件失败",
+        "accountStatus": {
+          "active": "活跃",
+          "inactive": "未激活",
+          "banned": "已封禁"
+        },
+        "loginWithQQ": "QQ登录",
+        "loginWithMicrosoft": "微软账号登录",
+        "qqLoginFailed": "获取QQ登录链接失败",
+        "qqLoginError": "QQ登录过程中出错",
+        "qqCallbackError": "QQ登录回调处理失败",
+        "thirdPartyLoggingIn": "正在通过第三方登录...",
+        "microsoftLoginFailed": "Microsoft 登录失败",
+        "microsoftLoginError": "Microsoft 登录错误",
+        "microsoftCallbackError": "Microsoft 回调错误",
+        "showLoginForm": "显示登录表格",
+        "hideLoginForm": "隐藏登录表格",
+        "qrLogin": "二维码登录",
+        "passwordLogin": "密码登录",
+        "scanQRCode": "使用设备扫描此二维码",
+        "qrExpiresIn": "{minutes}秒后过期",
+        "refreshQRCode": "刷新二维码",
+        "generatingQRCode": "正在生成二维码...",
+        "qrCodeGenerated": "二维码生成成功",
+        "qrCodeGenerateFailed": "二维码生成失败",
+        "qrCodeScanned": "二维码已扫描，请在设备上确认",
+        "qrCodeConfirmed": "登录已确认，正在登录...",
+        "qrCodeExpired": "二维码已过期，请刷新",
+        "qrSessionNotFound": "未找到二维码会话",
+        "qrScannerNotSupported": "此设备不支持二维码扫描",
+        "qrScannerError": "二维码扫描错误",
+        "qrCodeScannedSuccess": "二维码扫描成功",
+        "qrCodeScanFailed": "二维码扫描失败",
+        "qrConfirmFailed": "登录确认失败",
+        "startScan": "扫描二维码",
+        "stopScan": "停止扫描",
+        "qrScanError": "二维码扫描错误",
+        "invalidQRCode": "无效的二维码",
+        "qrConfirmSuccess": "登录确认成功",
+        "qrLoginConfirmTitle": "扫码登录确认",
+        "qrLoginConfirmMessage": "检测到来自以下设备的登录请求，是否确认登录？",
+        "cloudSync": "云数据同步",
+        "slotNumber": "槽位 {slot}",
+        "lastUpdated": "最后更新时间",
+        "neverUpdated": "从未更新",
+        "uploadSuccess": "设置已上传至槽位 {slot}!",
+        "downloadSuccess": "设置已从槽位 {slot} 下载!",
+        "clearCloudSuccess": "槽位 {slot} 的云端数据已清除!",
+        "clearCloudConfirmTitle": "确认清除云端设置",
+        "clearCloudConfirmMessage": "确定要清除槽位 {slot} 的云端设置吗？此操作不可恢复！",
+        "overwriteConfirmTitle": "覆盖确认",
+        "overwriteConfirmMessage": "槽位 {slot} 已有同步记录，确定要覆盖吗？",
+        "changePassword": "修改密码",
+        "currentPassword": "当前密码",
+        "newPassword": "新密码",
+        "confirmNewPassword": "确认新密码",
+        "passwordChangedSuccess": "密码修改成功",
+        "changePasswordFailed": "密码修改失败",
+        "resetPassword": "重置密码",
+        "requestReset": "请求重置",
+        "sendResetLink": "发送重置链接",
+        "resetEmailSent": "重置邮件已发送",
+        "resetRequestFailed": "重置请求失败",
+        "resetToken": "重置令牌",
+        "tokenValidFor": "令牌有效，用户: {username}",
+        "invalidResetToken": "无效的重置令牌",
+        "resetPasswordFailed": "密码重置失败",
+        "passwordResetSuccess": "密码重置成功",
+        "emailRequired": "请输入邮箱地址",
+        "currentPasswordRequired": "请输入当前密码",
+        "newPasswordRequired": "请输入新密码",
+        "confirmPasswordRequired": "请确认新密码",
+        "passwordTooShort": "密码长度不足",
+        "passwordNoUpper": "密码必须包含至少一个大写字母",
+        "passwordNoLower": "密码必须包含至少一个小写字母",
+        "passwordNoNumber": "密码必须包含至少一个数字",
+        "passwordStrong": "密码强度高"
+      },
+      "gameOrder": {
+        "title": "游戏顺序设置",
+        "restoreDefault": "恢复默认顺序",
+        "restored": "已恢复游戏默认顺序",
+        "restoreFailed": "恢复默认顺序失败"
+      },
+      "debug": {
+        "title": "调试设置",
+        "resetLanguageCache": "重置语言缓存",
+        "languageCacheCleared": "语言缓存已重置",
+        "languageCacheClearFailed": "重置语言缓存失败"
       }
     },
-    "gameActivities": {
-      "challenge": "周期挑战",
-      "event": "普通活动",
-      "gacha": "祈愿活动",
-      "version": "版本更新",
-      "maintenance": "维护公告"
+    "gameSelection": {
+      "info": "请选择您游玩的游戏并配置您想要追踪的活动类型",
+      "save": "保存偏好设置",
+      "saved": "游戏偏好设置已保存",
+      "refreshSuccess": "游戏列表刷新成功",
+      "refreshFailed": "游戏列表刷新失败",
+      "noGames": "暂无可用游戏",
+      "loading": "正在加载游戏数据...",
+      "refresh": "刷新",
+      "selectGamePrompt": "选择一个游戏以查看可用活动",
+      "dragHint": "按住上下箭头可拖动改变游戏顺序",
+      "resetOrder": "恢复默认顺序",
+      "dragHintSettings": "可在设置页修改游戏顺序"
     },
-    "default": "默认",
+    "welcome": {
+      "title": "欢迎使用雾忆刻",
+      "message": "请选择您游玩的游戏并配置您想要追踪的活动类型：",
+      "confirm": "确认选择",
+      "skip": "暂时跳过"
+    },
+    "tabLock": {
+      "title": "应用已在其他窗口打开",
+      "message": "此应用已在另一个窗口中打开。",
+      "lostLockTitle": "会话冲突",
+      "lostLockMessage": "您不能同时在多个窗口中打开此应用。",
+      "warning": "警告：强制在本窗口继续可能会造成数据冲突。",
+      "continue": "强制在本窗口打开",
+      "forceAcquire": "强制在本窗口打开"
+    },
     "timeFormat": {
       "24hour": "24小时制",
       "12hour": "12小时制"
     },
-    "version_with_number": "{version} 版本",
+    "version_with_number": "{version} 版本"
+  },
+  "$vuetify": {
+    "open": "打开",
     "close": "关闭",
-    "go_to": "前往{target}"
+    "dataIterator": {
+      "loadingText": "加载中..."
+    },
+    "pagination": {
+      "ariaLabel": {
+        "root": "分页导航"
+      }
+    },
+    "carousel": {
+      "prev": "上一项",
+      "next": "下一项"
+    },
+    "dataFooter": {
+      "itemsPerPageAll": "全部",
+      "itemsPerPageText": "每页数量:",
+      "nextPage": "下一页",
+      "prevPage": "上一页",
+      "firstPage": "第一页",
+      "lastPage": "最后一页",
+      "pageText": "{0} - {1} 总数 {2}"
+    }
   }
 }

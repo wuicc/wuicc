@@ -1,0 +1,35 @@
+{
+  "name": "雾忆刻 - WUICC",
+  "short_name": "WUICC",
+  "description": "Multi-Game Timeline - 跨游戏时间线",
+  "id": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"],
+  "background_color": "#ffffff",
+  "theme_color": "#FFC0CB",
+  "icons": [
+    {
+      "src": "/assets/images/logo-256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshots/desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop Screenshot"
+    },
+    {
+      "src": "/assets/images/screenshots/mobile.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile Screenshot"
+    }
+  ]
+}

@@ -1,11 +1,95 @@
 {
   "app": {
-    "title": "時間線收集器",
-    "documentTitle": "時間線收集器 - Web UI Chrono Collector",
+    "title": "霧憶刻",
+    "documentTitle": "霧憶刻 - WUICC",
+    "common": {
+      "cancel": "取消",
+      "confirm": "確認",
+      "submit": "提交",
+      "save": "保存",
+      "import": "導入",
+      "loading": "載入中...",
+      "paused": "(請等待)",
+      "copy": "複製",
+      "copied": "已複製",
+      "close": "關閉",
+      "go_to": "前往{target}",
+      "default": "默認",
+      "retry": "重試"
+    },
+    "error": {
+      "network": "網路請求失敗",
+      "invalidResponse": "伺服器回應無效",
+      "unknown": "發生未知錯誤",
+      "loadFailed": "加載遊戲資料失敗",
+      "saveFailed": "儲存偏好設定失敗",
+      "codes": {
+        "unknown": "發生未知錯誤",
+        "100001": "缺少必要參數",
+        "100002": "參數格式錯誤",
+        "100003": "不支援的語言",
+        "100004": "請求的資源不存在",
+        "100005": "請求方法不允許",
+        "100006": "不支援的媒體類型",
+        "100007": "伺服器內部錯誤",
+        "100008": "請求頻率超限",
+        "200001": "需要驗證",
+        "200002": "驗證失敗",
+        "200003": "無效令牌",
+        "200004": "無效憑證",
+        "200005": "信箱已存在",
+        "200006": "使用者名稱已存在",
+        "200007": "郵件發送失敗",
+        "200008": "信箱驗證已過期",
+        "200009": "帳號已啟用",
+        "200010": "郵件發送過於頻繁",
+        "200011": "帳號未啟用",
+        "200012": "帳號已被封鎖",
+        "200013": "帳號未啟用",
+        "200014": "信箱格式錯誤",
+        "200015": "註冊次數超限",
+        "200016": "第三方認證失敗",
+        "200017": "令牌已過期",
+        "200018": "權限不足",
+        "200019": "密碼重置令牌已過期",
+        "200020": "無效的密碼重置令牌",
+        "200021": "當前密碼不正確",
+        "200022": "密碼強度不足",
+        "200023": "新密碼不能與舊密碼相同",
+        "200030": "QR Code 會話已過期",
+        "200031": "無效的 QR Code 狀態",
+        "200032": "請求頻率超限",
+        "300001": "遊戲資料不存在",
+        "300002": "挑戰資料不存在",
+        "300003": "設定不存在",
+        "300004": "設定解析錯誤",
+        "300005": "無效的 JSON 格式",
+        "300006": "請求資料過大",
+        "400001": "暫無公告",
+        "400002": "暫無挑戰",
+        "400003": "無效的遊戲 ID",
+        "400004": "無效的活動類型",
+        "500001": "請求的資源不存在",
+        "500002": "無效的活動類型",
+        "500003": "參數格式錯誤",
+        "500004": "無效的遊戲 ID",
+        "600001": "抽卡記錄導入失敗",
+        "600002": "抽卡記錄導出失敗",
+        "600003": "未找到抽卡記錄",
+        "600004": "無效的UIGF格式",
+        "600005": "抽卡數據庫錯誤",
+        "600006": "抽卡數據驗證失敗"
+      }
+    },
+    "buttons": {
+      "toggleSidebar": "切換側邊欄",
+      "changeLanguage": "切換語言"
+    },
     "sidebar": {
       "home": "首頁",
       "timeline": "時間線",
       "notification": "通知",
+      "gacha": "抽卡分析",
       "settings": "設定",
       "about": "關於"
     },
@@ -23,10 +107,41 @@
         "title": "鳴潮"
       }
     },
+    "gameActivities": {
+      "challenge": "週期挑戰",
+      "event": "普通活動",
+      "gacha": "祈願活動",
+      "version": "版本更新",
+      "maintenance": "維護公告"
+    },
     "pages": {
       "home": {
         "title": "首頁",
-        "welcome": "歡迎來到WUICC首頁！"
+        "intro": "一站式遊戲活動時間線管理工具",
+        "go_to_login": "前往登入",
+        "login_support": "支援",
+        "qq_login": "QQ登入",
+        "install_app": "安裝應用程式",
+        "pwa_install_accepted": "用戶接受了PWA安裝提示",
+        "pwa_install_declined": "用戶拒絕了PWA安裝提示",
+        "features": {
+          "multi_game": {
+            "title": "多遊戲時間線管理",
+            "description": "實時追蹤多款熱門遊戲的限時活動、版本週期和限定卡池等資訊"
+          },
+          "reminders": {
+            "title": "個性化提醒",
+            "description": "自定義遊戲偏好和活動類型提醒，不錯過任何重要活動"
+          },
+          "timezones": {
+            "title": "多時區支援",
+            "description": "全球伺服器活動一目了然，自動適配您的本地時區"
+          },
+          "interface": {
+            "title": "簡潔直觀",
+            "description": "精心設計的界面，讓信息獲取變得輕鬆愉快"
+          }
+        }
       },
       "timeline": {
         "title": "時間線",
@@ -34,12 +149,12 @@
         "loading": "時間線加載中...",
         "time_remaining": {
           "days_hours": "{days}天 {hours}小時",
-          "hours_minutes": "{days}小時 {minutes}分鐘",
-          "minutes": "{minutes}分鐘",
-          "less_than_minute": "不到一分鐘"
+          "hours_minutes": "{hours}小時 {minutes}分",
+          "minutes": "{minutes}分",
+          "less_than_minute": "不足1分"
         },
-        "starts_in": "開始倒計時",
-        "ends_in": "結束倒計時",
+        "starts_in": "距開始",
+        "ends_in": "剩餘",
         "starts_in_prefix": "即將開始 ",
         "ends_in_prefix": "",
         "event_ended": "活動已結束",
@@ -49,14 +164,37 @@
         "yesterday": "昨天",
         "daysAgo": "{count} 天前",
         "daysLater": "{count} 天後",
-        "noActivitiesForDay": "當天無活動"
+        "noActivitiesForDay": "當天無活動",
+        "vote": {
+          "loading": "載入投票資料中...",
+          "none": "暫無",
+          "no_options": "暫無選項",
+          "submit": "提交投票",
+          "success": "投票成功",
+          "error": "投票失敗",
+          "login_required": "登入後參與投票",
+          "retry": "投票失敗，請重試",
+          "title": "活動投票",
+          "no_tags": "暫無投票選項",
+          "cancel": {
+            "failed": "取消投票失敗",
+            "success": "已取消投票"
+          },
+          "count": "{count}票"
+        },
+        "launch_game": "啟動遊戲",
+        "china_server": "中國服",
+        "global_server": "國際服",
+        "launch_pc": "PC客戶端",
+        "launch_mobile": "手機客戶端",
+        "launch_cloud_mobile": "雲遊戲(手機)",
+        "launch_cloud_web": "雲遊戲(網頁)",
+        "defaultSort": "預設排序",
+        "endTimeDesc": "按結束時間排序（升序）"
       },
       "notification": {
         "title": "通知",
-        "content": "這是通知內容。"
-      },
-      "settings": {
-        "title": "設定"
+        "content": "通知訂閱功能即將上線..."
       },
       "shortcuts": {
         "title": "遊戲快捷連結",
@@ -71,48 +209,151 @@
           "kurogame_os_wuthering": "官網 (國際服)"
         }
       },
-      "notFound": {
-        "title": "頁面未找到",
-        "message": "您訪問的頁面不存在或已被移除",
-        "backHome": "返回首頁"
+      "gacha": {
+        "title": "抽卡分析",
+        "overview": {
+          "title": "抽卡數據總覽",
+          "fiveStarCount": "五星數",
+          "fourStarCount": "四星數",
+          "sRankCount": "S級數",
+          "aRankCount": "A級數",
+          "totalPulls": "總抽數",
+          "selectGame": "選擇遊戲",
+          "noUidSelected": "未選擇遊戲帳號",
+          "selectUid": "選擇帳號",
+          "changeUid": "更改帳號",
+          "pulls": "抽",
+          "noRecordsHint": "沒有抽卡記錄，請先下載數據",
+          "gachaTypeStats": "卡池類型統計",
+          "chartTitle": "抽卡統計圖表",
+          "chartComingSoon": "統計圖表功能即將上線"
+        },
+        "records": {
+          "title": "抽卡記錄詳情",
+          "time": "時間",
+          "name": "名稱",
+          "rarity": "星級",
+          "type": "類型",
+          "character": "角色",
+          "weapon": "武器",
+          "noData": "暫無抽卡記錄",
+          "selectGachaType": "選擇卡池",
+          "pullCount": "抽數",
+          "lastCount": "保底",
+          "rank": "級",
+          "noUidSelected": "未選擇UID"
+        },
+        "settings": {
+      "title": "抽卡設定",
+      "accountInfo": "帳戶信息",
+      "notLoggedIn": "未登入",
+      "goToLogin": "前往登入",
+      "authorizedAccounts": "已授權遊戲帳號",
+      "game": "遊戲",
+      "uid": "UID",
+      "nickname": "備註名",
+      "lastUsed": "最後使用",
+      "actions": "操作",
+      "downloadRecords": "下載記錄",
+      "revoke": "撤銷授權",
+      "confirmRevoke": "確定要撤銷此UID的授權嗎？",
+      "downloading": "下載中...",
+      "downloadSuccess": "成功導入 {count} 條{type}記錄",
+      "downloadFailed": "記錄下載失敗",
+      "updateSuccess": "備註名更新成功",
+      "updateFailed": "備註名更新失敗",
+      "revokeSuccess": "UID授權已撤銷",
+      "revokeFailed": "撤銷授權失敗",
+      "edit": "編輯",
+      "editNickname": "編輯別名",
+      "confirmRevokeTitle": "確認撤銷授權",
+      "confirmRevokeMessage": "您確定要撤銷此帳號的授權嗎？撤銷後將無法獲取該帳號的抽卡記錄。",
+      "selectGachaTypeToDownload": "選擇要下載的卡池類型",
+      "recordsDownloaded": "已下載記錄",
+      "importOfficialLink": "導入官方連結",
+      "selectGame": "選擇遊戲",
+      "officialLink": "官方抽卡記錄連結",
+      "linkPlaceholder": "請輸入遊戲內獲取的抽卡記錄連結",
+      "importPending": "導入任務已建立，正在排隊處理",
+      "importProcessing": "正在導入抽卡記錄，請稍候...",
+      "importCompleted": "抽卡記錄導入完成！",
+      "importFailed": "抽卡記錄導入失敗",
+      "selectPlatform": "選擇平台",
+      "windowsInstructions": "請複製以下腳本，在PowerShell中執行並按照提示操作：",
+      "androidInstructions": "Android平台導入方法正在開發中，請參考其他途徑獲取連結。",
+      "iosInstructions": "iOS平台導入方法正在開發中，請參考其他途徑獲取連結。",
+      "pasteLink": "粘貼獲取到的連結",
+      "invalidUrl": "請輸入有效的URL連結",
+      "unsupportedDomain": "僅支持米哈游/庫洛遊戲官方域名",
+      "deleteRecords": "刪除記錄",
+      "deleteRecordsTitle": "刪除記錄",
+      "deleteRecordsMessage": "請選擇要從何處刪除記錄：",
+      "deleteLocal": "刪除本機",
+      "deleteCloud": "刪除雲端",
+      "confirmDeleteTitle": "確認刪除",
+      "confirmDeleteLocal": "確定要刪除此UID的所有本機記錄嗎？此操作無法撤銷。",
+      "confirmDeleteCloud": "確定要刪除此UID的所有雲端記錄嗎？此操作無法撤銷。"
+    },
+        "types": {
+          "genshin": {
+            "301": "角色活動祈願",
+            "302": "武器活動祈願",
+            "500": "集錄祈願",
+            "200": "常駐祈願",
+            "100": "新手祈願"
+          },
+          "starrail": {
+            "11": "角色活動躍遷",
+            "12": "光錐活動躍遷",
+            "21": "角色聯動躍遷",
+            "22": "光錐聯動躍遷",
+            "1": "常駐躍遷",
+            "2": "新手躍遷"
+          },
+          "zenless": {
+            "2": "角色頻段",
+            "3": "音擎頻段",
+            "1": "常駐頻段",
+            "5": "邦布頻段"
+          },
+          "wuthering": {
+            "1": "角色活動喚取",
+            "2": "武器活動喚取",
+            "3": "角色常駐喚取",
+            "4": "武器常駐喚取",
+            "5": "新手喚取",
+            "6": "新手自選喚取",
+            "7": "新手自選喚取（感恩定向喚取）",
+            "8": "角色新旅喚取",
+            "9": "武器新旅喚取"
+          }
+        },
+        "itemTypes": {
+          "character": "角色",
+          "weapon": "武器",
+          "lightCone": "光錐",
+          "agents": "代理人",
+          "wEngines": "音擎",
+          "resonator": "共鳴者",
+          "Bangboo": "邦布"
+        }
       },
       "about": {
         "title": "關於",
         "projectInfo": "項目信息",
-        "description": "時間線收集器 (WUICC) 是一款用於跨平台追蹤遊戲活動和事件的時間線管理工具。項目開始於2025年5月28日。",
+        "description": "霧憶刻 (WUICC) 是一款用於跨多個遊戲的抽卡分析和活動時間軸管理工具。項目開始於2025年5月24日。",
         "team": "開發團隊",
         "teamDescription": "我們的團隊致力於為玩家創造實用工具。",
-        "disclaimer": "<h4>免責聲明</h4><p>本網站為遊戲愛好者自發創建的非營利性項目，與米哈遊(HoYoverse)、庫洛遊戲(Kuro Game)等企業不存在任何隸屬、授權或合作關係。網站中涉及的遊戲素材、視聽內容、文字資料及相關註冊商標等知識產權，均歸各自版權方所有。</p><p><strong>特別聲明</strong></p><ul><li>本平台所有內容僅限交流學習之用，禁止用於任何商業用途</li><li>網站運營未獲得任何遊戲廠商的官方授權</li><li>引用素材的著作權及商標權均歸屬原權利主體</li></ul>"
+        "disclaimer": "<h4>關於本站</h4><p>本網站為遊戲愛好者自發創建的非營利性項目，與米哈遊(HoYoverse)、庫洛遊戲(Kuro Game)等企業不存在任何隸屬、授權或合作關係。</p><p><strong>特別聲明</strong></p><ul><li>本平台所有內容僅限交流學習之用，禁止用於任何商業用途。</li><li>本站所有數據、文本和圖片均來自社區或Wiki。本站僅對相應內容進行整理匯總。</li><li>引用素材的著作權及商標權均歸屬原權利主體。</li></ul>"
+      },
+      "notFound": {
+        "title": "頁面未找到",
+        "message": "您訪問的頁面不存在或已被移除",
+        "backHome": "返回首頁"
       }
     },
-    "buttons": {
-      "toggleSidebar": "切換側邊欄",
-      "changeLanguage": "切換語言"
-    },
-    "gameSelection": {
-      "info": "請選擇您遊玩的遊戲並配置您想要追蹤的活動類型",
-      "save": "儲存偏好設定",
-      "saved": "遊戲偏好設定已儲存",
-      "refreshSuccess": "遊戲列表刷新成功",
-      "refreshFailed": "遊戲列表刷新失敗",
-      "noGames": "暫無可用遊戲",
-      "loading": "正在加載遊戲數據..."
-    },
-    "errors": {
-      "network": "網路請求失敗",
-      "invalidResponse": "伺服器回應無效",
-      "unknown": "發生未知錯誤",
-      "loadFailed": "加載遊戲數據失敗",
-      "saveFailed": "儲存偏好設定失敗"
-    },
-    "welcome": {
-      "title": "歡迎使用WUICC",
-      "message": "請選擇您遊玩的遊戲並配置您想要追蹤的活動類型：",
-      "confirm": "確認選擇",
-      "skip": "暫時跳過"
-    },
     "settings": {
-      "title": "系統設定",
+      "title": "設定",
       "gameSelection": {
         "title": "遊戲設定",
         "save": "儲存遊戲偏好",
@@ -126,7 +367,8 @@
         "selectLabel": "選擇主題",
         "light": "淺色主題",
         "dark": "深色主題",
-        "system": "跟隨系統"
+        "system": "跟隨系統",
+        "showBackgroundImage": "顯示背景圖片"
       },
       "language": {
         "title": "語言設定",
@@ -146,26 +388,207 @@
         "serverLabel": "遊戲伺服器時區",
         "useLocalLabel": "使用本地時區顯示時間",
         "options": {
-          "asia": "亞洲、東南亞、台灣/香港/澳門 (UTC+8)",
+          "asia": "亞洲, 東南亞, TW/HK/MO (UTC+8)",
           "america": "美洲 (UTC-5)",
           "europe": "歐洲 (UTC+1)"
         }
+      },
+      "account": {
+        "title": "帳戶 & 資料",
+        "login": "登入",
+        "logout": "登出",
+        "logoutAll": "登出所有裝置",
+        "username": "使用者名稱",
+        "password": "密碼",
+        "loginSuccess": "登入成功",
+        "loginFailed": "登入失敗，請檢查使用者名稱和密碼",
+        "logoutSuccess": "登出成功",
+        "logoutFailed": "登出失敗",
+        "logoutAllSuccess": "所有裝置已登出",
+        "logoutAllFailed": "登出所有裝置失敗",
+        "networkError": "網路錯誤，請稍後重試",
+        "uploadSettings": "上傳",
+        "downloadSettings": "下載",
+        "uploadSuccess": "設定已上傳至槽位 {slot}!",
+        "uploadFailed": "上傳設定失敗",
+        "downloadSuccess": "設定已從槽位 {slot} 下載!",
+        "downloadFailed": "下載設定失敗",
+        "noLocalSettings": "找不到本地設定",
+        "invalidSettingsFormat": "雲端設定格式無效",
+        "clearLocal": "清空本地設定",
+        "clearCloud": "清除",
+        "clearLocalSuccess": "本地設定已清空",
+        "clearLocalFailed": "清空本地設定失敗",
+        "clearCloudSuccess": "槽位 {slot} 的雲端資料已清除!",
+        "clearCloudFailed": "清空雲端設定失敗",
+        "clearLocalConfirmTitle": "確認清空本地設定",
+        "clearLocalConfirmMessage": "這將永久刪除您裝置上的所有本地設定，確定要繼續嗎？",
+        "clearCloudConfirmTitle": "確認清除雲端設定",
+        "clearCloudConfirmMessage": "確定要清除槽位 {slot} 的雲端設定嗎？此操作不可恢復！",
+        "overwriteConfirmTitle": "覆蓋確認",
+        "overwriteConfirmMessage": "槽位 {slot} 已有同步記錄，確定要覆蓋嗎？",
+        "turnstileError": "請完成人機驗證",
+        "fillAllFields": "請填寫所有欄位",
+        "logoutAllConfirmTitle": "確認退出所有設備",
+        "logoutAllConfirmMessage": "您確定要退出所有設備上的登入嗎？此操作不可撤銷。",
+        "registerTitle": "註冊新帳戶",
+        "register": "註冊",
+        "email": "電子郵箱",
+        "confirmPassword": "確認密碼",
+        "passwordMismatch": "密碼不匹配",
+        "registerSuccess": "註冊成功！請檢查您的郵箱以激活帳戶。",
+        "registerFailed": "註冊失敗",
+        "backToLogin": "返回登入",
+        "accountBanned": "您的帳戶已被封禁",
+        "accountNotActivated": "您的帳戶尚未激活，請檢查您的郵箱。",
+        "resendVerification": "重發驗證郵件",
+        "verificationResent": "驗證郵件已重新發送",
+        "verificationSendFailed": "驗證郵件發送失敗",
+        "invalidEmail": "請輸入有效的郵箱地址",
+        "emailVerifiedSuccess": "郵箱驗證成功",
+        "emailVerifiedFailed": "郵箱驗證失敗",
+        "resendFailed": "重新發送驗證郵件失敗",
+        "accountStatus": {
+          "active": "活躍",
+          "inactive": "未激活",
+          "banned": "已封禁"
+        },
+        "loginWithQQ": "QQ登入",
+        "loginWithMicrosoft": "微軟賬號登入",
+        "qqLoginFailed": "獲取QQ登入鏈接失敗",
+        "qqLoginError": "QQ登入過程中出錯",
+        "qqCallbackError": "QQ登入回調處理失敗",
+        "thirdPartyLoggingIn": "正在通過第三方登入...",
+        "microsoftLoginFailed": "Microsoft 登入失敗",
+        "microsoftLoginError": "Microsoft 登入錯誤",
+        "microsoftCallbackError": "Microsoft 回調錯誤",
+        "showLoginForm": "顯示登入表格",
+        "hideLoginForm": "隱藏登入表格",
+        "qrLogin": "二維碼登入",
+        "passwordLogin": "密碼登入",
+        "scanQRCode": "使用裝置掃描此二維碼",
+        "qrExpiresIn": "{minutes}秒後過期",
+        "refreshQRCode": "刷新二維碼",
+        "generatingQRCode": "正在生成二維碼...",
+        "qrCodeGenerated": "二維碼生成成功",
+        "qrCodeGenerateFailed": "二維碼生成失敗",
+        "qrCodeScanned": "二維碼已掃描，請在裝置上確認",
+        "qrCodeConfirmed": "登入已確認，正在登入...",
+        "qrCodeExpired": "二維碼已過期，請刷新",
+        "qrSessionNotFound": "未找到二維碼會話",
+        "qrScannerNotSupported": "此裝置不支持二維碼掃描",
+        "qrScannerError": "二維碼掃描錯誤",
+        "qrCodeScannedSuccess": "二維碼掃描成功",
+        "qrCodeScanFailed": "二維碼掃描失敗",
+        "qrConfirmFailed": "登入確認失敗",
+        "startScan": "掃描二維碼",
+        "stopScan": "停止掃描",
+        "qrScanError": "二維碼掃描錯誤",
+        "invalidQRCode": "無效的二維碼",
+        "qrConfirmSuccess": "登入確認成功",
+        "qrLoginConfirmTitle": "掃碼登入確認",
+        "qrLoginConfirmMessage": "偵測到來自以下裝置的登入請求，是否確認登入？",
+        "cloudSync": "雲數據同步",
+        "slotNumber": "槽位 {slot}",
+        "lastUpdated": "最後更新時間",
+        "neverUpdated": "從未更新",
+        "changePassword": "修改密碼",
+        "currentPassword": "當前密碼",
+        "newPassword": "新密碼",
+        "confirmNewPassword": "確認新密碼",
+        "passwordChangedSuccess": "密碼修改成功",
+        "changePasswordFailed": "密碼修改失敗",
+        "resetPassword": "重置密碼",
+        "requestReset": "請求重置",
+        "sendResetLink": "發送重置鏈接",
+        "resetEmailSent": "重置郵件已發送",
+        "resetRequestFailed": "重置請求失敗",
+        "resetToken": "重置令牌",
+        "tokenValidFor": "令牌有效，用戶: {username}",
+        "invalidResetToken": "無效的重置令牌",
+        "resetPasswordFailed": "密碼重置失敗",
+        "passwordResetSuccess": "密碼重置成功",
+        "emailRequired": "請輸入郵箱地址",
+        "currentPasswordRequired": "請輸入當前密碼",
+        "newPasswordRequired": "請輸入新密碼",
+        "confirmPasswordRequired": "請確認新密碼",
+        "passwordTooShort": "密碼長度不足",
+        "passwordNoUpper": "密碼必須包含至少一個大寫字母",
+        "passwordNoLower": "密碼必須包含至少一個小寫字母",
+        "passwordNoNumber": "密碼必須包含至少一個數字",
+        "passwordStrong": "密碼強度高"
+      },
+      "gameOrder": {
+        "title": "遊戲順序設置",
+        "restoreDefault": "恢復預設順序",
+        "restored": "已恢復遊戲預設順序",
+        "restoreFailed": "恢復預設順序失敗"
+      },
+      "debug": {
+        "title": "除錯設置",
+        "resetLanguageCache": "重置語言緩存",
+        "languageCacheCleared": "語言緩存已重置",
+        "languageCacheClearFailed": "重置語言緩存失敗"
       }
     },
-    "gameActivities": {
-      "challenge": "週期挑戰",
-      "event": "普通活動",
-      "gacha": "祈願活動",
-      "version": "版本更新",
-      "maintenance": "維護公告"
+    "gameSelection": {
+      "info": "請選擇您遊玩的遊戲並配置您想要追蹤的活動類型",
+      "save": "儲存偏好設定",
+      "saved": "遊戲偏好設定已儲存",
+      "refreshSuccess": "遊戲列表刷新成功",
+      "refreshFailed": "遊戲列表刷新失敗",
+      "noGames": "暫無可用遊戲",
+      "loading": "正在加載遊戲資料...",
+      "refresh": "重新整理",
+      "selectGamePrompt": "選擇一個遊戲以查看可用活動",
+      "dragHint": "按住上下箭頭可拖動改變遊戲順序",
+      "resetOrder": "重置順序",
+      "dragHintSettings": "可在設置頁修改遊戲順序"
     },
-    "default": "默認",
+    "welcome": {
+      "title": "歡迎使用雾憶刻",
+      "message": "請選擇您遊玩的遊戲並配置您想要追蹤的活動類型：",
+      "confirm": "確認選擇",
+      "skip": "暫時跳過"
+    },
+    "tabLock": {
+      "title": "應用已在其他視窗開啟",
+      "message": "此應用已在另一個視窗中開啟。",
+      "lostLockTitle": "工作階段衝突",
+      "lostLockMessage": "您不能同時在多個視窗中開啟此應用。",
+      "warning": "警告：強制在此視窗繼續可能會造成資料衝突。",
+      "continue": "強制在此視窗開啟",
+      "forceAcquire": "強制在此視窗開啟"
+    },
     "timeFormat": {
       "24hour": "24小時制",
       "12hour": "12小時制"
     },
-    "version_with_number": "{version} 版本",
-    "close": "关闭",
-    "go_to": "前往{target}"
+    "version_with_number": "{version} 版本"
+  },
+  "$vuetify": {
+    "open": "打開",
+    "close": "關閉",
+    "dataIterator": {
+      "loadingText": "載入中..."
+    },
+    "pagination": {
+      "ariaLabel": {
+        "root": "分頁導航"
+      }
+    },
+    "carousel": {
+      "prev": "上一項",
+      "next": "下一項"
+    },
+    "dataFooter": {
+      "itemsPerPageText": "每頁數量:",
+      "itemsPerPageAll": "全部",
+      "nextPage": "下一頁",
+      "prevPage": "上一頁",
+      "firstPage": "第一頁",
+      "lastPage": "最後一頁",
+      "pageText": "{0} - {1} 總數 {2}"
+    }
   }
 }
