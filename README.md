@@ -5,6 +5,8 @@
 [![Vuetify](https://img.shields.io/badge/Vuetify-3-purple)](https://vuetifyjs.com/)
 [![i18n](https://img.shields.io/badge/i18n-Support-yellow)](https://vue-i18n.intlify.dev/)
 
+EN | [中文](README-zh.md)
+
 ## Project Introduction
 
 WUICC is an all-in-one game management tool that provides features such as multi-game activity tracking, gacha record management, and quick game launching to help players manage their gaming experience more conveniently.

@@ -5,6 +5,8 @@
 [![Vuetify](https://img.shields.io/badge/Vuetify-3-purple)](https://vuetifyjs.com/)
 [![i18n](https://img.shields.io/badge/i18n-Support-yellow)](https://vue-i18n.intlify.dev/)
 
+[EN](README.md) | 中文
+
 ## 项目简介
 
 WUICC是一款一站式游戏管理工具，为玩家提供多游戏活动追踪、抽卡记录管理、游戏快捷启动等功能，帮助玩家更便捷地管理游戏体验。
