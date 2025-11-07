@@ -19,6 +19,12 @@
             {{ user.username }}
           </div>
         </div>
+        <div class="ml-4">
+          <v-btn color="accent" variant="outlined" :to="{ path: '/settings', query: { highlight: 'login' } }">
+            <v-icon left>mdi-cog</v-icon>
+            {{ $t("app.common.go_to", { target: $t("app.settings.title") }) }}
+          </v-btn>
+        </div>
       </div>
 
       <!-- 未登录状态 -->
@@ -824,8 +830,8 @@ const confirmDownload = async () => {
       // 添加新数据
       for (const record of records) {
         // 对于原神，使用uigf_gacha_type作为键，否则使用gacha_type
-        const gachaTypeKey = downloadingGameId.value === 'genshin' && record.uigf_gacha_type 
-          ? record.uigf_gacha_type 
+        const gachaTypeKey = downloadingGameId.value === 'genshin' && record.uigf_gacha_type
+          ? record.uigf_gacha_type
           : record.gacha_type;
         await dbManager.addGachaRecord(tableName, gachaTypeKey, record);
       }

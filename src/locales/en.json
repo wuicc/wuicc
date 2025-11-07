@@ -349,6 +349,10 @@
         "teamDescription": "Our team is dedicated to creating useful tools for gamers.",
         "disclaimer": "<h4>About This Site</h4><p>This website is a non-profit project created spontaneously by game enthusiasts and has no affiliation, authorization, or cooperative relationship with HoYoverse, Kuro Game or other companies.</p><p><strong>Special Note</strong></p><ul><li>All content on this platform is for communication and learning only, and is prohibited for any commercial use.</li><li>All data, text, and images on this site are sourced from the community or wikis. This site only compiles and summarizes the corresponding content.</li><li>The copyright and trademark rights of the quoted materials belong to the original rights holders.</li></ul>"
       },
+      "genshinActivities": {
+        "languageRestriction": "This page is only available in Simplified Chinese",
+        "switchToChinese": "Switch to Simplified Chinese"
+      },
       "notFound": {
         "title": "Page Not Found",
         "message": "The page you're looking for doesn't exist or has been removed",
@@ -431,6 +435,8 @@
         "clearCloudConfirmMessage": "Are you sure you want to clear cloud settings in slot {slot}? This action cannot be undone!",
         "overwriteConfirmTitle": "Overwrite Confirmation",
         "overwriteConfirmMessage": "Slot {slot} already has sync data. Are you sure you want to overwrite it?",
+        "localNewerTitle": "Local Data is Newer",
+        "localNewerMessage": "Your local data is newer than the cloud data in slot {slot}. Are you sure you want to overwrite your local data?",
         "turnstileError": "Please complete verification",
         "fillAllFields": "Please fill in all fields",
         "logoutAllConfirmTitle": "Confirm logout all devices",

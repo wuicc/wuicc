@@ -159,7 +159,7 @@
                     <div class="text-subtitle-2 font-weight-bold mb-2">通关阶段</div>
                     <div class="d-flex flex-wrap gap-2">
                       <v-chip v-for="(stage, stageIndex) in record.stage_names" :key="stageIndex" size="small"
-                        color="info" variant="tonal">
+                        color="info" variant="tonal" class="mr-1">
                         {{ stage }}
                       </v-chip>
                     </div>

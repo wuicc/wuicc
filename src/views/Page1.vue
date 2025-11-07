@@ -1,7 +1,11 @@
 <template>
   <v-card class="timeline-root" :loading="loading ? 'accent' : false">
-    <v-card-title class="timeline-header-container">
-      <span>{{ $t("app.pages.timeline.title") }}</span>
+    <v-card-title class="d-flex align-center flex-wrap timeline-header-container">
+      <div class="d-flex align-center mr-2">
+        <v-icon class="mr-2">mdi-calendar-text</v-icon>
+        <span>{{ $t("app.pages.timeline.title") }}</span>
+      </div>
+      <v-spacer></v-spacer>
       <div class="time-controls">
         <v-menu v-model="timeSortMenuOpen" offset-y :close-on-content-click="false" scrollStrategy="close"
           location="start">
@@ -22,7 +26,7 @@
             </v-select>
           </v-card>
         </v-menu>
-        <v-chip class="timezone-chip" color="accent" variant="outlined" @click="navigateToSettings">
+        <v-chip class="timezone-chip" color="accent" variant="outlined" @click="navigateToSettings('timezone')">
           <v-icon left>mdi-server</v-icon>
           {{ displayedServerTimezone }}&nbsp;
           <template v-if="shouldShowLocalTimezone">
@@ -38,9 +42,15 @@
       <v-alert v-if="error" type="error" class="ma-4">
         {{ error }}
       </v-alert>
-      <v-alert v-else-if="!loading && activities.length === 0" type="info" class="ma-4" color="accent">
-        {{ $t("app.pages.timeline.noActivities") }}
-      </v-alert>
+      <div v-else-if="!loading && activities.length === 0">
+        <v-alert type="info" class="ma-4" color="accent">
+          {{ $t("app.pages.timeline.noActivities") }}
+        </v-alert>
+        <v-btn class="mt-0 mb-4 ml-4" color="accent" @click="navigateToSettings('games')" prepend-icon="mdi-cog">
+          <!-- <v-icon left>mdi-cog</v-icon> -->
+          {{ $t("app.common.go_to", { target: $t("app.settings.gameSelection.title") }) }}
+        </v-btn>
+      </div>
       <div class="timeline-scroll-container" v-if="!error && !loading && activities.length !== 0">
         <div class="sticky-header-container">
           <div class="timeline-header months-header">
@@ -114,20 +124,17 @@
       <div v-if="selectedDay" class="day-panel-backdrop" @click="hideDayPanel">
         <div class="day-panel" @click.stop>
           <div class="day-panel-header">
-            <div class="day-panel-date" style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              ">
-              <div>
+            <div class="day-panel-date">
+              <div class="day-panel-date-container">
                 <span class="font-weight-bold">{{
                   formatFullDate(selectedDay)
-                  }}</span>
-                <span class="day-panel-days-away ml-2">{{
+                }}</span>
+                <span class="day-panel-days-away">{{
                   getDaysAwayText(selectedDay)
-                  }}</span>
+                }}</span>
               </div>
-              <v-btn icon class="day-panel-close-btn" density="comfortable" variant="flat" @click="hideDayPanel">
+              <v-btn icon class="day-panel-close-btn" density="comfortable" variant="flat" @click="hideDayPanel"
+                size="large">
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </div>
@@ -199,9 +206,9 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const navigateToSettings = () => {
+const navigateToSettings = (target) => {
   // 传递参数告诉设置页面需要高亮时区设置
-  router.push({ path: '/settings', query: { highlight: 'timezone' } });
+  router.push({ path: '/settings', query: { highlight: target } });
 };
 
 const timeSortMenuOpen = ref(false);
@@ -512,36 +519,36 @@ onMounted(() => {
 
     currentTime.value = getAdjustedCurrentTime();
   }, 100);
-  
+
   // 处理活动数据加载
   if (eventsStore.activities.length === 0) {
     fetchEvents();
   } else {
     // 如果store中已有数据，将其存到变量中
     originalActivitiesOrder.value = [...eventsStore.activities];
-    
+
     // 立即应用排序选项（如果有）
     if (sortOption.value && sortOption.value !== 'default') {
       applySortOption(sortOption.value);
     } else {
       activities.value = [...eventsStore.activities];
     }
-    
+
     // 在activities.value被赋值后再计算时间范围
     calculateTimeRange();
-    
+
     // 使用requestAnimationFrame确保DOM已经准备好
     requestAnimationFrame(() => {
       // 更新当前时间位置
       getCurrentTimePosition();
-      
+
       // 延迟滚动到当前时间，确保DOM已经完全渲染
       setTimeout(() => {
         scrollToCurrentTime();
       }, 10);
     });
   }
-  
+
   document.addEventListener("mousemove", handleMouseMove);
   document.addEventListener("mouseup", handleMouseUp);
 
@@ -835,7 +842,7 @@ watch(storeActivities, (newActivities) => {
   // 当store中的活动更新时，重置排序状态
   isTimeSorted.value = false;
   originalActivitiesOrder.value = [];
-  
+
   // 应用当前排序选项
   if (sortOption.value && sortOption.value !== 'default') {
     applySortOption(sortOption.value);
@@ -1519,6 +1526,7 @@ const scrollToActivity = (activity) => {
 .time-controls {
   display: flex;
   align-items: center;
+  margin-top: -4px;
   gap: 4px;
   float: right;
 }
@@ -1618,12 +1626,13 @@ const scrollToActivity = (activity) => {
   width: 90%;
   max-width: 500px;
   max-height: 70vh;
-  overflow-y: auto;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   margin-top: 20px;
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
 }
 
 .v-theme--dark .day-panel {
@@ -1632,11 +1641,8 @@ const scrollToActivity = (activity) => {
 }
 
 .day-panel-header {
-  padding: 16px;
+  padding: 0px 16px;
   border-bottom: 1px solid #e0e0e0;
-  position: sticky;
-  top: 0;
-  background-color: inherit;
   z-index: 1;
   transition: opacity 0.2s ease;
 }
@@ -1646,8 +1652,11 @@ const scrollToActivity = (activity) => {
 }
 
 .day-panel-date {
+  margin: 4px 0px;
   font-size: 1.2rem;
-  margin-bottom: -4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .day-panel-days-away {
@@ -1659,10 +1668,36 @@ const scrollToActivity = (activity) => {
   color: #aaa;
 }
 
+.day-panel-date-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.day-panel-days-away {
+  margin-left: 8px;
+}
+
+@media (max-width: 480px) {
+  .day-panel-date-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .day-panel-days-away {
+    margin-left: 0;
+    margin-top: 2px;
+  }
+}
+
 .day-panel-activities {
-  padding: 12px 0;
+  margin-bottom: 12px;
+  padding-top: 12px;
   transition: opacity 0.2s ease;
   user-select: none;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .day-panel-activity {

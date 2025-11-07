@@ -1,13 +1,16 @@
 <template>
   <v-card class="setting-root">
-    <v-card-title class="my-2">
-      {{ $t("app.settings.title") }}
+    <v-card-title class="mt-1 mb-2 d-flex align-center flex-wrap">
+      <div class="d-flex align-center mr-2">
+        <v-icon class="mr-2">mdi-cog</v-icon>
+        {{ $t("app.settings.title") }}
+      </div>
     </v-card-title>
     <v-card-text>
       <v-row>
         <v-col cols="12" md="7" class="pt-2 pb-0">
-          <v-expansion-panels class="mb-2" v-model="panel" multiple>
-            <v-expansion-panel eager value="games">
+          <v-expansion-panels class="mb-2" v-model="gamePanel" multiple>
+            <v-expansion-panel eager value="games" id="game-settings">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <div class="d-flex align-center w-100">
@@ -46,7 +49,7 @@
             @logoutAllSessions="logoutAllSessions" ref="loginPanelRef" />
 
           <!-- Timezone settings -->
-          <v-card id="timezone-settings" class="mb-4" :class="{ 'highlight-card': isHighlighting }">
+          <v-card id="timezone-settings" class="mb-4" ref="timezoneSettingsRef">
             <v-card-title class="text-h6">
               <v-icon left>mdi-clock-time-three</v-icon>
               {{ $t("app.settings.timezone.title") }}
@@ -81,7 +84,7 @@
           </v-card>
 
           <!-- Debug settings -->
-          <v-card class="mb-4">
+          <!-- <v-card class="mb-4">
             <v-card-title class="text-h6">
               <v-icon left>mdi-bug</v-icon>
               {{ $t("app.settings.debug.title") }}
@@ -93,7 +96,7 @@
                 {{ $t("app.settings.debug.resetLanguageCache") }}
               </v-btn>
             </v-card-text>
-          </v-card>
+          </v-card> -->
         </v-col>
       </v-row>
     </v-card-text>
@@ -115,12 +118,12 @@ import { useAuthStore } from "@/store/auth";
 import { getApiUrl } from "@/utils/apiEndpoints";
 
 const route = useRoute();
-const isHighlighting = ref(false);
+const timezoneSettingsRef = ref(null);
 
 // 基础状态和引用
 const loading = ref(false);
 const gameSelector = ref(null);
-const panel = ref(["games"]);
+const gamePanel = ref(["games"]);
 const theme = useTheme();
 const { mobile, mdAndUp } = useDisplay();
 const resettingLanguageCache = ref(false);
@@ -153,7 +156,7 @@ const selectedTheme = ref(StorageManager.get("theme") || "system");
 const selectedServerTimezone = ref("UTC+8");
 const useLocalTimezone = ref(false);
 const showBackgroundImage = ref(
-  StorageManager.get("showBackgroundImage") !== "false"
+  StorageManager.get("showBackgroundImage") === "true"
 );
 
 const timezoneOptions = computed(() => [
@@ -182,7 +185,7 @@ watch(
   mdAndUp,
   (newValue) => {
     // 当屏幕宽度≥md(960px)时自动展开，否则自动收起
-    panel.value = newValue ? ["games"] : [];
+    gamePanel.value = newValue ? ["games"] : [];
   },
   { immediate: true }
 );
@@ -511,15 +514,42 @@ const handleAuthError = (errorCode, message) => {
 };
 
 const highlightTimezoneSetting = () => {
-  isHighlighting.value = true;
-  setTimeout(() => {
-    isHighlighting.value = false;
-  }, 1500); // 闪烁3秒
-
-  // 滚动到时区设置部分
+  // 尝试使用ref获取元素，如果不可用则回退到getElementById
   const element = document.getElementById("timezone-settings");
+
   if (element) {
+    // 确保直接操作DOM元素，而不是Vue组件实例
+    element.classList.add('highlight-card');
+
+    // 3秒后移除高亮类
+    setTimeout(() => {
+      if (element && element.classList) {
+        element.classList.remove('highlight-card');
+      }
+    }, 1500); // 闪烁3秒
+
+    // 滚动到时区设置部分
     element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+const highlightGameSetting = () => {
+  // 尝试使用ref获取元素，如果不可用则回退到getElementById
+  const element = document.getElementById("game-settings");
+
+  if (element) {
+    gamePanel.value = ["games"];
+    // 确保直接操作DOM元素，而不是Vue组件实例
+    setTimeout(() => {
+      element.classList.add('highlight-card');
+      // debugger
+      // 3秒后移除高亮类
+      setTimeout(() => {
+        if (element && element.classList) {
+          element.classList.remove('highlight-card');
+        }
+      }, 1500); // 闪烁3秒
+    }, 100);
   }
 };
 
@@ -536,6 +566,8 @@ const highlightLoginPanel = (expandForm = false) => {
 onMounted(() => {
   if (route.query.highlight === "timezone") {
     highlightTimezoneSetting();
+  } else if (route.query.highlight === "games") {
+    highlightGameSetting();
   } else if (route.query.highlight === "login") {
     highlightLoginPanel(true); // 自动展开登录表单
   }
@@ -548,6 +580,8 @@ onMounted(() => {
     // 处理高亮逻辑
     if (highlightValue === "timezone") {
       highlightTimezoneSetting();
+    } else if (highlightValue === "games") {
+      highlightGameSetting();
     } else if (highlightValue === "login") {
       highlightLoginPanel(true); // 自动展开登录表单
     }
@@ -652,6 +686,14 @@ onUnmounted(() => {
   background-color: #444a;
 }
 
+#game-settings {
+  background-color: #fffa;
+}
+
+.v-theme--dark #game-settings {
+  background-color: #444a;
+}
+
 .highlight-card {
   animation: highlight 0.5s ease-in-out 3;
   /* 闪烁6次(3秒) */
@@ -661,7 +703,7 @@ onUnmounted(() => {
 
   0%,
   100% {
-    /* background-color: #888a; */
+    background-color: inherit;
   }
 
   50% {

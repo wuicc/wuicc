@@ -2,11 +2,37 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import fs from 'fs'
+import { fileURLToPath } from 'url'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const domesticDomain = env.VITE_DOMESTIC_DOMAIN
   const internationalDomain = env.VITE_INTERNATIONAL_DOMAIN
+
+  // 获取语言文件的最后更新时间
+  const getLanguageFilesLastModified = () => {
+    const localesDir = path.resolve(process.cwd(), 'src/locales')
+    const languageFiles = ['en.json', 'zh-Hans.json', 'zh-Hant.json', 'ja.json', 'ko.json', 'fr.json']
+    const lastModified = {}
+    
+    try {
+      languageFiles.forEach(file => {
+        const filePath = path.join(localesDir, file)
+        if (fs.existsSync(filePath)) {
+          const stats = fs.statSync(filePath)
+          lastModified[file.replace('.json', '')] = stats.mtimeMs
+        }
+      })
+    } catch (error) {
+      console.error('Failed to get language files last modified time:', error)
+    }
+    
+    return lastModified
+  }
+
+  // 语言文件最后更新时间
+  const languageLastModified = getLanguageFilesLastModified()
 
   return {
     assetsInclude: ['**/*.ps1'],
@@ -64,7 +90,8 @@ export default defineConfig(({ mode }) => {
             ogImage: env.VITE_OG_IMAGE || 'https://wuicc.net/logo.png',
             canonicalUrl: env.VITE_CANONICAL_URL || 'https://wuicc.net',
             analyticsUrl: env.VITE_ANALYTICS_URL || '',
-            analyticsId: env.VITE_ANALYTICS_ID || ''
+            analyticsId: env.VITE_ANALYTICS_ID || '',
+            languageLastModified: JSON.stringify(languageLastModified)
           }
         }
       }),

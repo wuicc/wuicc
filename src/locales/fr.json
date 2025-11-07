@@ -91,7 +91,8 @@
       "notification": "Notifications",
       "gacha": "Compteur de Gacha",
       "settings": "Paramètres",
-      "about": "À propos"
+      "about": "À propos",
+      "genshinActivities": "Activités Genshin Impact"
     },
     "games": {
       "genshin": {
@@ -338,6 +339,10 @@
         "teamDescription": "Notre équipe est dédiée à la création d'outils utiles pour les joueurs.",
         "disclaimer": "<h4>À Propos de Ce Site</h4><p>Ce site est un projet à but non lucratif créé spontanément par des passionnés de jeux et n'a aucune affiliation, autorisation ou relation de coopération avec HoYoverse, Kuro Game ou d'autres entreprises.</p><p><strong>Déclaration spéciale</strong></p><ul><li>Tous les contenus de cette plateforme sont uniquement destinés à des fins d'échange et d'apprentissage, interdits à toute utilisation commerciale.</li><li>Toutes les données, textes et images sur ce site proviennent de la communauté ou des wikis. Ce site ne fait que compiler et résumer le contenu correspondant.</li><li>Les droits d'auteur et marques des matériels cités appartiennent aux détenteurs originaux.</li></ul>"
       },
+      "genshinActivities": {
+        "languageRestriction": "Cette page est uniquement disponible en Chinois simplifié",
+        "switchToChinese": "Changer en Chinois simplifié"
+      },
       "notFound": {
         "title": "Page non trouvée",
         "message": "La page que vous recherchez n'existe pas ou a été supprimée",
@@ -408,6 +413,7 @@
         "downloadFailed": "Échec du téléchargement des paramètres",
         "noLocalSettings": "Aucun paramètre local trouvé",
         "invalidSettingsFormat": "Format de paramètres cloud invalide",
+        "activityStatusLastUpdated": "Dernière mise à jour de l'état d'activité",
         "clearLocal": "Effacer les paramètres locaux",
         "clearCloud": "Supprimer",
         "clearLocalSuccess": "Paramètres locaux effacés",
@@ -418,6 +424,8 @@
         "clearLocalConfirmMessage": "Cela supprimera définitivement tous les paramètres locaux de votre appareil. Êtes-vous sûr de vouloir continuer ?",
         "clearCloudConfirmTitle": "Confirmer l'effacement des paramètres cloud",
         "clearCloudConfirmMessage": "Êtes-vous sûr de vouloir effacer les paramètres cloud de l'emplacement {slot} ? Cette action ne peut pas être annulée !",
+        "localNewerTitle": "Données locales plus récentes",
+        "localNewerMessage": "Vos données locales sont plus récentes que les données cloud de l'emplacement {slot}. Êtes-vous sûr de vouloir écraser vos données locales ?",
         "overwriteConfirmTitle": "Confirmation de remplacement",
         "overwriteConfirmMessage": "L'emplacement {slot} contient déjà des données de synchronisation. Êtes-vous sûr de vouloir les remplacer ?",
         "turnstileError": "Veuillez compléter la vérification",

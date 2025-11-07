@@ -91,7 +91,8 @@
       "notification": "알림",
       "gacha": "가챠 카운터",
       "settings": "설정",
-      "about": "정보"
+      "about": "정보",
+      "genshinActivities": "원신 활동 데이터"
     },
     "games": {
       "genshin": {
@@ -346,6 +347,10 @@
         "teamDescription": "우리 팀은 게이머들을 위한 유용한 도구를 만들기 위해 노력하고 있습니다.",
         "disclaimer": "<h4>이 사이트에 대해</h4><p>본 웹사이트는 게임 애호가들이 자발적으로 만든 비영리 프로젝트로, HoYoverse, Kuro Game 등 기업과는 어떠한 소속, 인가 또는 협력 관계도 없습니다.</p><p><strong>특별 공지</strong></p><ul><li>본 플랫폼의 모든 콘텐츠는 교류 및 학습 목적으로만 사용되며 상업적 사용을 엄격히 금지합니다.</li><li>본 사이트의 모든 데이터, 텍스트 및 이미지는 커뮤니티 또는 위키에서 가져왔습니다. 본 사이트는 해당 콘텐츠를 정리 및 요약한 것입니다.</li><li>인용된 자료의 저작권 및 상표권은 원저작권자에게 있습니다.</li></ul>"
       },
+      "genshinActivities": {
+        "languageRestriction": "이 페이지는 한국어로만 이용 가능합니다",
+        "switchToChinese": "한국어로 변경"
+      },
       "notFound": {
         "title": "페이지를 찾을 수 없음",
         "message": "찾으시는 페이지가 존재하지 않거나 삭제되었습니다",
@@ -416,6 +421,7 @@
         "downloadFailed": "설정 다운로드 실패",
         "noLocalSettings": "로컬 설정을 찾을 수 없음",
         "invalidSettingsFormat": "잘못된 클라우드 설정 형식",
+        "activityStatusLastUpdated": "마지막으로 활동 상태가 업데이트된 시간",
         "clearLocal": "로컬 설정 지우기",
         "clearCloud": "삭제",
         "clearLocalSuccess": "로컬 설정이 지워짐",
@@ -426,6 +432,8 @@
         "clearLocalConfirmMessage": "이렇게 하면 기기의 모든 로컬 설정이 영구적으로 삭제됩니다. 계속하시겠습니까?",
         "clearCloudConfirmTitle": "클라우드 설정 지우기 확인",
         "clearCloudConfirmMessage": "{slot}번 슬롯의 클라우드 설정을 지우시겠습니까? 이 작업은 취소할 수 없습니다!",
+        "localNewerTitle": "로컬 데이터가 더 최신",
+        "localNewerMessage": "{slot}번 슬롯의 클라우드 데이터보다 로컬 데이터가 더 최신입니다. 로컬 데이터를 덮어쓰시겠습니까?",
         "overwriteConfirmTitle": "덮어쓰기 확인",
         "overwriteConfirmMessage": "{slot}번 슬롯에 이미 동기화 데이터가 있습니다. 덮어쓰시겠습니까?",
         "turnstileError": "인증을 완료하세요",

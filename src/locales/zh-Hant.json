@@ -77,8 +77,8 @@
         "600002": "抽卡記錄導出失敗",
         "600003": "未找到抽卡記錄",
         "600004": "無效的UIGF格式",
-        "600005": "抽卡數據庫錯誤",
-        "600006": "抽卡數據驗證失敗"
+        "600005": "抽卡資料庫錯誤",
+        "600006": "抽卡資料驗證失敗"
       }
     },
     "buttons": {
@@ -87,11 +87,12 @@
     },
     "sidebar": {
       "home": "首頁",
-      "timeline": "時間線",
-      "notification": "通知",
-      "gacha": "抽卡分析",
-      "settings": "設定",
-      "about": "關於"
+        "timeline": "時間線",
+        "notification": "通知",
+        "gacha": "抽卡分析",
+        "settings": "設定",
+        "about": "關於",
+        "genshinActivities": "原神活動資料"
     },
     "games": {
       "genshin": {
@@ -212,7 +213,7 @@
       "gacha": {
         "title": "抽卡分析",
         "overview": {
-          "title": "抽卡數據總覽",
+          "title": "抽卡資料總覽",
           "fiveStarCount": "五星數",
           "fourStarCount": "四星數",
           "sRankCount": "S級數",
@@ -223,7 +224,7 @@
           "selectUid": "選擇帳號",
           "changeUid": "更改帳號",
           "pulls": "抽",
-          "noRecordsHint": "沒有抽卡記錄，請先下載數據",
+          "noRecordsHint": "沒有抽卡記錄，請先下載資料",
           "gachaTypeStats": "卡池類型統計",
           "chartTitle": "抽卡統計圖表",
           "chartComingSoon": "統計圖表功能即將上線"
@@ -285,6 +286,8 @@
       "pasteLink": "粘貼獲取到的連結",
       "invalidUrl": "請輸入有效的URL連結",
       "unsupportedDomain": "僅支持米哈游/庫洛遊戲官方域名",
+      "loadUidsFailed": "加載授權帳號失敗",
+      "networkError": "網路錯誤，請檢查網路連線後重試",
       "deleteRecords": "刪除記錄",
       "deleteRecordsTitle": "刪除記錄",
       "deleteRecordsMessage": "請選擇要從何處刪除記錄：",
@@ -344,12 +347,16 @@
         "description": "霧憶刻 (WUICC) 是一款用於跨多個遊戲的抽卡分析和活動時間軸管理工具。項目開始於2025年5月24日。",
         "team": "開發團隊",
         "teamDescription": "我們的團隊致力於為玩家創造實用工具。",
-        "disclaimer": "<h4>關於本站</h4><p>本網站為遊戲愛好者自發創建的非營利性項目，與米哈遊(HoYoverse)、庫洛遊戲(Kuro Game)等企業不存在任何隸屬、授權或合作關係。</p><p><strong>特別聲明</strong></p><ul><li>本平台所有內容僅限交流學習之用，禁止用於任何商業用途。</li><li>本站所有數據、文本和圖片均來自社區或Wiki。本站僅對相應內容進行整理匯總。</li><li>引用素材的著作權及商標權均歸屬原權利主體。</li></ul>"
+        "disclaimer": "<h4>關於本站</h4><p>本網站為遊戲愛好者自發創建的非營利性項目，與米哈遊(HoYoverse)、庫洛遊戲(Kuro Game)等企業不存在任何隸屬、授權或合作關係。</p><p><strong>特別聲明</strong></p><ul><li>本平台所有內容僅限交流學習之用，禁止用於任何商業用途。</li><li>本站所有資料、文本和圖片均來自社區或Wiki。本站僅對相應內容進行整理匯總。</li><li>引用素材的著作權及商標權均歸屬原權利主體。</li></ul>"
       },
       "notFound": {
         "title": "頁面未找到",
         "message": "您訪問的頁面不存在或已被移除",
         "backHome": "返回首頁"
+      },
+      "genshinActivities": {
+        "languageRestriction": "此頁面僅提供簡體中文版本",
+        "switchToChinese": "切換到簡體中文"
       }
     },
     "settings": {
@@ -415,6 +422,7 @@
         "downloadFailed": "下載設定失敗",
         "noLocalSettings": "找不到本地設定",
         "invalidSettingsFormat": "雲端設定格式無效",
+        "activityStatusLastUpdated": "最後更新活動狀態時間",
         "clearLocal": "清空本地設定",
         "clearCloud": "清除",
         "clearLocalSuccess": "本地設定已清空",
@@ -427,6 +435,8 @@
         "clearCloudConfirmMessage": "確定要清除槽位 {slot} 的雲端設定嗎？此操作不可恢復！",
         "overwriteConfirmTitle": "覆蓋確認",
         "overwriteConfirmMessage": "槽位 {slot} 已有同步記錄，確定要覆蓋嗎？",
+        "localNewerTitle": "本地資料較新",
+        "localNewerMessage": "您的本地資料比槽位 {slot} 的雲端資料更新，確定要覆蓋本地資料嗎？",
         "turnstileError": "請完成人機驗證",
         "fillAllFields": "請填寫所有欄位",
         "logoutAllConfirmTitle": "確認退出所有設備",
@@ -488,7 +498,7 @@
         "qrConfirmSuccess": "登入確認成功",
         "qrLoginConfirmTitle": "掃碼登入確認",
         "qrLoginConfirmMessage": "偵測到來自以下裝置的登入請求，是否確認登入？",
-        "cloudSync": "雲數據同步",
+        "cloudSync": "雲資料同步",
         "slotNumber": "槽位 {slot}",
         "lastUpdated": "最後更新時間",
         "neverUpdated": "從未更新",
@@ -546,7 +556,7 @@
       "dragHintSettings": "可在設置頁修改遊戲順序"
     },
     "welcome": {
-      "title": "歡迎使用雾憶刻",
+      "title": "歡迎使用霧憶刻",
       "message": "請選擇您遊玩的遊戲並配置您想要追蹤的活動類型：",
       "confirm": "確認選擇",
       "skip": "暫時跳過"

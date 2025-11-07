@@ -75,7 +75,7 @@
           <v-divider style="margin: 8px 0" />
           <v-list-item prepend-icon="mdi-link" :title="$t('app.pages.shortcuts.title')" value="shortcuts"
             to="/shortcuts" :active="activeRoutePath === '/shortcuts'" active-class="text-primary_dark" />
-          <v-list-item prepend-icon="mdi-star-circle" :title="$t('app.sidebar.genshinActivities')" value="genshin-activities"
+          <v-list-item prepend-icon="mdi-package" :title="$t('app.sidebar.genshinActivities')" value="genshin-activities"
             to="/genshin-activities" :active="activeRoutePath === '/genshin-activities'"
             active-class="text-primary_dark" />
           <v-list-item prepend-icon="mdi-information" :title="$t('app.pages.about.title')" value="about" to="/about"
@@ -242,12 +242,12 @@ const rail = ref(false); // 默认展开(false)
 const isMobile = mobile;
 const windowControlsOverlayVisible = ref(false);
 const showBackgroundImage = ref(
-  StorageManager.get("showBackgroundImage") !== "false"
+  StorageManager.get("showBackgroundImage") === "true"
 );
 
 // 监听StorageManager变化以更新背景图片显示状态
 const handleStorageChange = () => {
-  showBackgroundImage.value = StorageManager.get("showBackgroundImage") !== "false";
+  showBackgroundImage.value = StorageManager.get("showBackgroundImage") === "true";
 };
 
 // 监听StorageManager的自定义事件

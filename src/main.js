@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import pinia from './store'
 import { i18n, loadLanguage, initializeAppTitle } from './i18n' // 导入loadLanguage和initializeAppTitle函数
+import LanguageStorageManager from '@/utils/LanguageStorageManager'
 // 导入虚拟滚动相关
 import VueVirtualScroller from 'vue-virtual-scroller';
 
@@ -20,10 +21,30 @@ const setReferrerPolicy = () => {
   referrerMeta.content = 'no-referrer';
 }
 
+// 检查并清除过时的语言缓存
+function checkAndClearOutdatedLanguageCache() {
+  // 检查是否有服务器提供的语言更新时间
+  if (window.languageLastModified && typeof window.languageLastModified === 'object') {
+    // 获取所有可用语言
+    const availableLanguages = ['zh-Hans', 'zh-Hant', 'ja', 'ko', 'fr'];
+    
+    // 检查每种语言是否过时
+    availableLanguages.forEach(locale => {
+      if (LanguageStorageManager.isLanguageFileOutdated(locale)) {
+        // console.log(`Clearing outdated language cache for: ${locale}`);
+        LanguageStorageManager.clearLanguageCache(locale);
+      }
+    });
+  }
+}
+
 // 异步初始化应用
 async function initApp() {
   // 设置referrer策略，确保图片不发送referer
   setReferrerPolicy();
+  
+  // 检查并清除过时的语言缓存
+  checkAndClearOutdatedLanguageCache();
   
   const app = createApp(App)
 

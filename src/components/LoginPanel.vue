@@ -128,10 +128,31 @@
         <!-- Not logged in content -->
         <template v-else>
           <!-- Clear data buttons -->
-          <!-- Activity status last updated -->
-          <div v-if="activityStatusLastUpdated" class="my-1">
-            <div>{{ $t("app.settings.account.activityStatusLastUpdated") }}: {{ activityStatusLastUpdated }}</div>
-          </div>
+      <!-- Activity status last updated -->
+      <div v-if="activityStatusLastUpdated" class="my-1">
+        <div>{{ $t("app.settings.account.activityStatusLastUpdated") }}: {{ activityStatusLastUpdated }}</div>
+      </div>
+      
+      <!-- Confirm overwrite local dialog -->
+      <v-dialog v-model="confirmOverwriteLocalDialog" max-width="400">
+        <v-card>
+          <v-card-title class="text-h6">
+            {{ $t("app.settings.account.localNewerTitle") }}
+          </v-card-title>
+          <v-card-text>
+            {{ $t("app.settings.account.localNewerMessage", { slot: selectedSlot }) }}
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="secondary" @click="confirmOverwriteLocalDialog = false">
+              {{ $t("app.common.cancel") }}
+            </v-btn>
+            <v-btn color="accent" @click="confirmOverwriteLocal">
+              {{ $t("app.common.confirm") }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
           <div class="d-flex flex-wrap" style="gap: 8px">
             <v-btn color="error" variant="outlined" @click="confirmClearLocal" :loading="clearingLocal">
               <v-icon left>mdi-delete</v-icon>
@@ -838,7 +859,7 @@ const activityStatusLastUpdated = ref(null);
 
 // 更新activity status最后更新时间
 function updateActivityStatusLastUpdated() {
-  activityStatusLastUpdated.value = StorageManager.get('activityStatusLastUpdated');
+  activityStatusLastUpdated.value = formatDate(StorageManager.get('activityStatusLastUpdated'));
 }
 
 const qrLogoConfig = {
@@ -1534,7 +1555,29 @@ const uploadSettings = async () => {
   }
 };
 
+// 添加确认覆盖本地数据的弹窗状态
+const confirmOverwriteLocalDialog = ref(false);
+
 const downloadSettings = async () => {
+  // 获取本地数据的最后更新时间
+  const localLastUpdated = StorageManager.get('activityStatusLastUpdated');
+  const localLastUpdatedTime = localLastUpdated ? new Date(localLastUpdated).getTime() : 0;
+  
+  // 获取云端数据的最后更新时间（从auth store中）
+  const cloudLastUpdated = currentUser.value.settings_metadata?.[`slot_${selectedSlot.value}`];
+  const cloudLastUpdatedTime = cloudLastUpdated ? new Date(cloudLastUpdated).getTime() : 0;
+  
+  // 如果本地有数据且本地数据比云端新，则显示确认覆盖弹窗
+  if (localLastUpdatedTime > 0 && localLastUpdatedTime > cloudLastUpdatedTime) {
+    confirmOverwriteLocalDialog.value = true;
+    return;
+  }
+  
+  // 如果本地没有数据或本地数据比云端旧，则直接下载
+  await performDownloadSettings();
+};
+
+const performDownloadSettings = async () => {
   emit("update:downloadingSettings", true);
   try {
     await CloudSync.downloadSettings(
@@ -1559,6 +1602,12 @@ const downloadSettings = async () => {
   } finally {
     emit("update:downloadingSettings", false);
   }
+};
+
+// 确认覆盖本地数据
+const confirmOverwriteLocal = async () => {
+  confirmOverwriteLocalDialog.value = false;
+  await performDownloadSettings();
 };
 
 const clearCloudSettings = async (slot) => {
@@ -1821,9 +1870,19 @@ const scanQRCode = () => {
     requestAnimationFrame(scanQRCode);
   } catch (error) {
     console.error("QR scan error:", error);
-    scanningQRCode.value = false;
-    qrStatusMessage.value = t("app.settings.account.qrScanError");
-    qrStatusType.value = "error";
+    stopQRScanner();
+    // scanningQRCode.value = false;
+    
+    // 如果是IndexSizeError，使用toast显示错误
+    if (error.name === 'IndexSizeError') {
+      props.toast?.showToast(
+        t("app.settings.account.qrScanError"),
+        "error"
+      );
+    } else {
+      qrStatusMessage.value = t("app.settings.account.qrScanError");
+      qrStatusType.value = "error";
+    }
   }
 };
 
@@ -1872,7 +1931,7 @@ const handleScannedQRCode = async (qrCode) => {
     const qr_code = urlObj.searchParams.get("qr_code");
     const sessionId = urlObj.searchParams.get("qr_session_id");
 
-    if (!sessionId) {
+    if (!qr_code && !sessionId) {
       invalidQr = true;
       throw new Error(t("app.settings.account.invalidQRCode"));
     }
@@ -1987,11 +2046,14 @@ const handleScannedQRCode = async (qrCode) => {
     }
 
     // 5秒后自动恢复扫描
-    setTimeout(() => {
-      qrLoading.value = false;
-      qrError.value = null;
-      startQRScanner();
-    }, 5000);
+    // console.log("invalidQr:", invalidQr);
+    if (!invalidQr) {
+      setTimeout(() => {
+        qrLoading.value = false;
+        qrError.value = null;
+        startQRScanner();
+      }, 5000);
+    }
   }
 };
 

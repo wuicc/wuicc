@@ -1,36 +1,25 @@
 <template>
   <v-container class="pa-4">
     <v-row>
-      <v-col
-        cols="12"
-        md="6"
-        v-for="(game, index) in filteredGames"
-        :key="index"
-      >
+      <v-col cols="12" md="6" v-for="(game, index) in filteredGames" :key="index">
         <v-card class="h-100 text-white" :style="getCardStyle(game.color)" dark>
-          <v-card-title class="text-h5">
-            {{ $t(`app.games.${game.id}.title`) }}
-            <v-btn
-              variant="text"
-              @click="openGameLaunchDialog(game.id)"
-              prepend-icon="mdi-television-play"
-            >
-              <span class="ml-1">{{
-                $t("app.pages.timeline.launch_game")
-              }}</span>
-            </v-btn>
+          <v-card-title class="text-h5 d-flex align-center flex-wrap">
+            <div class="d-flex align-center">
+              {{ $t(`app.games.${game.id}.title`) }}
+              <v-btn variant="text" class="ml-2 mr-1" @click="openGameLaunchDialog(game.id)"
+                prepend-icon="mdi-television-play">
+                {{
+                  $t("app.pages.timeline.launch_game")
+                }}
+              </v-btn>
+            </div>
           </v-card-title>
 
           <v-card-text>
             <v-list bg-color="transparent">
               <!-- 游戏官网链接 -->
-              <v-list-item
-                v-for="(official, officialIndex) in game.official"
-                :key="'official-' + officialIndex"
-                :href="official.url"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <v-list-item v-for="(official, officialIndex) in game.official" :key="'official-' + officialIndex"
+                :href="official.url" target="_blank" rel="noopener noreferrer">
                 <template v-slot:prepend>
                   <v-icon>mdi-web</v-icon>
                 </template>
@@ -40,13 +29,8 @@
               </v-list-item>
 
               <!-- 其他工具链接 -->
-              <v-list-item
-                v-for="(link, linkIndex) in game.links"
-                :key="'link-' + linkIndex"
-                :href="link.url"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <v-list-item v-for="(link, linkIndex) in game.links" :key="'link-' + linkIndex" :href="link.url"
+                target="_blank" rel="noopener noreferrer">
                 <template v-slot:prepend>
                   <v-icon>mdi-tools</v-icon>
                 </template>

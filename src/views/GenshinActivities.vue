@@ -1,150 +1,112 @@
 <template>
   <v-card class="genshin-activities-container">
-    <v-card-title class="my-2">
-      <div class="d-flex align-center">
-        <v-icon class="mr-2">mdi-calendar-check</v-icon>
-        原神活动数据
-      </div>
-      <v-spacer></v-spacer>
-    </v-card-title>
-    <v-card-text>
-      <!-- 文件上传部分 -->
-      <v-card class="mb-6" elevation="2">
-        <v-card-title class="text-h6">
-          <v-icon left>mdi-upload</v-icon>
-          上传活动数据
-        </v-card-title>
-        <v-card-text>
-          <input type="file" ref="fileInput" accept=".json" style="display: none" @change="handleFileUpload" />
-          <v-row>
-            <v-col>
-              <v-row class="mb-0">
-                <v-col cols="12" sm="auto" class="d-flex flex-column flex-sm-row align-start align-sm-center gap-2">
-                  <v-btn color="success" @click="triggerFileUpload" :disabled="loading" class="mr-sm-4 mb-3 mb-sm-0">
-                    <v-icon left>mdi-file</v-icon>
-                    选择响应JSON文件
-                  </v-btn>
-                
-                  <v-btn color="error" @click="confirmDeleteData" v-if="Object.keys(activities).length > 0">
-                    <v-icon left>mdi-delete</v-icon>
-                    删除所有数据
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-          <span class="text-sm text-secondary">所有数据仅在本地处理，不上传到服务器</span>
-
-          <v-alert v-if="uploadStatus.show" :type="uploadStatus.type" class="mt-4" dense v-model="uploadStatus.show">
-            <div class="d-flex justify-between items-center">
-              <span>{{ uploadStatus.message }}</span>
-              <v-btn v-if="uploadStatus.retry && uploadStatus.retryCallback" :loading="loading" :disabled="loading" text
-                color="currentColor" @click="uploadStatus.retryCallback()">
-                重试
-              </v-btn>
-            </div>
-          </v-alert>
-        </v-card-text>
-      </v-card>
-
-      <!-- 米游社API信息 -->
-      <v-expansion-panels class="mb-6">
-        <v-expansion-panel>
-          <v-expansion-panel-title>
-            <v-icon left>mdi-information</v-icon>
-            &nbsp;如何获取活动数据
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-card elevation="0">
-              <v-card-text>
-                <v-alert type="info" dense>
-                  <p>截至2025年10月24日，仍然可以调用米游社API获取历史活动数据，但未来可能会关闭此接口，可以使用下方的命令快速获取历史活动数据<br>
-                  注意：需要先获取米游社Cookie，具体方法请搜索并参考如何获取Cookie的教程<br>
-                  如果存在疑虑，请自行下载脚本内容并检查，或通过其他方式获得活动数据
-                  </p>
-                </v-alert>
-                
-                <div class="mt-4">
-                  <v-textarea readonly variant="outlined" density="comfortable" :model-value="windowsScript" rows="2"
-                    hide-details class="mb-2"></v-textarea>
-                  <v-btn class="float-right" variant="outlined" size="small" @click="copyToClipboard(windowsScript)"
-                    :color="copySuccess ? 'success' : 'accent'">
-                    <v-icon left>
-                      {{ copySuccess ? "mdi-check" : "mdi-content-copy" }}
-                    </v-icon>
-                    {{ copySuccess ? "已复制" : "复制" }}
-                  </v-btn>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-      </v-expansion-panels>
-
-      <!-- 活动列表 -->
-      <template v-if="!loading">
-        <!-- 无数据提示 -->
-        <div v-if="Object.keys(activities).length === 0" class="text-center py-10">
-          <v-icon size="64" color="grey-lighten-1">mdi-calendar-blank</v-icon>
-          <p class="mt-4 text-medium-emphasis">暂无活动数据</p>
-          <v-btn color="accent" class="mt-2" @click="triggerFileUpload">
-            上传活动数据
-          </v-btn>
+    <!-- 只在简体中文语言下显示页面内容 -->
+    <template v-if="locale === 'zh-Hans'">
+      <v-card-title class="my-2">
+        <div class="d-flex align-center">
+          <v-icon class="mr-2">mdi-package</v-icon>
+          原神活动数据
         </div>
+        <v-spacer></v-spacer>
+      </v-card-title>
+      <v-card-text>
+        <!-- 文件上传部分 -->
+        <v-card class="mb-4" elevation="2">
+          <v-card-title class="text-h6">
+            <v-icon left>mdi-upload</v-icon>
+            上传活动数据
+          </v-card-title>
+          <v-card-text>
+            <input type="file" ref="fileInput" accept=".json" style="display: none" @change="handleFileUpload" />
+            <v-row>
+              <v-col>
+                <v-row class="mb-0">
+                  <v-col cols="12" sm="auto" class="d-flex flex-column flex-sm-row align-start align-sm-center gap-2">
+                    <v-btn color="success" @click="triggerFileUpload" :disabled="loading" class="mr-sm-4 mb-3 mb-sm-0">
+                      <v-icon left>mdi-file</v-icon>
+                      选择响应JSON文件
+                    </v-btn>
+
+                    <v-btn color="error" @click="confirmDeleteData" v-if="Object.keys(activities).length > 0">
+                      <v-icon left>mdi-delete</v-icon>
+                      删除所有数据
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+            <span class="text-sm text-secondary">所有数据仅在本地处理，不上传到服务器</span>
+
+            <v-alert v-if="uploadStatus.show" :type="uploadStatus.type" class="mt-4" dense v-model="uploadStatus.show">
+              <div class="d-flex justify-between items-center">
+                <span>{{ uploadStatus.message }}</span>
+                <v-btn v-if="uploadStatus.retry && uploadStatus.retryCallback" :loading="loading" :disabled="loading"
+                  text color="currentColor" @click="uploadStatus.retryCallback()">
+                  重试
+                </v-btn>
+              </div>
+            </v-alert>
+          </v-card-text>
+        </v-card>
+
+        <!-- 米游社API信息 -->
+        <v-expansion-panels class="mb-4">
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-information</v-icon>
+              &nbsp;如何获取活动数据
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-card elevation="0">
+                <v-card-text>
+                  <v-alert type="info" dense>
+                    <p>截至2025年10月24日，仍然可以调用米游社API获取历史活动数据，但未来可能会关闭此接口，可以使用下方的命令快速获取历史活动数据<br>
+                      注意：需要先获取米游社Cookie，具体方法请搜索并参考如何获取Cookie的教程<br>
+                      如果存在疑虑，请自行下载脚本内容并检查，或通过其他方式获得活动数据
+                    </p>
+                  </v-alert>
+
+                  <div class="mt-4">
+                    <v-textarea readonly variant="outlined" density="comfortable" :model-value="windowsScript" rows="2"
+                      hide-details class="mb-2"></v-textarea>
+                    <v-btn class="float-right" variant="outlined" size="small" @click="copyToClipboard(windowsScript)"
+                      :color="copySuccess ? 'success' : 'accent'">
+                      <v-icon left>
+                        {{ copySuccess ? "mdi-check" : "mdi-content-copy" }}
+                      </v-icon>
+                      {{ copySuccess ? "已复制" : "复制" }}
+                    </v-btn>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+        </v-expansion-panels>
 
         <!-- 活动列表 -->
-        <div v-else class="activities-list">
-          <!-- 已支持的活动 -->
-          <v-card class="mb-6" elevation="2">
-            <v-card-title class="text-h6">
-              <v-icon left>mdi-star-circle</v-icon>
-              已支持活动 ({{ Object.keys(supportedActivities).length }})
-            </v-card-title>
-            <v-card-text>
-              <v-row>
-                <v-col v-for="(activity, activityId) in supportedActivities" :key="activityId" cols="12" md="6" lg="4">
-                  <v-card class="mb-0 cursor-pointer" @click="selectActivity(activityId)">
-                    <v-card-title class="d-flex align-center">
-                      <v-icon class="mr-2" :color="getMetadata(activityId)?.icon ? 'accent' : 'grey'">
-                        {{ getMetadata(activityId)?.icon || 'mdi-help-circle-outline' }}
-                      </v-icon>
-                      <h3 class="text-h6 mb-0 mr-2">{{ getActivityTitle(activity, activityId) }}</h3>
-                      <v-chip v-if="getMetadata(activityId)?.not_shown" color="grey-darken-2" text size="small">
-                        隐藏
-                      </v-chip>
-                    </v-card-title>
-                    <v-card-text>
-                      <p class="text-sm text-medium-emphasis">
-                        {{ getActivitySummary(activity, activityId) }}
-                      </p>
-                    </v-card-text>
-                  </v-card>
-                </v-col>
-              </v-row>
-              <div v-if="Object.keys(supportedActivities).length === 0" class="text-center py-4">
-                <p class="text-medium-emphasis">暂无已支持的活动</p>
-              </div>
-            </v-card-text>
-          </v-card>
+        <template v-if="!loading">
+          <!-- 无数据提示 -->
+          <div v-if="Object.keys(activities).length === 0" class="text-center py-10">
+            <v-icon size="64" color="grey-lighten-1">mdi-calendar-blank</v-icon>
+            <p class="mt-4 text-medium-emphasis">暂无活动数据</p>
+            <v-btn color="accent" class="mt-2" @click="triggerFileUpload">
+              上传活动数据
+            </v-btn>
+          </div>
 
-          <!-- 未支持的活动 -->
-          <v-expansion-panels>
-            <v-expansion-panel elevation="2">
-              <v-expansion-panel-title class="text-h6">
-                <template v-slot:default="{ expanded }">
-                  <v-icon left class="mr-2">mdi-help-circle-outline</v-icon>
-                  未支持活动 ({{ Object.keys(unsupportedActivities).length }})
-                  <v-chip color="warning" text class="ml-4">
-                    暂未支持
-                  </v-chip>
-                </template>
-              </v-expansion-panel-title>
-
-              <v-expansion-panel-text>
+          <!-- 活动列表 -->
+          <div v-else class="activities-list">
+            <!-- 已支持的活动 -->
+            <v-card class="mb-4" elevation="2">
+              <v-card-title class="text-h6 mb-2">
+                <v-icon left>mdi-star-circle</v-icon>
+                已支持活动 ({{ Object.keys(supportedActivities).length }})
+              </v-card-title>
+              <v-card-text>
                 <v-row>
-                  <v-col v-for="(activity, activityId) in unsupportedActivities" :key="activityId" cols="12" md="6"
-                    lg="4">
-                    <v-card class="mb-0 cursor-pointer" @click="selectActivity(activityId)">
+                  <v-col v-for="(activity, activityId) in supportedActivities" :key="activityId" cols="12" md="6" lg="4"
+                    class="pa-2">
+                    <v-card class="mb-0 cursor-pointer" variant="tonal" @click="selectActivity(activityId)">
                       <v-card-title class="d-flex align-center">
                         <v-icon class="mr-2" :color="getMetadata(activityId)?.icon ? 'accent' : 'grey'">
                           {{ getMetadata(activityId)?.icon || 'mdi-help-circle-outline' }}
@@ -162,74 +124,135 @@
                     </v-card>
                   </v-col>
                 </v-row>
-                <div v-if="Object.keys(unsupportedActivities).length === 0" class="text-center py-4">
-                  <p class="text-medium-emphasis">暂无未支持的活动</p>
+                <div v-if="Object.keys(supportedActivities).length === 0" class="text-center py-4">
+                  <p class="text-medium-emphasis">暂无已支持的活动</p>
                 </div>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-          </v-expansion-panels>
-        </div>
-      </template>
+              </v-card-text>
+            </v-card>
 
-      <!-- 活动详情对话框 -->
-      <v-dialog v-model="showActivityDetail" max-width="900px">
-        <v-card>
-          <v-card-title class="pa-4">
-            <div class="d-flex align-start justify-space-between w-100">
-              <!-- 左侧标题区域 -->
-              <div class="d-flex flex-column flex-grow-1">
-                <div class="d-flex align-center flex-wrap">
-                  <v-icon class="mr-2" :color="getMetadata(currentActivityId)?.icon ? 'accent' : 'grey'">
-                    {{ getMetadata(currentActivityId)?.icon || 'mdi-help-circle-outline' }}
-                  </v-icon>
-                  <span class="text-h5 mr-2" style="word-break: break-word;">{{ currentActivityTitle }}
-                    <v-chip v-if="getMetadata(currentActivityId)?.not_shown" color="grey-darken-2" text size="small"
-                      class="my-1">
-                      隐藏
-                    </v-chip></span>
+            <!-- 未支持的活动 -->
+            <v-expansion-panels>
+              <v-expansion-panel elevation="2">
+                <v-expansion-panel-title class="text-h6">
+                  <template v-slot:default="{ expanded }">
+                    <v-icon left class="mr-2">mdi-help-circle-outline</v-icon>
+                    未支持活动 ({{ Object.keys(unsupportedActivities).length }})
+                    <v-chip color="warning" text class="ml-4">
+                      暂未支持
+                    </v-chip>
+                  </template>
+                </v-expansion-panel-title>
+
+                <v-expansion-panel-text>
+                  <v-row>
+                    <v-col v-for="(activity, activityId) in unsupportedActivities" :key="activityId" cols="12" md="6"
+                      lg="4" class="pa-2">
+                      <v-card class="mb-0 cursor-pointer" @click="selectActivity(activityId)" variant="tonal">
+                        <v-card-title class="d-flex align-center">
+                          <v-icon class="mr-2" :color="getMetadata(activityId)?.icon ? 'accent' : 'grey'">
+                            {{ getMetadata(activityId)?.icon || 'mdi-help-circle-outline' }}
+                          </v-icon>
+                          <h3 class="text-h6 mb-0 mr-2">{{ getActivityTitle(activity, activityId) }}</h3>
+                          <v-chip v-if="getMetadata(activityId)?.not_shown" color="grey-darken-2" text size="small">
+                            隐藏
+                          </v-chip>
+                        </v-card-title>
+                        <v-card-text>
+                          <p class="text-sm text-medium-emphasis">
+                            {{ getActivitySummary(activity, activityId) }}
+                          </p>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                  <div v-if="Object.keys(unsupportedActivities).length === 0" class="text-center py-4">
+                    <p class="text-medium-emphasis">暂无未支持的活动</p>
+                  </div>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+            </v-expansion-panels>
+          </div>
+        </template>
+
+        <!-- 活动详情对话框 -->
+        <v-dialog v-model="showActivityDetail" max-width="900px">
+          <v-card>
+            <v-card-title class="pa-4">
+              <div class="d-flex align-start justify-space-between w-100">
+                <!-- 左侧标题区域 -->
+                <div class="d-flex flex-column flex-grow-1">
+                  <div class="d-flex align-center flex-wrap">
+                    <v-icon class="mr-2" :color="getMetadata(currentActivityId)?.icon ? 'accent' : 'grey'">
+                      {{ getMetadata(currentActivityId)?.icon || 'mdi-help-circle-outline' }}
+                    </v-icon>
+                    <span class="text-h5 mr-2" style="word-break: break-word;">{{ currentActivityTitle }}
+                      <v-chip v-if="getMetadata(currentActivityId)?.not_shown" color="grey-darken-2" text size="small"
+                        class="my-1">
+                        隐藏
+                      </v-chip></span>
+                  </div>
+                  <div class="text-caption text-medium-emphasis mt-1 ml-10">{{ currentActivityId }}</div>
                 </div>
-                <div class="text-caption text-medium-emphasis mt-1 ml-10">{{ currentActivityId }}</div>
+
+                <!-- 右侧关闭按钮 -->
+                <v-btn icon @click="closeActivityDetail" size="large" variant="text" class="ml-4 flex-shrink-0">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
               </div>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text class="activity-detail-content pa-0">
+              <!-- 不支持的活动提示 -->
+              <div v-if="!isCurrentActivitySupported" class="text-center py-10">
+                <v-icon size="64" color="warning">mdi-alert-circle</v-icon>
+                <p class="mt-4 text-medium-emphasis">暂未支持该活动</p>
+                <p class="text-sm text-muted">活动ID: {{ currentActivityId }}</p>
+              </div>
+              <!-- 活动组件 -->
+              <div v-else class="activity-component-container">
+                <component :is="currentActivityComponent" :activity-data="currentActivityData" />
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
 
-              <!-- 右侧关闭按钮 -->
-              <v-btn icon @click="closeActivityDetail" size="large" class="ml-4 flex-shrink-0">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </div>
-          </v-card-title>
-          <v-divider></v-divider>
-          <v-card-text class="activity-detail-content pa-0">
-            <!-- 不支持的活动提示 -->
-            <div v-if="!isCurrentActivitySupported" class="text-center py-10">
-              <v-icon size="64" color="warning">mdi-alert-circle</v-icon>
-              <p class="mt-4 text-medium-emphasis">暂未支持该活动</p>
-              <p class="text-sm text-muted">活动ID: {{ currentActivityId }}</p>
-            </div>
-            <!-- 活动组件 -->
-            <div v-else class="activity-component-container">
-              <component :is="currentActivityComponent" :activity-data="currentActivityData" />
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-dialog>
+        <!-- 删除确认对话框 -->
+        <v-dialog v-model="deleteConfirmDialog" max-width="400">
+          <v-card>
+            <v-card-title class="d-flex align-center flex-wrap">
+              <div class="d-flex align-center flex-grow-1">
+                <v-icon color="error" class="mr-2" style="margin-top: -1px;">mdi-alert-decagram</v-icon>
+                确认删除
+              </div>
+            </v-card-title>
+            <v-card-text>
+              确定要删除所有活动数据吗？此操作不可恢复。
+            </v-card-text>
+            <v-card-actions>
+              <v-btn @click="deleteConfirmDialog = false">取消</v-btn>
+              <v-btn color="error" @click="deleteAllData" :disabled="loading">确认删除</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-card-text>
+    </template>
 
-      <!-- 删除确认对话框 -->
-      <v-dialog v-model="deleteConfirmDialog" max-width="400">
-        <v-card>
-          <v-card-title>
-            <v-icon color="error" class="mr-2">mdi-alert-decagram</v-icon>
-            确认删除
-          </v-card-title>
-          <v-card-text>
-            确定要删除所有活动数据吗？此操作不可恢复。
-          </v-card-text>
-          <v-card-actions>
-            <v-btn @click="deleteConfirmDialog = false">取消</v-btn>
-            <v-btn color="error" @click="deleteAllData" :disabled="loading">确认删除</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-card-text>
+    <!-- 非简体中文语言下显示的提示信息 -->
+    <template v-else>
+      <v-card-title class="my-2">
+        <div class="d-flex align-center">
+          <v-icon class="mr-2">mdi-package</v-icon>
+          {{ $t('app.sidebar.genshinActivities') }}
+        </div>
+      </v-card-title>
+      <v-card-text class="text-center py-10">
+        <v-icon size="64">mdi-information-box</v-icon>
+        <p class="mt-4">{{ $t('app.pages.genshinActivities.languageRestriction') }}</p>
+        <!-- <v-btn class="mt-4" color="primary" @click="switchToChinese">
+            {{ $t('app.pages.genshinActivities.switchToChinese') }}
+          </v-btn> -->
+      </v-card-text>
+    </template>
   </v-card>
 </template>
 
@@ -237,8 +260,21 @@
 import { ref, computed, onMounted, reactive, shallowRef } from 'vue';
 import { ActivitiesManager } from '@/utils/ActivitiesManager';
 import { useI18n } from 'vue-i18n';
+import { loadLanguage } from '@/i18n';
+import StorageManager from '@/utils/StorageManager';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+// 切换到简体中文
+const switchToChinese = async () => {
+  try {
+    await loadLanguage('zh-Hans');
+    StorageManager.set('userLanguage', 'zh-Hans');
+    locale.value = 'zh-Hans';
+  } catch (error) {
+    console.error('切换到简体中文失败:', error);
+  }
+};
 
 // 预置活动元数据
 const activityMetadata = {
@@ -860,6 +896,14 @@ onMounted(async () => {
 .genshin-activities-container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.v-card {
+  border-radius: 16px;
+}
+
+:deep(.v-expansion-panel) {
+  border-radius: 16px;
 }
 
 /* 为活动卡片添加悬停效果 */
